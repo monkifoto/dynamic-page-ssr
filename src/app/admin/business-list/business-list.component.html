@@ -1,0 +1,39 @@
+<!-- business-list.component.html -->
+<div class="business-list-container">
+  <h2>Business List</h2>
+  <button ttype="button" class="afhBtn"  (click)="addNewBusiness()">Add New Business</button>
+  <label for="toggle-active">Show Active Only</label>
+  <input type="checkbox" id="toggle-active" [(ngModel)]="showActiveOnly" (change)="loadBusinesses()" />
+  <table class="business-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Provider</th>
+        <th>Active</th>
+        <th>Live</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let business of businesses">
+        <td>
+          <a
+            [routerLink]="['/home/']"
+            [queryParams]="{ id: business.id }"
+            class="business-id-link">
+           <strong> {{ business.id }}</strong>
+          </a>
+        </td>
+        <td>{{ business.businessName }}</td>
+        <td><strong>{{ business.providerName}} </strong><br> {{business.phone}}<br>{{business.email}}</td>
+        <td>{{ business.isActive}}</td>
+        <td>{{ business.isLive}}</td>
+        <td>
+          <button type="button" class="afhBtn"  (click)="editBusiness(business.id)">Edit</button>
+          <button type="button" class="afhBtn" *ngIf="!business.isActive"  (click)="deleteBusiness(business.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,46 @@
+<!-- <div class="parallax-container" [style.backgroundImage]="'url(' + backgroundImage + ')'">
+  <div class="stats-overlay">
+    <div class="stat">
+      <span class="number">{{ yearsOfExperience }}</span>
+      <span class="label">Years of Experience</span>
+    </div>
+    <div class="stat">
+      <span class="number">{{ happyFamilies }}</span>
+      <span class="label">Happy Families</span>
+    </div>
+    <div class="stat">
+      <span class="number">{{ servicesOffered }}</span>
+      <span class="label">Services Offered</span>
+    </div>
+    <div class="stat">
+      <span class="number">{{ trainedStaff }}</span>
+      <span class="label">Trained Staff</span>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="tab-container">
+  <div class="tabs">
+    <div
+      *ngFor="let tab of tabs; index as i"
+      class="tab"
+      [class.active]="i === selectedTabIndex"
+      (click)="selectTab(i)"
+    >
+      {{ tab.title }}
+    </div>
+  </div>
+
+  <div class="tab-content">
+    <div class="image">
+      <img [src]="selectedTab.imageUrl" alt="{{ selectedTab.title }}" />
+    </div>
+    <div class="text">
+      <h1 class="number">{{ selectedTab.number }}</h1>
+      <h2 class="title">{{ selectedTab.title }}</h2>
+      <p class="description">{{ selectedTab.description }}</p>
+      <a class="read-more" (click)="navigateTo(selectedTab.link)">READ MORE →</a>
+    </div>
+  </div>
+</div>

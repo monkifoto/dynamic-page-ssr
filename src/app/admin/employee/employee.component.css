@@ -1,0 +1,157 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Headings */
+h2 {
+  border-bottom: 2px solid #e67e22;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  font-size: 22px;
+}
+
+h3 {
+  color: #34495e;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Section Container */
+.section-container {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  border-left: 4px solid #e67e22;
+}
+
+/* Employee Card */
+.employee-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #3498db;
+  margin-bottom: 10px;
+}
+
+/* Flex Layout for Rows */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Flex Columns */
+.col {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Form Elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #34495e;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #1abc9c;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(26, 188, 156, 0.5);
+}
+
+/* Buttons */
+button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #219150;
+}
+
+button[type="button"] {
+  background-color: #e74c3c;
+}
+
+button[type="button"]:hover {
+  background-color: #c0392b;
+}
+
+/* Upload Progress Bar */
+.progress {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 10px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #007bff;
+  text-align: center;
+  color: white;
+  line-height: 10px;
+}
+
+/* Employee Photo */
+.employee-photo {
+  margin-top: 10px;
+  max-width: 150px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .form-control {
+    font-size: 13px;
+    padding: 8px;
+  }
+}

@@ -1,0 +1,300 @@
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
+    <footer class="footer">
+      <div class="footer-content">
+        <h2 class="footer-title">{{business?.businessName}}</h2>
+        <hr class="footer-divider" />
+        <div class="footer-info">
+          <div class="footer-column">
+            <h3 class="footer-column-title">Location:</h3>
+            <address>
+              {{ business?.address }}
+            </address>
+          </div>
+          <div class="footer-column">
+            <h3 class="footer-column-title">Provider:{{business?.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+          </div>
+          <div class="footer-column">
+            <h3 class="footer-column-title">Resident Manager:{{business?.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="clemo-footer-bottom">
+        <div class="copy">
+          <div class="design">
+            <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a>
+          </div>
+          <div class="rights">
+            <p> © Copyright 2025. All rights reserved.</p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'ae'">
+    <footer class="ae-footer">
+      <div class="ae-footer-content">
+        <!-- Business Name and Divider -->
+        <div class="ae-footer-business">
+          <hr class="ae-footer-line" />
+          <h2 class="ae-footer-business-text">{{ business?.businessName }}</h2>
+          <hr class="ae-footer-line" />
+        </div>
+
+        <!-- Footer Columns -->
+        <div class="ae-footer-columns">
+          <!-- Owner -->
+          <div class="ae-footer-column">
+            <h3 class="ae-footer-column-title">Owner:</h3>
+            <p>{{ business?.providerName }}</p>
+          </div>
+
+          <!-- Location -->
+          <div class="ae-footer-column">
+            <h3 class="ae-footer-column-title">Location:</h3>
+            <p>{{ business?.address }}</p>
+          </div>
+
+          <!-- Provider -->
+          <div class="ae-footer-column">
+            <h3 class="ae-footer-column-title">Provider:</h3>
+            <p>{{ business?.providerName }}</p>
+            <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
+            <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="clemo-footer-bottom">
+
+
+          <div class="copy">
+            <div class="design">
+              <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a>
+            </div>
+            <div class="rights">
+              <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="'clemo'">
+    <footer class="clemo-footer">
+      <!-- Row 1: Footer Navigation Links -->
+      <div class="clemo-footer-links">
+        <nav class="clemo-footer-nav">
+          <span class="clemo-footer-link" (click)="navigateTo('home')">HOME</span>
+          <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
+          <span class="clemo-footer-link" (click)="navigateTo('services')">SERVICES</span>
+          <span class="clemo-footer-link" (click)="navigateTo('gallery')">OUR HOME</span>
+          <span class="clemo-footer-link" (click)="navigateTo('testimonials')">TESTIMONIALS</span>
+          <span class="clemo-footer-link" (click)="navigateTo('resident-form')">RESIDENT FORM</span>
+          <span class="clemo-footer-link" (click)="navigateTo('contact-us')">CONTACT</span>
+        </nav>
+      </div>
+      <div class="clemo-footer-logo">
+        <div class="logo-circle">
+        <img src="{{ business?.logoImage }}" alt="">
+        </div>
+        <h4 class="clemo-footer-section-heading">{{ business?.businessName }}</h4>
+      </div>
+      <!-- Row 2: Address, Contact, and Logo -->
+      <div class="clemo-footer-content">
+
+        <div class="clemo-footer-address">
+          <h4 class="clemo-footer-section-heading">Address</h4>
+          <p>{{ business?.address }}</p>
+        </div>
+
+        <div class="clemo-footer-phone">
+          <h4 class="clemo-footer-section-heading">Contact Us</h4>
+          <p>Phone:{{ business?.phone }}<br>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+        </div>
+        <div class="clemo-footer-contact">
+          <h4 class="clemo-footer-section-heading">Provider</h4>
+          <p>{{business?.providerName}}</p>
+        </div>
+      </div>
+      <div class="clemo-footer-bottom">
+        <div class="clemo-footer-copy">
+          <div class="clemo-footer-design">
+            <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a></p>
+          </div>
+          <div class="clemo-footer-rights">
+            <p>© Copyright 2025. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'prestige'">
+    <footer class="clemo-footer">
+      <div class="clemo-footer-content">
+        <!-- Logo and Contact Info -->
+        <div class="clemo-footer-logo">
+          <img src="{{ business?.logoImage}}" alt="">
+          <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
+          <h4>{{ business?.businessName }}</h4>
+          <p class="clemo-footer-phone">{{ business?.phone }}</p>
+          <p class="clemo-footer-address">{{ business?.address }}</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="clemo-footer-social">
+          <a href="#" class="clemo-social-icon"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="clemo-social-icon"><i class="fa-brands fa-google"></i></a>
+        </div>
+
+        <!-- Footer Navigation -->
+        <nav class="clemo-footer-nav">
+
+          <span class="clemo-footer-link" (click)="navigateTo('home')">HOME</span>
+          <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
+          <span class="clemo-footer-link" (click)="navigateTo('services')">SERVICES</span>
+          <span class="clemo-footer-link" (click)="navigateTo('gallery')">OUR HOME</span>
+          <span class="clemo-footer-link" (click)="navigateTo('testimonials')">TESTIMONIALS</span>
+          <span class="clemo-footer-link" (click)="navigateTo('resident-form')">RESIDENT FORM</span>
+          <span class="clemo-footer-link" (click)="navigateTo('contact-us')">CONTACT</span>
+        </nav>
+
+        <!-- Copyright Notice -->
+        <div class="clemo-footer-bottom">
+          <div class="copy">
+            <div class="design">
+              <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a>
+            </div>
+            <div class="rights">
+              <p> © Copyright 2025. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'sb'">
+    <footer class="clemo-footer">
+      <div class="clemo-footer-content">
+        <!-- Logo and Contact Info -->
+        <div class="clemo-footer-logo">
+          <img src="{{ business?.logoImage}}" alt="">
+          <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
+          <!-- <h4>{{ business?.businessName }}</h4> -->
+          <p class="clemo-footer-phone">{{ business?.phone }}</p>
+          <p class="clemo-footer-address">{{ business?.address }}</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="clemo-footer-social">
+          <a href="#" class="clemo-social-icon"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="clemo-social-icon"><i class="fa-brands fa-google"></i></a>
+        </div>
+
+        <!-- Footer Navigation -->
+        <nav class="clemo-footer-nav">
+          <span class="clemo-footer-link" (click)="navigateTo('home')">HOME</span>
+          <span class="clemo-footer-link" (click)="navigateTo('about-us')">ABOUT US</span>
+          <span class="clemo-footer-link" (click)="navigateTo('services')">SERVICES</span>
+          <span class="clemo-footer-link" (click)="navigateTo('gallery')">OUR WORK</span>
+          <!-- <span class="clemo-footer-link" (click)="navigateTo('resident-form')">RESIDENT FORM</span> -->
+          <span class="clemo-footer-link" (click)="navigateTo('contact-us')">CONTACT</span>
+        </nav>
+
+        <!-- Copyright Notice -->
+        <div class="clemo-footer-bottom">
+          <div class="copy">
+            <div class="design">
+              <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a>
+            </div>
+            <div class="rights">
+              <p> © Copyright 2025. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </ng-container>
+
+
+
+
+  <ng-container *ngSwitchDefault>
+    <footer class="footer">
+      <div class="footer-content">
+        <h2 class="footer-title">{{business?.businessName}}</h2>
+        <hr class="footer-divider" />
+        <div class="footer-info">
+          <div class="footer-column">
+            <h3 class="footer-column-title">Location:</h3>
+            <address>
+              {{ business?.address }}
+            </address>
+          </div>
+          <div class="footer-column">
+            <h3 class="footer-column-title">Provider:{{business?.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+          </div>
+          <div class="footer-column">
+            <h3 class="footer-column-title">Resident Manager:{{business?.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </ng-container>
+
+</div>
+
+
+
+<div *ngIf="isAuthenticated$ | async" class="footer-theme-file">
+  <h1 class="debugger-title">Debugger:</h1>
+  <div class="debugger-info">
+    <div class="debugger-item">
+      <span class="debugger-label">Theme File:</span>
+      <span class="debugger-value">{{ themeFileName}}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Theme Type:</span>
+      <span class="debugger-value">{{ business?.theme?.themeType}}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Business ID:</span>
+      <span class="debugger-value">{{ business?.id }}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Business Name:</span>
+      <span class="debugger-value">{{ business?.businessName }}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Environment:</span>
+      <span class="debugger-value">{{ envName }}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Use Mock Map:</span>
+      <span class="debugger-value">{{ useMockMap }}</span>
+    </div>
+    <div class="debugger-item">
+      <span class="debugger-label">Use Mock Reviews:</span>
+      <span class="debugger-value">{{ useMockReviews }}</span>
+    </div>
+  </div>
+</div>

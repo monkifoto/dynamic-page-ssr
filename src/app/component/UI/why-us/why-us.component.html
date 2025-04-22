@@ -1,0 +1,41 @@
+
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+<section class="whychoose-section">
+  <div class="whychoose-section-heading">
+    <span class="whychoose-section-title main">{{title}}</span>
+    <span class="whychoose-section-title highlight"> {{subTitle}} </span>
+  </div>
+    <div class="whychoose-container">
+      <div class="whychoose-list">
+        <div *ngFor="let feature of items" class="whychoose-item">
+          <div class="whychoose-list-item-title" [innerHTML]="feature.title"></div>
+          <div class="whychoose-list-item-description" [innerHTML]="feature.description"></div>
+        </div>
+    </div>
+  </div>
+</section>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+</ng-container>
+
+<ng-container *ngSwitchDefault>
+  <section class="whychoose-section">
+    <div class="whychoose-section-heading">
+      <span class="whychoose-section-title main">{{title}} </span>
+      <span class="whychoose-section-title highlight"> {{subTitle}}</span>
+    </div>
+      <div class="whychoose-container">
+        <div class="whychoose-list">
+          <div *ngFor="let feature of items" class="whychoose-item">
+            <div class="whychoose-list-item-title" [innerHTML]="feature.title"></div>
+            <div class="whychoose-list-item-description" [innerHTML]="feature.description"></div>
+          </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+</div>

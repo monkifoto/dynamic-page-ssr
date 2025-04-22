@@ -1,0 +1,39 @@
+
+/********************************************************* CALL TO ACTION  ********************************************************/
+.cta-container {
+  text-align: center;
+  padding: 100px;
+  /* border-radius: 10px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10rem auto;
+}
+
+.cta-content h2 {
+  font-size: 4rem;
+  margin-bottom: 25px;
+}
+
+.cta-content p {
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  display: inline-block;
+  min-width: 180px;
+  padding: 0.4em;
+  height: 45px;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 1.125rem;
+
+  margin-top: 20px;
+  background-color: var(--dark-button-color);
+  transition: 0.5s;
+  border: 1px solid var(--primary-color);
+}
+/********************************************************* CALL TO ACTION  ********************************************************/

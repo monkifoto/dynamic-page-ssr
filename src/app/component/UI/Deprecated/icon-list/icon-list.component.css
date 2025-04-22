@@ -1,0 +1,111 @@
+.services-container {
+  text-align: center;
+  padding: 2rem;
+  /* background-color: var(--dark-background-color); */
+  color: #333;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10rem;
+  padding: 3rem 0;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.service-item i {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-title {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+}
+
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .services-grid {
+    gap: 1.5rem; /* Reduce gap further for compact layout */
+  }
+
+  .service-item {
+    max-width: 100%; /* Allow full width on smaller screens */
+    font-size: 1.25rem; /* Scale down font size */
+  }
+
+  .service-item i {
+    font-size: 2.5rem; /* Scale down icon size */
+  }
+
+  .service-title {
+    font-size: 1.1rem; /* Adjust title font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .services-container {
+    padding: 1.5rem 1rem; /* Further reduce padding for very small screens */
+  }
+
+  .services-title {
+    font-size: 1.5rem; /* Scale down section title */
+    margin-bottom: 1rem;
+  }
+
+}
+
+.parallax-container {
+  background-image: url('/assets/sharedAssets/istockphoto-1319783351-2048x2048.jpg'); /* Replace with your image path */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000; /* Adjust text color to match design */
+  position: relative;
+  padding: 20px;
+}
+
+.parallax-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Light overlay for better readability */
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-style: italic;
+}

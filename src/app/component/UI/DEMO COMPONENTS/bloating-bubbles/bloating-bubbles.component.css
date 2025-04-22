@@ -1,0 +1,79 @@
+.background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, #002872, #011438);
+  overflow: hidden;
+}
+
+.overlay{
+  /* border: 2px solid red; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.overlay-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 500px;
+  z-index: 2; /* Ensure this is above the overlay */
+}
+
+.overlay-content h2{
+  color: white;
+  font-size: 68px;
+  line-height: 80px;
+}
+
+.bubble {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: aliceblue;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite; /* General floating animation */
+}
+@keyframes floatLeftUp {
+  0% {
+    transform: translate(0, 0); /* Start at original position */
+  }
+  100% {
+    transform: translate(-100vw, -100vh); /* Move left and up */
+  }
+}
+
+@keyframes floatLeftDown {
+  0% {
+    transform: translate(0, 0); /* Start at original position */
+  }
+  100% {
+    transform: translate(-100vw, 100vh); /* Move left and down */
+  }
+}
+
+@keyframes floatRightUp {
+  0% {
+    transform: translate(0, 0); /* Start at original position */
+  }
+  100% {
+    transform: translate(100vw, -100vh); /* Move right and up */
+  }
+}
+
+@keyframes floatRightDown {
+  0% {
+    transform: translate(0, 0); /* Start at original position */
+  }
+  100% {
+    transform: translate(100vw, 100vh); /* Move right and down */
+  }
+}

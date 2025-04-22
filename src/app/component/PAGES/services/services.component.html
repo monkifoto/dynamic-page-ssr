@@ -1,0 +1,83 @@
+<div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+      <div class="hero-services">
+        <div class="page-hero-overlay">
+          <h1>Our Services</h1>
+          <div class="hero-subtitle">
+            <p>Providing exceptional care tailored to your needs</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'ae'">
+      <app-hero></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'clemo'">
+      <app-hero [layoutType]="'clemo'"></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'sb' ">
+      <app-hero [layoutType]="'sb'"></app-hero>
+      </ng-container>
+
+    <ng-container *ngSwitchCase="'prestige'">
+      <app-hero [layoutType]="'prestige'"></app-hero>
+    </ng-container>
+  </div>
+
+
+  <div *ngIf="business.theme.themeType!='prestige'" class="aboutus-page-main-container">
+    <div class="container text-section" #dynamicContainer></div>
+  </div>
+
+  <div *ngIf="business.theme.themeType=='prestige'" class="aboutus-page-main-container">
+    <div class="" #dynamicContainer></div>
+  </div>
+
+
+  <div [ngSwitch]="business.theme.themeType">
+  <ng-container *ngSwitchCase="'ae'">
+    <app-testimonial-image
+      [imageURL]="
+        '../../../../assets/sharedAssets/istockphoto-1453597643-2048x2048.jpg'
+      "
+      [author]="business.testimonials[1].name || ''"
+      [text]="business.testimonials[1].quote || ''"
+    ></app-testimonial-image>
+  </ng-container>
+  </div>
+
+
+<!-- <div *ngIf="business.theme.themeType=='prestige'">
+  <section class="testimonials-section">
+    <div class="heading-container">
+        <h2 class="styled-heading">Testimonials</h2>
+    </div>
+    <div class="testimonial">
+        <div class="quote-icon">“</div>
+        <p>"Great experience as always! Friendly, excellent communication, quality tuning."</p>
+        <h4>Amy G.</h4>
+    </div>
+    <div class="testimonial">
+        <div class="quote-icon">“</div>
+        <p>"Great service. Friendly staff, and piano always sounds like new after tuning."</p>
+        <h4>Jesse A.</h4>
+    </div>
+    <div class="testimonial">
+        <div class="quote-icon">“</div>
+        <p>"Great, friendly, professional, thorough service. Great communication."</p>
+        <h4>Brian S.</h4>
+    </div>
+    <div class="testimonial">
+        <div class="quote-icon">“</div>
+        <p>"You can trust these guys. I will recommend them to anyone and use them again."</p>
+        <h4>Colin B.</h4>
+    </div>
+  </section>
+</div> -->
+
+
+</div>

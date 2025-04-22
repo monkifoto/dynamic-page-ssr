@@ -1,0 +1,19 @@
+
+.mock-data{
+  max-width: var(--site-max-width);
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.mock-badge {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}

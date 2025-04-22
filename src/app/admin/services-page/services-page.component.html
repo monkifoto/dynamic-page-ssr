@@ -1,0 +1,92 @@
+<form [formGroup]="form">
+<h2>Services Page</h2>
+
+
+<button (click)="addService()">+ Add Service</button>
+
+<div formArrayName="services">
+  <div *ngFor="let service of services.controls; let i = index" [formGroupName]="i" class="service-container">
+
+    <!-- Single Row Display (Collapsed) -->
+    <div class="service-header">
+      <i [class]="service.get('icon')?.value || 'fa fa-star'"></i>
+      <span class="service-name">{{ 'Service ' + (i + 1) }}: {{ service.get('name')?.value }}</span>
+
+      <!-- Button Group: Expand/Collapse & Remove -->
+      <div class="button-group">
+        <button (click)="toggleService(i)" class="icon-btn">
+          <i [class]="collapsedServices[i] ? 'fa-solid fa-angles-down' : 'fa-solid fa-angles-up'"></i>
+        </button>
+        <button (click)="removeService(i)" class="icon-btn delete-btn">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Expanded View -->
+    <div *ngIf="!collapsedServices[i]" class="service-details">
+      <label for="serviceName">Service Name</label>
+      <input formControlName="name" id="serviceName" class="form-control" placeholder="Enter service name" />
+
+      <label for="serviceIcon">Font Awesome Icon</label>
+      <input formControlName="icon" id="serviceIcon" class="form-control" placeholder="Enter Icon Class" />
+
+      <label for="serviceDescription">Description</label>
+      <textarea formControlName="description" id="serviceDescription" class="form-control" rows="3"></textarea>
+    </div>
+
+  </div>
+</div>
+
+
+<button (click)="addBenefit()">+ Add Benefit</button>
+
+<div formArrayName="benefits">
+  <div *ngFor="let benefit of benefits.controls; let i = index" [formGroupName]="i" class="benefit-container">
+
+    <!-- Single Row Display (Collapsed) -->
+    <div class="benefit-header">
+      <i [class]="benefit.get('icon')?.value || 'fa fa-star'"></i>
+      <span class="benefit-name">{{ 'Benefit ' + (i + 1) }}: {{ benefit.get('name')?.value }}</span>
+
+      <!-- Button Group: Expand/Collapse & Remove -->
+      <div class="button-group">
+        <button (click)="toggleBenefit(i)" class="icon-btn">
+          <i [class]="collapsedBenefits[i] ? 'fa-solid fa-angles-down' : 'fa-solid fa-angles-up'"></i>
+        </button>
+        <button (click)="removeBenefit(i)" class="icon-btn delete-btn">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Expanded View -->
+    <div *ngIf="!collapsedBenefits[i]" class="benefit-details">
+      <label for="benefitName">Benefit Name</label>
+      <input formControlName="name" id="benefitName" class="form-control" placeholder="Enter benefit name" />
+
+      <label for="benefitIcon">Font Awesome Icon</label>
+      <input formControlName="icon" id="benefitIcon" class="form-control" placeholder="Enter Icon Class" />
+
+      <label for="benefitDescription">Description</label>
+      <textarea formControlName="description" id="benefitDescription" class="form-control" rows="3"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- 
+
+<div class="form-group">
+  <label for="specialPrograms">Special Programs</label>
+  <textarea id="specialPrograms" formControlName="specialPrograms" class="form-control"></textarea>
+</div>
+<div class="form-group">
+  <label for="tours">Tours</label>
+  <textarea id="tours" formControlName="tours" class="form-control"></textarea>
+</div>
+<div class="form-group">
+  <label for="freeConsulting">Free Consulting</label>
+  <textarea id="freeConsulting" formControlName="freeConsulting" class="form-control"></textarea>
+</div> -->
+</form>

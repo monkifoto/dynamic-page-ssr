@@ -1,0 +1,42 @@
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+video,
+iframe {
+  width: 100%; /* Fill container by default */
+  max-width: var(--site-max-width); /* Constrain to site max width */
+  aspect-ratio: 16 / 9;
+  height: auto; /* Maintain aspect ratio */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .video-container {
+    padding: 10px;
+  }
+
+  video,
+  iframe {
+    max-height: 60vh;
+  }
+}
+
+/* Phones (small devices) */
+@media (max-width: 480px) {
+  .video-container {
+    padding: 8px;
+  }
+
+  video,
+  iframe {
+    max-height: 50vh; /* More conservative height on small screens */
+  }
+}

@@ -1,0 +1,6 @@
+<div class="modal-overlay" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button type="button" class="afhBtn"  (click)="close()">Close</button>
+    <img [src]="imageUrl" alt="Full Size Image">
+  </div>
+</div>

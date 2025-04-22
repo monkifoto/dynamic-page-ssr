@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+  <h2>Contact Us</h2>
+
+  <!-- Predefined Images Section -->
+  <div class="section-container">
+    <h3>Choose from Available Images</h3>
+    <div class="image-grid">
+      <div *ngFor="let image of predefinedImages" class="image-option">
+        <input
+          type="radio"
+          formControlName="contactUsImageUrl"
+          [value]="image.url"
+          (change)="onImageSelection(image.url)">
+        <img class="contactUsImagesThumbnails" [src]="image.url" alt="Predefined Image" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload New Image Section -->
+  <!-- <div class="section-container">
+    <h3>Upload a New Image</h3>
+    <input type="file" (change)="onFileSelected($event)" class="form-control">
+  </div> -->
+
+  <!-- Contact Form Details -->
+  <div class="section-container">
+    <h3>Contact Form Details</h3>
+    <div class="row">
+      <div class="col">
+        <label for="contactFormDetails">Details</label>
+        <textarea id="contactFormDetails" formControlName="contactFormDetails" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,103 @@
+.testimonial {
+  display: flex;
+  justify-content: center;
+  background-color: var(--dark-background-color); /* Light beige background */
+  padding: 2rem;
+  padding-top: 6.6vmax;
+  padding-bottom: 6.6vmax;
+}
+
+.testimonial-image {
+  position: relative;
+  max-width: 800px;
+}
+
+.testimonial-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+}
+
+.testimonial-content {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Align to the right of the image */
+  transform: translate(70%, -50%); /* Center vertically */
+  background-color: var(--primary-color);
+  padding: 1.5rem 3rem;
+  max-width: 80%; /* Adjust width as needed */
+}
+
+.testimonial-text {
+  font-size: 2rem;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.testimonial-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1080px), (max-width: 1024px) {
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .testimonial-image {
+    position: static; /* Remove absolute positioning for mobile */
+    max-width: 50%;
+    text-align: center; /* Center content */
+  }
+
+  .testimonial-content {
+    position: static; /* Remove absolute positioning for mobile */
+    transform: none; /* Remove transformation */
+    margin-top: 1rem; /* Add spacing below the image */
+    max-width: 100%; /* Allow content to fill the container */
+    text-align: center; /* Center the text */
+    padding: 1rem 1.5rem; /* Adjust padding for smaller screens */
+  }
+
+  .testimonial-text {
+    font-size: 1.5rem; /* Scale down font size */
+  }
+
+  .testimonial-name {
+    font-size: 0.8rem; /* Adjust font size for mobile */
+    margin-top: 0.5rem;
+  }
+}
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .testimonial-image {
+    position: static; /* Remove absolute positioning for mobile */
+    max-width: 100%;
+    text-align: center; /* Center content */
+  }
+
+  .testimonial-content {
+    position: static; /* Remove absolute positioning for mobile */
+    transform: none; /* Remove transformation */
+    margin-top: 1rem; /* Add spacing below the image */
+    max-width: 100%; /* Allow content to fill the container */
+    text-align: center; /* Center the text */
+    padding: 1rem 1.5rem; /* Adjust padding for smaller screens */
+  }
+
+  .testimonial-text {
+    font-size: 1.5rem; /* Scale down font size */
+  }
+
+  .testimonial-name {
+    font-size: 0.8rem; /* Adjust font size for mobile */
+    margin-top: 0.5rem;
+  }
+}

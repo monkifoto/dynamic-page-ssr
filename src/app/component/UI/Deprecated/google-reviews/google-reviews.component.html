@@ -1,0 +1,32 @@
+<div class="reviews-carousel">
+    <!-- Mock Badge -->
+    <div *ngIf="useMockReviews" class="mock-badge">
+      <span>Mock Reviews Enabled</span>
+    </div>
+
+  <!-- Reviews -->
+  <div class="review" *ngFor="let review of reviews; let i = index" [class.active]="i === currentReviewIndex">
+    <div class="review-header">
+      <p class="review-author">{{ review.author_name }}</p>
+      <div class="review-rating">
+        <span *ngFor="let star of [].constructor(5); let j = index" class="star" [class.filled]="j < review.rating">★</span>
+      </div>
+    </div>
+    <p class="review-text">"{{ review.text }}"</p>
+  </div>
+
+  <!-- No reviews available -->
+  <div *ngIf="reviews && reviews.length === 0">
+    <p class="no-reviews">No reviews available for this business.</p>
+  </div>
+
+  <!-- Dots for navigation -->
+  <div class="carousel-dots">
+    <span
+      *ngFor="let _ of reviews; let i = index"
+      class="dot"
+      [class.active]="i === currentReviewIndex"
+      (click)="selectReview(i)"
+    ></span>
+  </div>
+</div>

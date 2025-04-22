@@ -1,0 +1,143 @@
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
+    <nav class="navbar_">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+            <img
+              class="logoImage"
+              *ngIf="business?.logoImage"
+              [src]="business?.logoImage"
+              alt="Business Logo"
+            />
+          </a>
+        </div>
+        <div class="menu-icon" (click)="toggleMenu()">
+          <div class="bar1" [ngClass]="{ 'open-bar1': menuOpen }"></div>
+          <div class="bar2" [ngClass]="{ 'open-bar2': menuOpen }"></div>
+          <div class="bar3" [ngClass]="{ 'open-bar3': menuOpen }"></div>
+        </div>
+        <ul class="nav-menu" [ngClass]="{ active: menuOpen }">
+          <li class="nav-item" (click)="navigateTo('home')">Home</li>
+          <li class="nav-item" (click)="navigateTo('services')">Services</li>
+          <li class="nav-item" (click)="navigateTo('about-us')">About Us</li>
+          <li class="nav-item" (click)="navigateTo('gallery')">Our Home</li>
+          <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
+        </ul>
+      </div>
+    </nav>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'ae'">
+    <nav class="navbar_">
+      <div class="ae-navbar-container">
+        <div class="logo">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+            <img
+              class="logoImage"
+              *ngIf="business?.logoImage"
+              [src]="business?.logoImage"
+              alt="Business Logo"
+            />
+          </a>
+        </div>
+        <div class="menu-icon" (click)="toggleMenu()">
+          <div class="bar1" [ngClass]="{ 'open-bar1': menuOpen }"></div>
+          <div class="bar2" [ngClass]="{ 'open-bar2': menuOpen }"></div>
+          <div class="bar3" [ngClass]="{ 'open-bar3': menuOpen }"></div>
+        </div>
+        <ul class="nav-menu" [ngClass]="{ active: menuOpen }">
+          <li class="nav-item" (click)="navigateTo('home')">Home</li>
+          <li class="nav-item" (click)="navigateTo('services')">Services</li>
+          <li class="nav-item" (click)="navigateTo('about-us')">About Us</li>
+          <li class="nav-item" (click)="navigateTo('gallery')">Our Home</li>
+          <li class="nav-item" (click)="navigateTo('testimonials')">Testimonials</li>
+          <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
+          <li class="nav-item" (click)="navigateTo('resident-form')">Resident Form</li>
+        </ul>
+        <div class="logo">
+          <a href="#" [routerLink]="['/contact-us']" [queryParams]="{ id: businessId }">
+            <button class="afhBtn" >Schedule a Visit</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="'clemo'">
+    <app-expandable-navigation></app-expandable-navigation>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'sb'">
+    <app-expandable-navigation></app-expandable-navigation>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'sp'">
+    <nav class="navbar_sp">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+            <img
+              class="logoImage"
+              *ngIf="business?.logoImage"
+              [src]="business?.logoImage"
+              alt="Business Logo"
+            />
+          </a>
+        </div>
+        <div class="menu-icon" (click)="toggleMenu()">
+          <div class="bar1" [ngClass]="{ 'open-bar1': menuOpen }"></div>
+          <div class="bar2" [ngClass]="{ 'open-bar2': menuOpen }"></div>
+          <div class="bar3" [ngClass]="{ 'open-bar3': menuOpen }"></div>
+        </div>
+        <ul class="nav-menu" [ngClass]="{ active: menuOpen }">
+          <li class="nav-item" (click)="scrollToSection('home')">Home</li>
+          <li class="nav-item" (click)="scrollToSection('services')">Services</li>
+          <li class="nav-item" (click)="scrollToSection('about-us')">About Us</li>
+          <li class="nav-item" (click)="scrollToSection('gallery')">Our Home</li>
+          <li class="nav-item" (click)="scrollToSection('contact-us')">Contact</li>
+        </ul>
+      </div>
+    </nav>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'prestige'">
+    <app-expandable-navigation></app-expandable-navigation>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'demo'">
+    <nav class="navbar_">
+      <div class="ae-navbar-container">
+        <div class="logo">
+          <a href="#" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+            <img
+              class="logoImage"
+              *ngIf="business?.logoImage"
+              [src]="business?.logoImage"
+              alt="Business Logo"
+            />
+          </a>
+        </div>
+        <div class="menu-icon" (click)="toggleMenu()">
+          <div class="bar1" [ngClass]="{ 'open-bar1': menuOpen }"></div>
+          <div class="bar2" [ngClass]="{ 'open-bar2': menuOpen }"></div>
+          <div class="bar3" [ngClass]="{ 'open-bar3': menuOpen }"></div>
+        </div>
+        <ul class="nav-menu" [ngClass]="{ active: menuOpen }">
+          <li class="nav-item" (click)="navigateTo('home')">Home</li>
+          <li class="nav-item" (click)="navigateTo('services')">Services</li>
+          <li class="nav-item" (click)="navigateTo('about-us')">About Us</li>
+          <li class="nav-item" (click)="navigateTo('gallery')">gallery</li>
+          <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
+          <li class="nav-item" (click)="navigateTo('resident-form')">Intake Form</li>
+        </ul>
+        <div class="logo">
+          <a href="#" [routerLink]="['/contact-us']" [queryParams]="{ id: businessId }">
+            <button class="afhBtn" >Schedule a Visit</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </ng-container>
+</div>

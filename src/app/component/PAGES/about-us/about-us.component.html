@@ -1,0 +1,53 @@
+<div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+      <div class="hero-about">
+        <div class="page-hero-overlay">
+          <h1>About Us</h1>
+          <div class="hero-subtitle">
+            <p>Where Compassion Meets Care: Your Loved Ones, Our Family.</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'ae'">
+      <app-hero [layoutType]="'ae'"></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'clemo'">
+      <app-hero [layoutType]="'clemo'"></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'sb'">
+      <app-hero [layoutType]="'sb'"></app-hero>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'prestige'">
+      <app-hero [layoutType]="'prestige'"></app-hero>
+    </ng-container>
+
+  </div>
+
+  <div *ngIf="business.theme.themeType!='prestige'" class="aboutus-page-main-container">
+    <div class="container text-section" #dynamicContainer></div>
+  </div>
+  <div *ngIf="business.theme.themeType=='prestige'" class="aboutus-page-main-container">
+    <div class="" #dynamicContainer></div>
+  </div>
+
+  <!-- <section class="business-team">
+    <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
+  </section> -->
+
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'ae'">
+      <app-testimonial-image
+        [imageURL]="
+          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
+        "
+        [author]="business.testimonials[0].name"
+        [text]="business.testimonials[0].quote"
+      ></app-testimonial-image>
+    </ng-container>
+  </div>

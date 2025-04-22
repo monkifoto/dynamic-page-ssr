@@ -1,0 +1,141 @@
+.ae-contact-us-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--background-color);
+  padding: 40px;
+  color: var(--text-color);
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+}
+
+/* Contact Details (Left Side) */
+.ae-contact-details {
+  width: 50%;
+  padding: 20px;
+  display: inline;
+  min-height: 350px;
+}
+.ae-contact-details:nth-child(even) {
+border-left: solid 1px var(--text-color);
+}
+
+.ae-contact-details h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  color:var(--dark-background-color);/* Adjust color to match the image */
+  margin-bottom: 10px;
+}
+
+.ae-contact-details p {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 14px;
+  display: inline-block;
+  padding: 5px 0;
+}
+
+.ae-contact-item .label {
+  font-weight: bold;
+  color: var(--dark-background-color);
+  margin-bottom: 5px;
+}
+
+/* Contact Form (Right Side) */
+.ae-contact-form {
+  width: 50%;
+  padding: 20px;
+  background: var(--background-color);
+  min-height: 300px;
+  border-right: solid 1px var(--text-color);
+}
+
+/* Map Container */
+.ae-map-container {
+  width: 50%;
+  padding: 20px;
+  min-height: 200px;
+}
+
+
+.ae-contact-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--dark-background-color)
+}
+
+.ae-contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 0; /* Adjust padding to only top and bottom */
+  border: none; /* Remove all borders */
+  border-bottom: 2px solid var(--dark-background-color); /* Add bottom border */
+  border-radius: 0; /* Remove border radius */
+  outline: none; /* Remove outline on focus */
+}
+
+
+/* Button */
+.ae-contact-form .btn {
+  background-color: var(--dark-background-color);/* Button color */
+  color:var(--background-color);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: 150px;
+  border:0;
+}
+
+.ae-contact-form .btn:hover {
+  background-color: var(--background-color); /* Darker shade on hover */
+  color: var(--text-color);
+  border: solid 1px var(--text-color); /* Add border on hover */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ae-contact-us-container:first-of-type  {
+    flex-direction: column-reverse;
+    padding: 20px;
+  }
+
+  .ae-contact-us-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .ae-map-container {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    border: none; /* Remove border for mobile view */
+  }
+
+  .ae-contact-details,
+  .ae-contact-form {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

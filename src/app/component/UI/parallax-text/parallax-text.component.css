@@ -1,0 +1,58 @@
+.parallax-container {
+  height: 400px; /* Default height for desktops */
+  background-image: url('../../../../assets/sharedAssets/istockphoto-1319783351-2048x2048.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  overflow: hidden; /* Prevents unwanted scrolling */
+}
+
+.parallax-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6); /* Light overlay for readability */
+  z-index: 1;
+}
+
+/* Ensure content is above the overlay */
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .parallax-container {
+    height: 300px; /* Reduce height on smaller screens */
+    background-attachment: scroll; /* Fix parallax issue on mobile */
+    background-size: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .parallax-container {
+    height: 250px; /* Further reduce height for very small screens */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Reduce text size */
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+}

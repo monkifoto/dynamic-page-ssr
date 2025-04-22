@@ -1,0 +1,106 @@
+<div
+  class="clemo-slider-container"
+  id="carousel"
+  [ngStyle]="{
+    '--slider-opacity': sliderOpacity,
+    height: sliderHeight,
+    '--button-border-radius': buttonBorderRadius,
+    '--subtitle-size': subtitleSize,
+    '--subtitle-weight': subtitleWeight
+  }"
+>
+<ng-container *ngFor="let slide of slides; let i = index">
+  <div
+  *ngIf="i === currentSlide || i === previousSlide && slide"
+  class="clemo-slides clemo-single-home-slider"
+  [@slideTransition]="{
+    value: i === currentSlide ? 'enter' : 'leave',
+    params: {
+      directionEnter: slideDirection === 'left' ? '100%' : '-100%',
+      directionLeave: slideDirection === 'left' ? '-100%' : '100%'
+    }
+  }"
+  (@slideTransition.done)="onSlideTransitionDone(i)"
+>
+    <!-- Background -->
+    <div
+      class="clemo-home-overlay"
+      [ngStyle]="slide?.backgroundImage && {
+        backgroundImage: 'url(' + slide.backgroundImage + ')',
+        'background-size': 'cover',
+        'background-position': 'center',
+        'background-repeat': 'no-repeat'
+      }"
+    ></div>
+
+    <!-- Slide Content -->
+    <div class="clemo-main-home" @slideFadeIn>
+      <div class="clemo-main-home-content">
+        <h1>{{ slide.title }}</h1>
+        <div class="clemo-separator"></div>
+        <h2
+        class="clemo-subtitle"
+        *ngIf="slide?.subtitle"
+        [ngStyle]="{ 'font-size': subtitleSize, 'font-weight': subtitleWeight }"
+        [innerHTML]="slide.subtitle"
+        ></h2>
+
+        <div class="clemo-home-btn" *ngIf="slide?.buttons?.length">
+          <ng-container *ngFor="let button of slide.buttons">
+            <a
+              [routerLink]="button.link"
+              [queryParams]="{ id: business?.id }"
+              [ngClass]="{
+                'clemo-btn': !button.outline,
+                'clemo-btn-outline': button.outline
+              }"
+              [ngStyle]="{ 'border-radius': buttonBorderRadius }"
+              routerLinkActive="active"
+            >
+              {{ button.text }}
+            </a>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mouse-scroll">
+        <div class="mouse"><div class="scroll"></div></div>
+        <p>Scroll down</p>
+      </div>
+    </div>
+  </div>
+</ng-container>
+  <!-- Navigation -->
+  <div *ngIf="slides && slides.length > 1">
+    <div class="clemo-slider-navigation" [ngClass]="{ 'bottom-nav': navigation === 'bottom' }">
+      <div
+        *ngFor="let slide of slides; let i = index"
+        [class.clemo-active]="i === currentSlide"
+        class="clemo-nav-item"
+        [ngClass]="{ 'line-style': navigation === 'bottom' }"
+        (click)="navigateToSlide(i)"
+      ></div>
+    </div>
+
+    <!-- Side Navigation Buttons -->
+    <button
+      *ngIf="sideButtons"
+      class="carousel-control-prev hh-prev"
+      type="button"
+      (click)="prevSlide()"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button
+      *ngIf="sideButtons"
+      class="carousel-control-next hh-next"
+      type="button"
+      (click)="nextSlide()"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

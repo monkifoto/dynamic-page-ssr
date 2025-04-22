@@ -1,0 +1,136 @@
+/****************************************** CLEMO FOOTER ******************************************/
+.clemo-footer {
+  background-color: var(--background-color);
+  text-align: center;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+}
+
+.clemo-footer-logo img {
+  max-width: 200px;
+}
+
+.clemo-footer-phone,
+.clemo-footer-address {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.clemo-social-icon {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.clemo-footer-nav {
+  margin: 20px 0;
+}
+
+.clemo-footer-link {
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clemo-footer-link:hover {
+  text-decoration: underline;
+}
+
+.clemo-footer-bottom {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
+}
+
+.footer-theme-file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--dark-background-color);
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/********** DEBUGER *********/
+.debugger-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.debugger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.debugger-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border: 1px solid var(--dark-background-color);
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.debugger-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.debugger-value {
+  color: var(--dark-background-color);
+  word-break: break-word;
+}
+/********** DEBUGER *********/
+.footer,
+.ae-footer,
+.clemo-footer {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.footer-info,
+.ae-footer-columns,
+.clemo-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.clemo-footer-content {
+  display: grid;
+}
+
+.copy {
+  max-width: var(--site-max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.design,
+.rights {
+  display: flex;
+  align-items: center;
+}
+/******************************************************** CLEMO FOOTER **********************************************************/

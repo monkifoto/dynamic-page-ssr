@@ -1,0 +1,242 @@
+.our-services-section {
+  background-color: var(--dark-background-color);
+  padding: 50px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.our-services-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.our-services-title.main {
+  color: var(--primary-color);
+}
+
+.our-services-title.highlight {
+  color: var(--accent-color);
+}
+
+.our-services-description {
+  color: var(--primary-color);
+  margin-bottom: 40px;
+}
+
+.our-services-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.our-services-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  color: var(--primary-color);
+  border-radius: 10px;
+}
+
+.our-services-item-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.our-services-item h3 {
+  font-size: 1.5em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.our-services-item i {
+  font-size: 2em;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.our-services-item p {
+  color: var(--primary-color);
+  font-size: 16px;
+  text-align: center;
+}
+
+.our-services-item-title {
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+  .our-services-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .our-services-item h3 {
+    font-size: 1.2em;
+  }
+
+  .our-services-item p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .our-services-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .our-services-item {
+    margin-bottom: 20px;
+  }
+
+  .our-services-item h3 {
+    font-size: 1.1em;
+  }
+
+  .our-services-item p {
+    font-size: 14px;
+  }
+
+  .our-services-item i {
+    font-size: 1.8em;
+  }
+}
+/* New CSS for the updated layout */
+
+/* Main section styling */
+.ae-modern-services-section {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  background-color: var(--dark-background-color);
+  padding: 10rem 0;
+}
+
+.ae-our-services-container{
+flex: 1;
+  max-width: 1400px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: var(--dark-background-color);
+  gap: 20px;
+}
+
+/* Left side: Services content */
+.ae-services-content {
+  flex: 1;
+  max-width: 50%;
+}
+
+.ae-services-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+
+.ae-our-services-title {
+  font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+.ae-our-services-title.main {
+  color: var(--primary-color);
+}
+
+.ae-our-services-title.highlight {
+  color: var(--accent-color);
+}
+
+.ae-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ae-service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  border-bottom: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.ae-service-description {
+  padding: 15px;
+  font-size: 1rem;
+  color: var(--background-color);
+  background-color: var(--dark-background-color);
+  border-left: 3px solid var(--accent-color);
+  margin: 10px 0;
+  transition: max-height 0.3s ease-in-out;
+}
+.ae-service-title {
+  font-weight: 500;
+  font-style: 3rem;
+}
+
+.ae-service-expand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Right side: Images */
+.ae-services-images {
+  flex: 1;
+  position: relative;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ae-image-large {
+  width: 90%; /* Adjusted to make it smaller */
+  height: 550px; /* Set a fixed height to remove extra space */
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* Ensures image stays within bounds */
+  padding-bottom: 20%;
+
+}
+
+.ae-image-small {
+  width: 60%; /* Adjusted to make it smaller */
+  height: 350px; /* Set a fixed height to remove extra space */
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  overflow: hidden; /* Ensures image stays within bounds */
+  padding-left: 10%;
+
+}
+
+/* Ensure images fit within containers without stretching */
+.ae-image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps the image aspect ratio */
+  border-radius: 15px;
+}
+
+
+

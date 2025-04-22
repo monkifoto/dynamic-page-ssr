@@ -1,0 +1,177 @@
+
+.gallery {
+  padding: 20px;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Responsive grid */
+  gap: 20px; /* Adds spacing between the images */
+}
+
+/* Individual gallery item */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Show pointer on hover */
+}
+
+/* Gallery image */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the full space */
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+/* .gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+} */
+.gallery-item:hover img {
+  transform: scale(1.1); /* Slightly enlarges the image */
+}
+
+/* Overlay for captions */
+.gallery-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 10px;
+}
+
+.gallery-item-overlay a{
+  color: white;
+  font-size: 2.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Title and description inside the overlay */
+.gallery-item-overlay h3 {
+  font-size: 3rem;
+  line-height: 3rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  color: aliceblue;
+}
+
+.gallery-item-overlay p {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Hover effect to show the overlay */
+.gallery-item:hover .gallery-item-overlay {
+  opacity: 1;
+  transform: translateY(0); /* Moves the overlay into view */
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+@media (max-width: 768px) {
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gallery-item-overlay {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+    background-color: var(--dark-background-color);
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 50%;
+    margin-top: 5px;
+  }
+
+  .gallery-item-overlay h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  .gallery-item-overlay p {
+    font-size: 0.95rem;
+  }
+
+  .gallery-item-overlay a {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+    text-decoration: underline;
+  }
+}

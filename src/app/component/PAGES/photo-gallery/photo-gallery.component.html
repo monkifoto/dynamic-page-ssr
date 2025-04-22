@@ -1,0 +1,53 @@
+<div *ngIf="business">
+  <div [ngSwitch]="business.theme.themeType">
+    <ng-container *ngSwitchCase="'hh'">
+      <div class="hero-about">
+        <div class="page-hero-overlay">
+          <h1>Our Home</h1>
+          <div class="hero-subtitle">
+            <p>Feel at Home: A Peek into Our Caring Environment</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'sb'">
+    <app-hero [layoutType]="'sb'"></app-hero>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ae'">
+      <app-hero [layoutType]="'ae'"></app-hero>
+      </ng-container>
+      <ng-container *ngSwitchCase="'clemo'">
+        <app-hero [layoutType]="'clemo'"></app-hero>
+        </ng-container>
+    <ng-container *ngSwitchCase="'prestige'">
+      <app-hero [layoutType]="'prestige'"></app-hero>
+    </ng-container>
+  </div>
+
+  <ng-container #dynamicContainer></ng-container>
+
+  <section class="gallery">
+    <div class="section-heading"><h2>Explore Our Gallery</h2></div>
+    <div class="gallery-grid">
+      <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
+        <img [src]="image.url" alt="Gallery Image">
+
+        <div *ngIf="image.title || image.description || image.link" class="gallery-item-overlay">
+          <h3 *ngIf="image.title">{{ image.title }}</h3>
+          <p *ngIf="image.description">{{ image.description }}</p>
+          <a *ngIf="image.link" [href]="image.link" target="_blank">View Page</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-container #ctaContainer></ng-container>
+</div>
+
+<!-- Image Modal -->
+<div class="image-modal" *ngIf="selectedImageUrl" (click)="onCloseModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onCloseModal()">&times;</button>
+    <img [src]="selectedImageUrl" alt="Full Image">
+  </div>
+</div>

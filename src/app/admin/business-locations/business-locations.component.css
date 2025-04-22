@@ -1,0 +1,71 @@
+.admin-locations {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+.section-container {
+  display: block;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.col {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.add-btn, .save-btn, .delete-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-btn {
+  background: #28a745;
+}
+
+.delete-btn {
+  background: #dc3545;
+}
+
+.message {
+  text-align: center;
+  margin-top: 10px;
+  color: green;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.required::after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
+}

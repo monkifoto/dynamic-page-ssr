@@ -1,0 +1,22 @@
+<div class="background">
+  <div *ngFor="let bubble of bubbles"
+       class="bubble"
+       [ngStyle]="{
+         'left': bubble.left,
+         'top': bubble.top,
+         'width': bubble.size,
+         'height': bubble.size,
+         'background-color': bubble.color,
+         'animation-duration': bubble.animationDuration,
+         'animation-name': bubble.animationDirection === 'left-up' ? 'floatLeftUp' :
+                           bubble.animationDirection === 'left-down' ? 'floatLeftDown' :
+                           bubble.animationDirection === 'right-up' ? 'floatRightUp' :
+                           'floatRightDown'
+       }"></div>
+
+<div class="overlay">
+  <div class="overlay-content">
+    <h2>{{ overlayText }}</h2> <!-- Bind the overlay text here -->
+  </div>
+</div>
+</div>

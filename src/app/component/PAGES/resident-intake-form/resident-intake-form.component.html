@@ -1,0 +1,210 @@
+<!-- <app-hero></app-hero> -->
+<div *ngIf="business">
+  <app-hero [layoutType]="business.theme.themeType || 'default'"></app-hero>
+
+
+  <form [formGroup]="intakeForm" (ngSubmit)="onSubmit()">
+    <!-- Personal Information -->
+    <div class="form-section">
+      <h2>Personal Information</h2>
+      <label for="name">Name *</label>
+      <input
+        formControlName="name"
+        placeholder="First and last name"
+        id="name"
+      />
+
+      <label for="email">Email *</label>
+      <input formControlName="email" type="email" id="email" />
+
+      <label for="phoneNumber">Phone number *</label>
+      <input formControlName="phoneNumber" id="phoneNumber" />
+    </div>
+
+    <!-- Referral Source -->
+    <div class="form-section">
+      <h2>Referral Source</h2>
+      <label for="referralSource">How did you find out about us? *</label>
+      <select formControlName="referralSource" id="referralSource">
+        <option value="google">Google</option>
+        <option value="facebook">Facebook</option>
+        <option value="placementAgency">Placement Agency</option>
+        <option value="friendsFamily">Friends and/or Family</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="relationToResident"
+        >What is your relation to the resident? *</label
+      >
+      <input formControlName="relationToResident" id="relationToResident" />
+    </div>
+
+    <!-- Resident Information -->
+    <div class="form-section">
+      <h2>Resident Information</h2>
+      <label for="residentName">Resident's name *</label>
+      <input formControlName="residentName" id="residentName" />
+
+      <label for="age">Age *</label>
+      <input formControlName="age" type="number" id="age" />
+
+      <label for="gender">Gender *</label>
+      <select formControlName="gender" id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="preferNotToSay">Prefer not to say</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <!-- Medical History -->
+    <div class="form-section">
+      <h2>Medical History</h2>
+      <label for="medicalHistory"
+        >Relevant medical and surgical history *</label
+      >
+      <textarea formControlName="medicalHistory" id="medicalHistory"></textarea>
+
+      <label for="height">Height *</label>
+      <input formControlName="height" type="number" id="height" />
+
+      <label for="weight">Weight *</label>
+      <input formControlName="weight" type="number" id="weight" />
+
+      <label for="reasonForMoving"
+        >Reason for moving to an adult family home *</label
+      >
+      <textarea
+        formControlName="reasonForMoving"
+        id="reasonForMoving"
+      ></textarea>
+
+      <label for="rnAssessment"
+        >Do you already have an "RN Assessment for AFH"? *</label
+      >
+      <select formControlName="rnAssessment" id="rnAssessment">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <!-- Care Levels -->
+    <div class="form-section">
+      <h2>Care Levels</h2>
+      <label for="eating">Eating *</label>
+      <select formControlName="eating" id="eating">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="personalHygiene">Personal Hygiene *</label>
+      <select formControlName="personalHygiene" id="personalHygiene">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="bathing">Bathing *</label>
+      <select formControlName="bathing" id="bathing">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="toileting">Toileting *</label>
+      <select formControlName="toileting" id="toileting">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="mobility">Mobility *</label>
+      <select formControlName="mobility" id="mobility">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="transfers">Transfers *</label>
+      <select formControlName="transfers" id="transfers">
+        <option value="independent">Independent</option>
+        <option value="needingAssistance">Needing Assistance</option>
+        <option value="dependent">Dependent</option>
+      </select>
+
+      <label for="medicationAssistance">Medication Assistance *</label>
+      <select formControlName="medicationAssistance" id="medicationAssistance">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <!-- Other Medical Information -->
+    <div class="form-section">
+      <h2>Other Medical Information</h2>
+      <label for="memoryIssues">Memory Issues *</label>
+      <select formControlName="memoryIssues" id="memoryIssues">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="behavior">Behavior</label>
+      <textarea formControlName="behavior" id="behavior"></textarea>
+
+      <label for="skinCondition">Skin Condition</label>
+      <textarea formControlName="skinCondition" id="skinCondition"></textarea>
+
+      <label for="additionalInfo">Other information you want us to know</label>
+      <textarea formControlName="additionalInfo" id="additionalInfo"></textarea>
+    </div>
+
+    <!-- Living Situation -->
+    <div class="form-section">
+      <h2>Living Situation</h2>
+      <label for="currentLivingSituation">Current living situation *</label>
+      <select
+        formControlName="currentLivingSituation"
+        id="currentLivingSituation"
+      >
+        <option value="ownHome">Own Home</option>
+        <option value="relativesHome">Relative's Home</option>
+        <option value="hospital">Hospital</option>
+        <option value="adultFamilyHome">Adult Family Home</option>
+        <option value="seniorLiving">Senior Living</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <!-- Move-In Date -->
+    <div class="form-section">
+      <label for="targetMoveInDate">Target move in date *</label>
+      <input
+        formControlName="targetMoveInDate"
+        type="date"
+        id="targetMoveInDate"
+      />
+    </div>
+
+    <!-- Disclosure Summary Request -->
+    <div class="form-section">
+      <label for="disclosureSummary"
+        >Would you like a summary of disclosures of our rates and services,
+        including itemized services?</label
+      >
+      <select formControlName="disclosureSummary" id="disclosureSummary">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <!-- Do you have any questions for us? -->
+    <div class="form-section">
+      <label for="questions">Do you have any questions for us?</label>
+      <textarea formControlName="questions" id="questions"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="intakeForm.invalid">Submit</button>
+  </form>
+</div>

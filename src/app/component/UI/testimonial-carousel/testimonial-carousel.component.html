@@ -1,0 +1,88 @@
+
+
+<div >
+  <div class="mock-data">
+  <div *ngIf="useMockReviews" class="mock-badge">
+    <span>Mock Google Reviews Enabled</span>
+  </div>
+</div>
+  <div class="testimonials-container modern-carousel">
+
+    <div class="testimonial-content">
+      <!-- Left Column -->
+      <div class="testimonial-intro">
+        <h2>from our <span class="highlight">community</span></h2>
+        <p class="intro-subtext">
+          Here’s what others had to say about us.
+        </p>
+        <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId != '0'">
+      Leave us a Google Review
+    </a>
+        <div class="carousel-arrows">
+          <button (click)="previousSlide()" aria-label="Previous testimonial">&#8592;</button>
+          <button (click)="nextSlide()" aria-label="Next testimonial">&#8594;</button>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <ng-container *ngIf="currentTestimonial; else noTestimonials">
+        <div
+          class="testimonial-quote"
+          *ngFor="let testimonial of [currentTestimonial]; trackBy: trackByIndex"
+          [@slideIn]
+        >
+          <div class="quote-icon">“</div>
+        <!-- Google reviews: plain text -->
+        <p class="quote-text" *ngIf="testimonial.isGoogle">
+          {{ truncateText(testimonial.quote) }}
+          <span *ngIf="isTruncated(testimonial.quote)">
+            ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+          </span>
+        </p>
+
+        <p class="quote-text" *ngIf="!testimonial.isGoogle">
+          <span [innerHTML]="truncateText(testimonial.rawQuote)"></span>
+          <span *ngIf="isTruncated(testimonial.rawQuote)">
+            ... <button class="read-more" (click)="navigateTo('testimonials')">Read More</button>
+          </span>
+        </p>
+
+          <div class="author-info">
+            <img
+              *ngIf="testimonial.photoUrl; else fallbackAvatar"
+              [src]="testimonial.photoUrl"
+              alt="{{ testimonial.name }}"
+              class="author-photo"
+            />
+            <ng-template #fallbackAvatar>
+              <div class="author-photo placeholder">
+                {{ testimonial.name?.charAt(0)?.toUpperCase() || '?' }}
+              </div>
+            </ng-template>
+            <div>
+              <p class="author-name">{{ testimonial.name }}</p>
+              <p class="author-role">{{ testimonial.relationship }}</p>
+              <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
+            </div>
+          </div>
+          <div class="testimonial-dots">
+            <div
+              *ngFor="let testimonial of testimonials; let i = index"
+              [class.active]="i === currentIndex"
+              (click)="goToSlide(i)"
+            ></div>
+          </div>
+        </div>
+        <!-- Slide Indicators -->
+
+      </ng-container>
+    </div>
+
+    <ng-template #noTestimonials>
+      <p class="no-testimonials-message">No testimonials available at the moment.</p>
+    </ng-template>
+
+  </div>
+
+
+</div>

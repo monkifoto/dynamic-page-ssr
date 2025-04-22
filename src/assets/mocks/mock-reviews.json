@@ -1,0 +1,22 @@
+[
+  {
+    "author_name": "John Doe",
+    "rating": 5,
+    "text": "Fantastic care and lovely staff!",
+    "relative_time_description": "2 weeks ago"
+  },
+  {
+    "author_name": "Jane Smith",
+    "rating": 4,
+    "text": "My father has been very happy here. Thank you!",
+    "relative_time_description": "1 month ago"
+  },
+  {
+    "author_name": "John Doe",
+    "text": "Fantastic place! The staff are so kind and attentive."
+  },
+  {
+    "author_name": "Mary Smith",
+    "text": "Highly recommend this home. My mom loves it here!"
+  }
+]

@@ -1,0 +1,94 @@
+<div [ngSwitch]="themeType">
+   <div *ngSwitchCase="'hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+   <div class="section-container">
+      <div class="section-heading">
+        <span class="section-title-main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
+      </div>
+      <!-- <p class="section-description">
+        {{content}}
+      </p> -->
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
+      <button type="button" class="afhBtn" (click)="navigateTo('resident-form')">Get Started</button>
+    </div>
+</div>
+
+<div *ngSwitchCase="'ae'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }"> {{title}}  Ready to experience </span>
+        <span class="consultation-title highlight"[ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}{{ _businessName }}?</span>
+      </div>
+      <p>Discover what makes our services unique and tailored to your needs.</p>
+      {{content}}
+      <div class="cta-buttons">
+        <button class="afhBtn" (click)="navigateToContact(businessId)">Schedule a Visit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div *ngSwitchCase="'clemo'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
+      </div>
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
+      <div class="cta-buttons">
+        <button type="button" class="cta-btn" (click)="navigateTo('resident-form')">{{buttonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div *ngSwitchCase="'sb'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <div class="consultation-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
+      </div>
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
+      <div class="cta-buttons">
+        <button class="consultation-btn" (click)="navigateTo('contact-us')">{{buttonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div *ngSwitchCase="'prestige'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <div class="ae-section-container">
+  <div class="cta-container">
+    <div class="cta-content">
+      <div class="our-services-section-heading">
+        <span class="consultation-title main" [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px' }">{{title}} </span>
+        <span class="section-title-highlight" [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px' }">{{subTitle}}</span>
+      </div>
+      <p class="section-description" [innerHTML]="sanitizedContent"></p>
+      <div class="cta-buttons">
+        <button type="button" class="cta-btn" (click)="navigateTo('resident-form')">{{buttonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

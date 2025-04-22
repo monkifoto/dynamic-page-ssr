@@ -1,0 +1,155 @@
+.sp-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2.subtitle {
+  margin: 20px 0;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.separator {
+  width: 50px;
+  height: 2px;
+  background-color: #fff;
+  margin: 20px auto;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #ccc;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.btn-outline:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Navigation */
+.navigation {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.navigation.bottom-nav {
+  right: auto;
+  bottom: 20px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+}
+
+.nav-item {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.nav-item.active {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+/* Controls */
+.control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.control.prev {
+  left: 20px;
+}
+
+.control.next {
+  right: 20px;
+}

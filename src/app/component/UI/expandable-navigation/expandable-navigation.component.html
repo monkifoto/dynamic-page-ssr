@@ -1,0 +1,43 @@
+<nav class="clemo-header" [ngClass]="{'clemo-shrink': isShrunk}">
+  <div class="clemo-container">
+    <a href="#" class="clemo-navbar-brand" [routerLink]="['/home']" [queryParams]="{ id: businessId }">
+      <img
+      class="clemo-logo"
+        *ngIf="business?.logoImage"
+        [src]="business?.logoImage"
+        alt="Business Logo"
+      />
+    </a>
+
+    <!-- Hamburger Menu Toggler -->
+    <button class="clemo-navbar-toggler" (click)="toggleMenu()">
+      <span class="clemo-navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="clemo-navbar-collapse" [ngClass]="{'clemo-show': menuOpen}">
+      <ul class="clemo-navbar-nav">
+        <li class="clemo-nav-linkitem"><span class="clemo-nav-link"  (click)="navigateTo('home')">Home</span></li>
+
+        <li class="clemo-nav-linkitem dropdown" *ngIf="locations!.length > 1">
+
+          <span class="clemo-nav-link dropdown-toggle" (click)="toggleDropdown(0)" >
+            Locations <!-- Locations ({{ locations.length }}) -->
+          </span>
+          <ul class="dropdown-menu" [class.show]="expandedDropdownIndex === 0">
+            <li *ngIf="locations?.length === 0" class="dropdown-item">No locations available</li>
+            <li class="dropdown-item" *ngFor="let location of locations; let i = index">
+              <span (click)="selectLocation(i)">{{ location.locationName || 'Unknown City' }}</span>
+            </li>
+          </ul>
+        </li>
+        <li class="clemo-nav-linkitem"><span class="clemo-nav-link" (click)="navigateTo('about-us')">About Us</span></li>
+        <li class="clemo-nav-linkitem" ><span class="clemo-nav-link" (click)="navigateTo('services')">Services</span></li>
+        <li class="clemo-nav-linkitem" *ngIf="layoutType!='sb'"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Home</span></li>
+        <li class="clemo-nav-linkitem" *ngIf="layoutType=='sb'"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Work</span></li>
+        <li class="clemo-nav-linkitem" *ngIf="layoutType!='sb'"><span class="clemo-nav-link" (click)="navigateTo('resident-form')">Resident Form</span></li>
+        <li class="clemo-nav-linkitem"><span class="clemo-nav-link" (click)="navigateTo('contact-us')">Contact</span></li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,122 @@
+
+.upload-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.drag-drop-area {
+  margin-top: 100px;
+  border: 2px dashed #ccc;
+  padding: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.drag-drop-area:hover {
+  background-color: #f7f7f7;
+}
+
+.drag-drop-area p {
+  margin: 0;
+  color: #999;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.progress-container {
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.thumbnail img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+  margin: 10px 0;
+}
+
+
+
+.gallery {
+  margin-bottom: 40px;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+/* background-color: var(--primary-color); */
+  border-radius: 10px;
+}
+
+input,
+textarea{
+  margin: 5px;
+  max-width: 240px;
+  border-radius: 7px;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 5px;
+  background-color: #f3f3f3;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: solid 1px red; */
+}

@@ -1,0 +1,118 @@
+<div class="admin-hero-slider">
+  <h2>Manage Hero Slider</h2>
+
+  <form [formGroup]="sliderForm" (ngSubmit)="saveSliderData()">
+
+    <!-- Slides Section -->
+    <div formArrayName="slides">
+      <div *ngFor="let slide of slides.controls; let i = index" [formGroupName]="i" class="section-container">
+        <div class="row">
+          <div class="col">
+            <h3>Slide {{ i + 1 }}</h3>
+          </div>
+          <div class="col">
+            <button type="button" (click)="removeSlide(i)" class="delete-btn">Remove Slide</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Title</label>
+            <input formControlName="title" type="text" class="form-control"/>
+          </div>
+          <div class="col">
+            <label>Subtitle</label>
+            <textarea formControlName="subtitle" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Background Image</label>
+            <input type="text" formControlName="backgroundImage" placeholder="Image URL" readonly class="form-control"/>
+            <input type="file" (change)="uploadImage($event, i)" class="form-control"/>
+            <progress *ngIf="uploadProgress[i] !== undefined" [value]="uploadProgress[i]" max="100"></progress>
+          </div>
+          <div class="col">
+            <img *ngIf="slides.at(i).get('backgroundImage')?.value"
+              [src]="slides.at(i).get('backgroundImage')?.value"
+              alt="Slide Background"
+              class="uploaded-image-preview" />
+          </div>
+        </div>
+
+        <details>
+          <summary>Buttons</summary>
+          <div formArrayName="buttons">
+            <div *ngFor="let button of getButtons(slide).controls; let j = index" [formGroupName]="j" class="row">
+              <div class="col">
+                <label>Button Text</label>
+                <input formControlName="text" type="text" class="form-control"/>
+              </div>
+              <div class="col">
+                <label>Button Link</label>
+                <input formControlName="link" type="text" class="form-control"/>
+              </div>
+              <div class="col">
+                <label><input formControlName="outline" type="checkbox"/> Outline</label>
+                <button type="button" (click)="removeButton(i, j)" class="delete-btn">✖</button>
+              </div>
+            </div>
+            <button type="button" (click)="addButton(i)" class="add-btn">+ Add Button</button>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <button type="button" (click)="addSlide()" class="add-btn">+ Add Slide</button>
+
+    <!-- Slider Configuration -->
+    <div class="section-container" formGroupName="sliderConfig">
+      <h3>Slider Configuration</h3>
+
+      <div class="row">
+        <div class="col">
+          <label>Navigation</label>
+          <select formControlName="navigation" class="form-control">
+            <option value="side">Side</option>
+            <option value="bottom">Bottom</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Show Side Buttons</label>
+          <input type="checkbox" formControlName="sideButtons"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Slider Height</label>
+          <select formControlName="sliderHeight" class="form-control">
+            <option *ngFor="let height of sliderHeights" [value]="height">{{ height }}</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Button Border Radius</label>
+          <input type="text" formControlName="buttonBorderRadius" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Subtitle Size</label>
+          <input type="text" formControlName="subtitleSize" class="form-control"/>
+        </div>
+        <div class="col">
+          <label>Subtitle Weight</label>
+          <input type="text" formControlName="subtitleWeight" class="form-control"/>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="save-btn" [disabled]="isSaving">Save Slider Data</button>
+  </form>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+</div>

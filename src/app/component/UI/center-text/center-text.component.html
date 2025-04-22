@@ -1,0 +1,102 @@
+
+
+  <div class="center-text-container"
+  *ngIf="themeType=='hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+    <div class="center-text-overlay">
+      <div class="center-text-content">
+        <div *ngIf="page=='home'">
+          <div class="features-section-heading" [ngStyle]="{ 'text-align': alignText}">
+            <span class="features-section-title highlight" [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px' }">{{subTitle | replaceKeyword: { businessName: _businessName } }}</span>
+            <br>
+            <span class="features-section-title main" [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px' }" >{{title}} </span>
+          </div>
+        </div>
+        <div *ngIf="page!='home'">
+        <h3> <span class="brand-name">{{ subTitle | replaceKeyword: { businessName: _businessName } }}</span></h3>
+        <div  class="heading-container">
+          <h2 class="styled-heading">{{title}}</h2>
+        </div>
+      </div>
+      <!-- <div class="text-container"> -->
+        <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+      <!-- </div> -->
+        <div class="buttons">
+          <button *ngIf="showButton" type="button" class="afhBtn" (click)="navigateToContact(buttonLink)">{{buttonText}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="center-text-container"
+*ngIf="themeType=='ae'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <h3 class="center-text-title"[ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':textFontStyle }">{{subTitle | replaceKeyword: { businessName: _businessName } }}</h3>
+  <h2 class="center-text-title"[ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':textFontStyle }" >{{ title }}</h2>
+  <div class="separator"></div>
+  <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>
+
+
+<!-- <div class="center-text-container"
+*ngIf="themeType=='clemo'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <h3 class="center-text-title">{{ subTitle }}</h3>
+  <h2 class="center-text-title">{{ title }}</h2>
+  <p class="center-text-description" [innerHTML]="sanitizedContent"></p>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div> -->
+
+<div class="center-text-container" *ngIf="themeType=='clemo'"
+     [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+     [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'border-radius': borderRadius + 'px'  }">
+
+  <div class="left-column">
+    <div>
+    <h2 class="center-text-title" [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':textFontStyle }" >{{ title }}</h2>
+    <h3 class="center-text-title" [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':textFontStyle }">{{subTitle | replaceKeyword: { businessName: _businessName } }}</h3>
+  </div>
+    <button *ngIf="showButton" class="afhBtn">Contact Us</button>
+  </div>
+
+  <div class="right-column">
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+
+  </div>
+</div>
+
+
+<div class="content-container"
+*ngIf="themeType=='sb' || themeType=='sp'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <div class="text-container">
+    <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h2>
+    <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h3>
+    <div class="separator2"></div>
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+</div>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>
+
+<div class="center-text-container"
+*ngIf="themeType=='prestige'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+  <img *ngIf="imageURL && showImage"  [src]="imageURL" alt="Section Image" class="center-text-image" />
+  <div class="text-container">
+  <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':textFontStyle }">{{ titleParts.part1 }}</h3>
+  <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':textFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+    <div class="separator2"></div>
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+</div>
+  <button *ngIf="showButton" class="afhBtn">Schedule A Visit</button>
+</div>

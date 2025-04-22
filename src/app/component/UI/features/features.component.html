@@ -1,0 +1,67 @@
+
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'"
+  [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+<section class="features-section">
+  <div class="features-section-heading">
+    <span class="features-section-title main">{{title}} </span>
+    <span class="features-section-title highlight">{{subTitle}}</span>
+  </div>
+    <div class="features-container">
+
+      <div class="feature-list">
+        <div *ngFor="let feature of items" class="feature-item">
+          <div class="feature-list-item-title" [innerHTML]="feature.title"></div>
+          <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
+        </div>
+    </div>
+  </div>
+</section>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+ <!-- <section class="ae-features-section">
+    <div class="ae-features-section-heading">
+      <span class="ae-features-section-title main">Our Unique</span>
+      <span class="ae-features-section-title highlight">Features</span>
+    </div>
+    <p class="ae-features-section-description">
+      What sets us apart.
+    </p>
+
+
+    <div class="ae-features-container">
+      <div class="ae-features-background">
+        <div class="ae-features-overlay">
+          <div class="ae-features-grid">
+
+            <div *ngFor="let feature of uniqueService" class="ae-feature-item">
+              <div class="ae-feature-item-title" [innerHTML]="feature.name"></div>
+              <div class="ae-feature-item-description" [innerHTML]="feature.description"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+</ng-container>
+<ng-container *ngSwitchDefault>
+  <section class="features-section">
+    <div class="features-section-heading">
+      <span class="features-section-title main">{{title}} </span>
+      <span class="features-section-title highlight">{{subTitle}}</span>
+    </div>
+      <div class="features-container">
+
+        <div class="feature-list">
+          <div *ngFor="let feature of items" class="feature-item">
+            <div class="feature-list-item-title" [innerHTML]="feature.title"></div>
+            <div class="feature-list-item-description" [innerHTML]="feature.description"></div>
+          </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+</div>

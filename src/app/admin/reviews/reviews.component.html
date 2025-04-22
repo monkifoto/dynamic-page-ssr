@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+  <h2>Social Media & Reviews</h2>
+
+  <!-- Social Media Section -->
+  <div class="section-container">
+    <h3>Social Media</h3>
+    <div class="row">
+      <div class="col">
+        <label for="socialMedia">Social Media Links</label>
+        <textarea id="socialMedia" formControlName="socialMedia" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="section-container">
+    <h3>Testimonials</h3>
+
+    <div formArrayName="testimonials">
+      <div *ngFor="let testimonial of testimonials.controls; let i = index" [formGroupName]="i" class="testimonial-item">
+        <div class="row">
+          <div class="col">
+            <label for="testimonialName">Name</label>
+            <input id="testimonialName" formControlName="name" class="form-control">
+          </div>
+          <div class="col">
+            <label for="testimonialRelationship">Relationship</label>
+            <input id="testimonialRelationship" formControlName="relationship" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="testimonialQuote">Quote</label>
+            <textarea id="testimonialQuote" formControlName="quote" class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="testimonialPhoto">Photo</label>
+            <input type="file" id="testimonialPhoto" (change)="onTestimonialFileChange($event, i)" class="form-control">
+            <ng-container *ngIf="uploadProgress['testimonial' + i] | async as progress">
+              <div class="progress">
+                <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="col">
+            <button type="button" class="delete-btn" (click)="removeTestimonial(i)">Remove Testimonial</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="add-btn" (click)="addTestimonial()">+ Add Testimonial</button>
+  </div>
+</form>

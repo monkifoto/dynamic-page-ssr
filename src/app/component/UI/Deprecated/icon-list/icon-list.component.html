@@ -1,0 +1,20 @@
+<div class="parallax-container">
+  <div class="content">
+    <div class="services-container">
+      <!-- ✅ Use sectionTitle from the new sections -->
+      <h2 class="services-title">{{ sectionTitle }}</h2>
+
+      <div class="services-grid">
+        <!-- ✅ Loop through section.items instead of services -->
+        <div class="service-item" *ngFor="let item of items && items">
+          <i [class]="item.icon" aria-hidden="true"></i>
+          <h3 class="service-title">{{ item.title }}</h3>
+          <p class="service-description">{{ item.description }}</p>
+        </div>
+      </div>
+
+      <!-- ✅ Show button only if needed -->
+      <button *ngIf="showLearnMore" class="afhBtn" routerLink="/services">Learn More</button>
+    </div>
+  </div>
+</div>

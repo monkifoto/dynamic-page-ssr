@@ -1,0 +1,43 @@
+#map {
+  width: 100%;
+  height: 400px; /* Default height */
+  max-width: 100%;
+}
+
+.mock-map{
+  max-width: var(--site-max-width);
+  width: 100%;
+  height: 600px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.mock-data{
+  max-width: var(--site-max-width);
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.mock-badge {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  #map {
+    height: 300px; /* Reduce height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  #map {
+    height: 250px; /* Further reduce height on very small screens */
+  }
+}

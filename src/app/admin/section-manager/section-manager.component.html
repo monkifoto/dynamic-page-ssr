@@ -1,0 +1,582 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col">
+      <button (click)="addSection()" class="afhBtn">+ Add Section</button>
+    </div>
+    <div class="col">
+      <button (click)="loadSections()" class="afhBtn">Reload Sections</button>
+    </div>
+    <div class="col">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="showInactiveSections"
+          [ngModelOptions]="{ standalone: true }"
+          (change)="toggleShowInactive()"
+        />
+        Show Inactive Sections
+      </label>
+    </div>
+  </div>
+
+  <div *ngFor="let page of pageGroups">
+    <div *ngIf="sectionGroups[page]?.length">
+      <h2>{{ page | titlecase }}</h2>
+
+      <div formArrayName="sections">
+        <div *ngFor="let section of sectionGroups[page]">
+          <div
+            [formGroup]="section"
+            class="sectionForm-container"
+            *ngIf="
+              showInactiveSections || section.get('isActive')?.value !== false
+            "
+            [class.inactive-section]="!section.get('isActive')?.value"
+            [class.active-section]="section.get('isActive')?.value"
+          >
+            <div class="row">
+              <div class="col">
+                <button
+                  (click)="toggleSection(section.get('id')?.value)"
+                  class="icon-btn"
+                >
+                  <i
+                    class="fa-solid"
+                    [ngClass]="
+                      collapsedSections[section.get('id')?.value]
+                        ? 'fa-angles-down'
+                        : 'fa-angles-up'
+                    "
+                  ></i>
+                </button>
+              </div>
+              <div class="col">
+                <label class="page">{{ section.get("order")?.value }}</label>
+              </div>
+              <div class="col">
+                <h3>{{ section.get("sectionTitle")?.value }}</h3>
+              </div>
+              <div class="col">
+                <label class="page">{{ section.get("page")?.value }}</label>
+              </div>
+              <div class="col">
+                <label class="location">{{
+                  section.get("location")?.value
+                }}</label>
+              </div>
+              <div class="col">
+                <label class="component">{{
+                  section.get("component")?.value
+                }}</label>
+              </div>
+              <div class="col">
+                <button (click)="updateSection(section)">Update</button>
+                <button (click)="removeSection(section.get('id')?.value)">
+                  Delete
+                </button>
+              </div>
+              <div class="col">
+                <label>Active</label>
+                <input type="checkbox" formControlName="isActive" />
+              </div>
+            </div>
+
+            <div *ngIf="!collapsedSections[section.get('id')?.value]">
+              <div class="settings-group">
+                <h4>General Settings</h4>
+                <div class="row">
+                  <div class="col">
+                    <label>Order</label>
+                    <input
+                      type="number"
+                      formControlName="order"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Page</label>
+                    <select formControlName="page" class="form-control">
+                      <option *ngFor="let p of pages" [value]="p">
+                        {{ p }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Location</label>
+                    <select formControlName="location" class="form-control">
+                      <option *ngFor="let loc of locations" [value]="loc">
+                        {{ loc }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Component Type</label>
+                    <select formControlName="component" class="form-control">
+                      <option
+                        *ngFor="let type of componentTypes"
+                        [value]="type"
+                      >
+                        {{ type }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="settings-group">
+                <h4>Content</h4>
+                <!-- ✅ Title Fields in One Row -->
+                <div class="row">
+                  <div class="col">
+                    <label>Title</label>
+                    <input
+                      formControlName="sectionTitle"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Title Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="titleFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Title Font Style</label>
+                    <select
+                      formControlName="titleFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Title Color<span
+                    class="inline-color-preview"
+                    [style.background]="section.get('titleColor')?.value"
+                  ></span></label>
+                    <select formControlName="titleColor" class="form-control">
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+
+                  </div>
+                </div>
+                <!-- ✅ Subtitle Fields in One Row -->
+                <div class="row">
+                  <div class="col">
+                    <label>Subtitle</label>
+                    <input
+                      formControlName="sectionSubTitle"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="subtitleFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Font Style</label>
+                    <select
+                      formControlName="subtitleFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Subtitle Color<span
+                    class="inline-color-preview"
+                    [style.background]="section.get('subtitleColor')?.value"
+                  ></span></label>
+
+                    <select
+                      formControlName="subtitleColor"
+                      class="form-control"
+                    >
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="row" *ngIf="section.get('component')?.value !== 'item-list'">
+                  <div class="col"  >
+                    <label>Content</label>
+                    <textarea
+                      formControlName="sectionContent"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row" *ngIf="section.get('component')?.value !== 'item-list'">
+
+                  <div class="col">
+                    <label>Text Color<span
+                    class="inline-color-preview"
+                    [style.background]="section.get('textColor')?.value"
+                  ></span></label>
+
+                    <select formControlName="textColor" class="form-control">
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Text Alignment</label>
+                    <select formControlName="alignText" class="form-control">
+                      <option value="left">Left</option>
+                      <option value="center">Center</option>
+                      <option value="right">Right</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Font Size</label>
+                    <input
+                      type="number"
+                      formControlName="textFontSize"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Font Style</label>
+                    <select
+                      formControlName="textFontStyle"
+                      class="form-control"
+                    >
+                      <option *ngFor="let style of fontStyles" [value]="style">
+                        {{ style }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Content Padding (px)</label>
+                    <input type="number" formControlName="contentPadding" class="form-control" />
+                  </div>
+                </div>
+
+                <!-- <p>Image URL: {{ section.get("sectionImageUrl")?.value }}</p> -->
+              </div>
+              <div class="settings-group">
+                <h4>Appearance</h4>
+                <div class="row">
+                  <div class="col">
+                    <label>Background Color<span
+                    class="inline-color-preview"
+                    [style.background]="section.get('backgroundColor')?.value"
+                  ></span></label>
+                    <select
+                      formControlName="backgroundColor"
+                      class="form-control"
+                    >
+                      <option
+                        *ngFor="let color of predefinedColors"
+                        [value]="color.value"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col">
+                    <label>Layout</label>
+                    <select formControlName="fullWidth" class="form-control">
+                      <option [value]="true">Full Width (100%)</option>
+                      <option [value]="false">Centered (1200px)</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label>Box Shadow</label>
+                    <input type="checkbox" formControlName="boxShadow" />
+                  </div>
+                  <div class="col">
+                    <label>Border Radius (px)</label>
+                    <input
+                      type="number"
+                      formControlName="borderRadius"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label>Padding Top (px)</label>
+                    <input type="number" formControlName="paddingTop" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Bottom (px)</label>
+                    <input type="number" formControlName="paddingBottom" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Left (px)</label>
+                    <input type="number" formControlName="paddingLeft" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label>Padding Right (px)</label>
+                    <input type="number" formControlName="paddingRight" class="form-control" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-group">
+                <h4>Buttons</h4>
+                <div class="row">
+                  <div class="col">
+                    <label>Show Button?</label>
+                    <input type="checkbox" formControlName="showButton" />
+                  </div>
+                  <div class="col" *ngIf="section.get('showButton')?.value">
+                    <label>Button Text</label>
+                    <input
+                      type="text"
+                      formControlName="buttonText"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col" *ngIf="section.get('showButton')?.value">
+                    <label>Button Link</label>
+                    <input
+                      type="text"
+                      formControlName="buttonLink"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-group">
+                <h4>Image</h4>
+                <div class="row">
+                  <div class="col">
+                    <label>Image Preview</label>
+                    <img
+                      *ngIf="section.get('sectionImageUrl')?.value"
+                      [src]="section.get('sectionImageUrl')?.value"
+                      class="uploaded-image-preview"
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Image Upload</label>
+                    <input
+                      type="text"
+                      formControlName="sectionImageUrl"
+                      placeholder="Image URL"
+                      readonly
+                      class="form-control"
+                    />
+                    <!-- File upload remains available for uploading images -->
+                    <input
+                      type="file"
+                      (change)="uploadImage($event, section.get('id')?.value)"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <!-- Clear Image Button -->
+                  <div class="col">
+                    <button
+                      type="button"
+                      (click)="clearImage(section.get('id')?.value)"
+                    >
+                      Clear Image
+                    </button>
+                  </div>
+
+                  <!-- Show Image Toggle -->
+                  <div class="col">
+                    <label>Show Image?</label>
+                    <input type="checkbox" formControlName="showImage" />
+                  </div>
+                </div>
+
+                <!-- Image Source Selection -->
+                <div class="row" style="margin-top: 10px">
+                  <div class="col">
+                    <label>
+                      <input
+                        type="radio"
+                        formControlName="imageSource"
+                        value="upload"
+                      />
+                      Upload Your Own Image
+                    </label>
+                  </div>
+                  <div class="col">
+                    <label>
+                      <input
+                        type="radio"
+                        formControlName="imageSource"
+                        value="predefined"
+                      />
+                      Choose Preferred Image
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Predefined Images (shown when 'predefined' is selected) -->
+                <!-- Predefined Images Grid (shown when 'predefined' is selected) -->
+                <div style="margin-top: 10px">
+                  <h4>Select a Preferred Image</h4>
+                  <div class="row">
+                    <div class="col predefinedImages">
+                      <div
+                        *ngFor="let image of predefinedImages"
+                        class="imageThumbs"
+                      >
+                        <label style="display: block; text-align: center">
+                          <img
+                            [src]="image.url"
+                            class="uploaded-image-preview"
+                            style="
+                              cursor: pointer;
+                              display: block;
+                              margin: auto;
+                            "
+                          />
+                          <!-- Checkbox bound to the current image selection -->
+                          <input
+                            type="checkbox"
+                            [checked]="
+                              section.get('sectionImageUrl')?.value ===
+                              image.url
+                            "
+                            (change)="
+                              selectCheckboxImage(
+                                section.get('id')?.value,
+                                image.url,
+                                $event
+                              )
+                            "
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- ✅ List-Item Section -->
+              <div
+                *ngIf="
+                  section.get('component')?.value === 'item-list' ||
+                  section.get('component')?.value === 'why-us' ||
+                  section.get('component')?.value === 'unique-features' ||
+                  section.get('component')?.value === 'item-list-image'
+                "
+              >
+                <h3>List Items</h3>
+                <div class="row">
+                  <div class="col">
+                    <label>Parallax</label>
+                    <input type="checkbox" formControlName="isParallax" />
+                  </div>
+                  <div class="col">
+                    <label>Minimal </label>
+                    <input type="checkbox" formControlName="isMinimal" />
+                  </div>
+                </div>
+                <button
+                  (click)="addItem(section.get('id')?.value)"
+                  class="afhBtn">
+                  + Add Item
+                </button>
+
+                <div *ngIf="getItems(section) as items">
+                  <div formArrayName="items">
+                    <div
+                      *ngFor="let item of items.controls; let j = index"
+                      [formGroupName]="j"
+                    >
+                      <div>
+                        <i
+                          [class]="item.get('icon')?.value || 'fa fa-star'"
+                        ></i>
+                        <span class="service-name"
+                          >{{ "Title " + (j + 1) }}:
+                          {{ item.get("title")?.value }}</span
+                        >
+                      </div>
+                      <label>Title:</label>
+                      <input
+                        formControlName="title"
+                        class="form-control"
+                        placeholder="Title"
+                      />
+                      <label>Description:</label>
+                      <input
+                        formControlName="description"
+                        class="form-control"
+                        placeholder="Description"
+                      />
+                      <label>Icon:</label>
+                      <input
+                        formControlName="icon"
+                        class="form-control"
+                        placeholder="Icon"
+                      />
+                      <button (click)="removeItem(section.get('id')?.value, j)">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="actions">
+
+
+              <!-- Business Selection Dropdown -->
+              <div class="row">
+                <div class="col"><button class="save-btn" (click)="updateSection(section)">Save</button></div>
+                <div class="col"> <button class="delete-btn" (click)="removeSection(section.get('id')?.value)"> Delete </button></div>
+                <div class="col">
+                  <label>Copy Section To:</label>
+                  <select
+                    formControlName="activeBusinessId"
+                    class="form-control"
+                    (change)="logActiveBusinessId(section)">
+                    <option value="">-- Select a Business --</option>
+                    <option *ngFor="let business of businessesList" [value]="business.id">
+                      {{ business.businessName }} ({{ business.id }})
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col">
+                  <button class="duplicate-btn"
+                    (click)="duplicateSection(section.get('id')?.value, section.get('activeBusinessId')?.value)">
+                    Copy to Another Business
+                  </button>
+                </div>
+              </div>
+              </div>
+              <!-- Duplicate Button -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

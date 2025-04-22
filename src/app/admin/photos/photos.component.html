@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+  <h2>Content and Photos</h2>
+
+  <!-- Logo Upload Section -->
+  <div class="section-container">
+    <h3>Logo Image</h3>
+    <div class="row">
+      <div class="col">
+        <label for="logoImage">Upload Logo</label>
+        <input type="file" id="logoImage" (change)="onFileChange($event, 'logoImage')" class="form-control">
+        <ng-container *ngIf="uploadProgress['logoImage'] | async as progress">
+          <div class="progress">
+            <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="col">
+        <div class="existing-logo" *ngIf="business?.logoImage">
+          <img class="logoImage" [src]="business?.logoImage" alt="Business Logo">
+        </div>
+        <div *ngIf="!business?.logoImage">
+          <p>No logo image available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Photos -->
+  <div class="section-container">
+    <h3>Gallery Photos</h3>
+    <div class="row">
+      <div class="col">
+        <label for="photoGallery">Manage Photo Gallery</label>
+        <a [routerLink]="['/admin/gallery-upload']" [queryParams]="{ id: business?.id }" class="btn btn-primary">
+          Upload Photos to Gallery
+        </a>
+      </div>
+    </div>
+  </div>
+</form>

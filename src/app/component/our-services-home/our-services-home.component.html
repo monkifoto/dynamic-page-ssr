@@ -1,0 +1,55 @@
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
+<section class="our-services-section">
+  <div class="our-services-section-heading">
+    <span class="our-services-title main">Our </span>
+    <span class="our-services-title highlight">Services</span>
+  </div>
+  <h3 class="our-services-description">Home Care From Trained Professionals</h3>
+  <div class="our-services-container">
+    <div *ngFor="let service of services" class="our-services-item">
+      <i [ngClass]="service.icon" class="our-services-item-icon"></i>
+      <h3 class="our-services-item-title">{{ service.title }}</h3>
+      <div class="our-services-item-description">
+        <p>{{ service.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+</ng-container>
+
+<ng-container *ngSwitchCase="'ae'">
+  <section class="ae-modern-services-section">
+    <div class="ae-our-services-container">
+    <div class="ae-services-content">
+      <div class="ae-our-services-section-heading">
+        <span class="ae-our-services-title main">Our </span>
+        <span class="ae-our-services-title highlight">Services</span>
+      </div>
+      <div class="ae-services-list">
+        <div *ngFor="let service of services; let i = index"  (click)="toggleService(i)">
+          <div class="ae-service-item">
+          <span class="ae-service-title">{{ service.title }}</span>
+          <span class="ae-service-expand">{{ expandedServiceIndex === i ? '-' : '+' }}</span>
+        </div>
+        <div *ngIf="expandedServiceIndex === i" class="ae-service-description">
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="ae-services-images">
+      <div class="ae-image-placeholder ae-image-large">
+        <img src="../../../assets/sharedAssets/istockphoto-1551967154-2048x2048.jpg" alt="Welcome Image" />
+      </div>
+      <div class="ae-image-placeholder ae-image-small">
+        <img src="../../../assets/sharedAssets/istockphoto-1097353864-2048x2048.jpg" alt="Welcome Image" />
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+</ng-container>
+</div>
+

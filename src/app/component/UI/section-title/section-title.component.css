@@ -1,0 +1,14 @@
+.center-text-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* padding: 4rem 2rem; */
+  /* max-width: calc(var(--cell-max-width) * 24); */
+  margin: 0 auto;
+}
+
+.center-text-title {
+  color: var(--text-color);
+  /* padding-bottom: 3rem; */
+}

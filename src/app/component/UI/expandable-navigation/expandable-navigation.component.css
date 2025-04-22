@@ -1,0 +1,180 @@
+/*
+.clemo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  height: 150px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.clemo-header.clemo-shrink {
+  height: 70px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.clemo-logo {
+  max-height: 100px;
+  transition: max-height 0.3s ease;
+}
+
+
+.clemo-header.clemo-shrink .clemo-logo {
+  max-height: 40px;
+}
+
+
+.clemo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.clemo-navbar-brand {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+}
+
+
+
+.clemo-navbar-collapse {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  transition: max-height 0.3s ease;
+  align-items: center;
+}
+
+.clemo-navbar-collapse.clemo-show {
+  display: flex;
+}
+
+
+
+.clemo-navbar-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clemo-nav-item {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.clemo-nav-link {
+  color: #333;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding: 15px 0;
+  display: block;
+  transition: font-size 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.clemo-header.clemo-shrink .clemo-nav-link {
+  font-size: 1rem;
+}
+
+.clemo-nav-link:hover {
+  color: var(--dark-background-color);
+}
+
+
+.clemo-navbar-toggler {
+  display: none;
+}
+
+.clemo-navbar-toggler-icon {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+  position: relative;
+}
+
+.clemo-navbar-toggler-icon::before,
+.clemo-navbar-toggler-icon::after {
+  content: '';
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.clemo-navbar-toggler-icon::before {
+  top: -7px;
+}
+
+.clemo-navbar-toggler-icon::after {
+  top: 7px;
+}
+
+
+@media (max-width: 991px) {
+
+  .clemo-navbar-nav{
+    display: block;
+    height: 80vh;
+  }
+  .clemo-navbar-collapse {
+    display: none;
+    flex-direction: column;
+    background-color: var(--background-color);
+    position: absolute;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .clemo-nav-item {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .clemo-nav-link {
+    padding: 10px;
+    font-size: 1.25rem;
+  }
+
+  .clemo-navbar-toggler {
+    display: block;
+    padding: 20px;
+
+    background-color: transparent;
+    border:0px;
+  }
+
+  .clemo-navbar-collapse.clemo-show {
+    display: flex;
+  }
+
+  .clemo-navbar-collapse {
+    top: 170px;
+  }
+}
+
+ */
+
+ /* Ensure dropdown menu is hidden by default */
+/* Ensure dropdown menu is hidden by default */

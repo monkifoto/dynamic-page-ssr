@@ -1,0 +1,163 @@
+.services-item-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.list-item{
+  border:  solid 1px black;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.list-item-header {
+  display: flex;
+  justify-content: space-between; /* Pushes items to the far ends */
+  align-items: center; /* Aligns items vertically */
+  width: 100%;
+}
+
+.service-item_info{
+  display: flex;
+}
+.service-item_info > div{
+  padding: 10px;
+}
+
+
+.sectionForm-container
+{
+  border: solid 1px var(--dark-background-color);
+  border-radius: 15px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.sectionForm-header{
+  display: flex;
+  justify-content: space-between; /* Pushes items to the far ends */
+  align-items: center; /* Aligns items vertically */
+  width: 100%;
+}
+
+
+.sectionForm-header-item{
+  width: 50%;
+  padding: 10px;
+}
+
+
+.collapsed {
+  display: none;
+}
+
+.toggle-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+
+
+
+.benefit-container {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.benefit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.benefit-header i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.benefit-name {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.delete-btn {
+  color: red;
+}
+
+
+.service-container {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.service-header i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.service-name {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.delete-btn {
+  color: red;
+}
+
+
+
+button[type="button"] {
+  background-color: var(--button-color); /* Bootstrap danger color */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+  margin-top: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: var(--button-hover-color); /* Darker shade on hover */
+}

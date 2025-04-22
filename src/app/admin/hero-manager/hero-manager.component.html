@@ -1,0 +1,93 @@
+<form [formGroup]="heroForm">
+  <button type="button" class="afhBtn" (click)="addHero()">+ Add Page Hero</button>
+
+  <!-- Parent FormArray -->
+  <div formArrayName="heroes">
+    <div *ngFor="let control of heroes.controls; let i = index" [formGroupName]="i" class="sectionForm-container">
+      <div class="row">
+        <div class="col">
+          <label>ID</label>
+          <label class="form-control">{{ control.get('id')?.value }}</label>
+        </div>
+        <div class="col">
+          <label>Page</label>
+          <select formControlName="page" class="form-control">
+            <option *ngFor="let page of predefinedPages" [value]="page.value">
+              {{ page.label }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Message</label>
+          <input formControlName="message" class="form-control" />
+        </div>
+        <div class="col">
+          <label>Order</label>
+          <input type="number" formControlName="order" class="form-control" />
+        </div>
+        <div class="col">
+          <label>Active</label>
+          <input type="checkbox" formControlName="isActive" />
+        </div>
+        <div class="col">
+          <button type="button" class="save-btn" (click)="saveHero(i)">Save</button>
+          <button type="button" class="delete-btn" (click)="removeHero(i)">Delete</button>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-4">
+          <label>Image Preview</label>
+          <img
+            *ngIf="control.get('imageUrl')?.value"
+            [src]="control.get('imageUrl')?.value"
+            class="uploaded-image-preview"
+          />
+        </div>
+        <div class="col-4">
+          <label>Image Upload</label>
+          <input type="file" class="form-control" (change)="uploadImage($event, i)" />
+        </div>
+        <div class="col-4">
+          <label>Current URL</label>
+          <input formControlName="imageUrl" class="form-control" />
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h4>Select a Predefined Image</h4>
+        <div class="row predefinedImages">
+          <div class="col" *ngFor="let img of predefinedImages">
+            <label>
+              <img
+                [src]="img.url"
+                (click)="selectPredefinedImage(i, img.url)"
+                class="uploaded-image-preview"
+                style="cursor: pointer;"
+              />
+              <input
+                type="radio"
+                [checked]="control.get('imageUrl')?.value === img.url"
+                name="selectedImage{{ i }}"
+                (change)="selectPredefinedImage(i, img.url)"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <select class="form-control" [formControl]="targetBusinessControl">
+            <option *ngFor="let biz of businesses" [value]="biz.id">{{ biz.businessName }}</option>
+          </select>
+      </div>
+        <div class="col">
+          <button type="button" class="duplicate-btn" (click)="copyHeroToBusiness(i)">
+            Copy
+          </button>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</form>

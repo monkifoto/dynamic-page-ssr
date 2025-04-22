@@ -1,0 +1,188 @@
+/****************************************** Dark FOOTER ******************************************/
+.clemo-footer {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: var(--secondary-color);
+  text-align: center;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+}
+
+.clemo-footer-links {
+  margin-bottom: 20px; /* Space between rows */
+}
+
+.clemo-footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.clemo-footer-link {
+  font-size: 14px;
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clemo-footer-link:hover {
+  text-decoration: underline;
+}
+
+.clemo-footer-content {
+  max-width: var(--site-max-width);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+  gap: 20px; /* Space between columns */
+  text-align: center; /* Center text in each column */
+  margin: 0 auto;
+}
+
+.clemo-footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.logo-circle {
+  background-color: white; /* White circle */
+  width: 150px; /* Adjust the size of the circle */
+  height: 150px; /* Adjust the size of the circle */
+  border-radius: 50%; /* Makes the container circular */
+  overflow: hidden; /* Ensures the image fits inside the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Adds space between the logo and the heading */
+}
+
+.logo-circle img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover; /* Ensures the image fills the circle without stretching */
+}
+
+.clemo-footer-phone,
+.clemo-footer-address,
+.clemo-footer-contact {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-start; /* Align items to the bottom */
+  padding: 25px;
+  height: 100%; /* Ensure full height for alignment */
+  text-align: center;
+  & a{
+    color: var(--background-color);
+    text-decoration: none;
+  }
+}
+
+.clemo-footer-address h4,
+.clemo-footer-phone h4,
+.clemo-footer-contact h4 {
+  padding: 20px;
+  text-align: center;
+  margin: 0; /* Remove default margin */
+}
+
+.clemo-footer-bottom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.clemo-footer-section-heading{
+  color: var(--text-color);
+}
+.clemo-footer-design a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/********** DEBUGER *********/
+.debugger-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.debugger-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.debugger-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border: 1px solid var(--background-color);
+  background-color: var(--dark-background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.debugger-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.debugger-value {
+  color: var(--background-color);
+  word-break: break-word;
+}
+.footer-theme-file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--background-color);
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .clemo-footer-content {
+    grid-template-columns: 1fr; /* Stack all columns on small screens */
+  }
+
+  .clemo-footer-nav {
+    flex-direction: column; /* Stack navigation links vertically */
+  }
+
+  .clemo-footer-link {
+    margin: 10px 0; /* Space between links */
+  }
+
+  .clemo-footer-phone,
+  .clemo-footer-address,
+  .clemo-footer-contact {
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
+
+  .clemo-footer-logo img {
+    max-width: 150px; /* Reduce logo size on smaller screens */
+  }
+
+  .clemo-footer {
+    padding: 20px 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .clemo-footer-content {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for tablet screens */
+  }
+}

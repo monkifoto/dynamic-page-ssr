@@ -1,0 +1,11 @@
+<div class="faq-container">
+  <h2>Frequently Asked Questions (FAQs)</h2>
+  <div *ngFor="let faq of faqs" class="faq-item">
+    <button class="faq-question" (click)="faq.open = !faq.open">
+      {{ faq.question }}
+    </button>
+    <div *ngIf="faq.open" class="faq-answer">
+      <p>{{ faq.answer }}</p>
+    </div>
+  </div>
+</div>

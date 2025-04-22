@@ -1,0 +1,194 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
+
+
+:root{
+  --primary-color: #fffaf2;
+  --secondary-color: #f8f3f0;
+  --accent-color: #F0C987;
+  --background-color:#F5F3E7;
+  --dark-background-color: #4C6A56;
+  --text-color: #2F2F2F;
+  --nav-background-color: var(--background-color);
+  --nav-text-color: #33372C;
+  --nav-active-background: #33372C;
+  --nav-active-text: white;
+  --button-color:#D9A064;
+  --button-hover-color: #c9605b;
+  --button-text-color: var(--primary-color);
+  --border-color:var(--text-color);
+}
+a{
+  color: var(--button-color);
+}
+.blue{
+  background-color: var(--background-color);
+}
+.yellow{
+  background-color: var(--secondary-color);
+}
+.red{
+  background-color: var(--accent-color);
+}
+.primary{
+  color: var(--primary-color) !important;
+}
+
+body {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5em;
+   margin-bottom: 150px;
+   color: var(--text-color);
+   background-color: var(--background-color);
+
+  }
+
+  h1{
+    font-family: "Montserrat", sans-serif;
+  }
+
+
+
+  h3{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .garamond{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+
+  .montserrat-hero {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: bold;
+  }
+
+  .catamaran-font {
+    font-family: "Catamaran", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.section-heading{
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.services_txt {
+  line-height: 2.5rem;
+  font-size: 1.5rem;
+  padding: 20px;
+}
+
+
+
+button, select {
+  background-color: var(--button-color);
+  color:  var(--primary-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover, select:hover {
+  background-color: var(--button-hover-color);
+}
+
+button:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}

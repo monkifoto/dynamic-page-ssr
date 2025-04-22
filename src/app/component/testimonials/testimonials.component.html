@@ -1,0 +1,145 @@
+
+<div [ngSwitch]="layoutType">
+  <ng-container *ngSwitchCase="'hh'">
+<section class="testimonial-comp">
+  <div class="testimonial-section-heading">
+    <span class="testimonial-section-title main">Testimonials</span>
+  </div>
+  <div class="testimonial"   *ngIf="testimonials?.length; else noTestimonials">
+    <div class="testimonial-container" *ngFor="let testimonial of testimonials">
+      <div>
+        <div class="testimonial-content garamond">
+          <div class="">
+            <p>" {{ testimonial.quote }} "</p>
+            <strong>{{ testimonial.name }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="'ae'">
+    <div class="content-wrapper">
+    <section class="ae-testimonial-comp">
+      <div class="ae-testimonial-heading">
+        <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+        <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
+      </div>
+
+      <div class="ae-testimonial-container">
+        <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
+          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
+            <div class="ae-testimonial-content">
+              <div class="ae-testimonial-quote-icon">❝</div>
+              <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+              <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="ae-testimonials-button">
+          <button class="view-all-testimonials" routerLink="/testimonials">
+            View All Testimonials
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+    </ng-container>
+
+
+  <ng-container *ngSwitchCase="'clemo'">
+    <div class="content-wrapper">
+    <section class="ae-testimonial-comp">
+      <div class="ae-testimonial-heading">
+        <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+        <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
+      </div>
+
+      <div class="ae-testimonial-container">
+        <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
+          <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
+            <div class="ae-testimonial-content">
+              <div class="ae-testimonial-quote-icon">❝</div>
+              <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+              <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="ae-testimonials-button">
+          <button class="view-all-testimonials" routerLink="/testimonials">
+            View All Testimonials
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+    </ng-container>
+
+
+  <ng-container *ngSwitchCase="'prestige'">
+
+    <div class="content-wrapper">
+      <section class="ae-testimonial-comp">
+        <div class="ae-testimonial-heading">
+          <h2 class="ae-testimonial-section-heading">Word of mouth</h2>
+          <p class="ae-testimonial-subheading">You should hear what people have to say about us</p>
+        </div>
+
+        <div class="ae-testimonial-container">
+          <div class="ae-testimonial-grid"   *ngIf="testimonials?.length; else noTestimonials">
+            <div class="ae-testimonial-card" *ngFor="let testimonial of testimonials | slice:0:4">
+              <div class="ae-testimonial-content">
+                <div class="ae-testimonial-quote-icon">❝</div>
+                <p class="ae-testimonial-quote">{{ testimonial.quote }}</p>
+                <h4 class="ae-testimonial-author">{{ testimonial.name }}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="ae-testimonials-button">
+            <button class="view-all-testimonials" routerLink="/testimonials">
+              View All Testimonials
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    </ng-container>
+
+
+    <ng-container *ngSwitchDefault>
+      <!-- <section class="demo-testimonial-comp">
+        <div class="demo-testimonial-heading">
+          <h2 class="demo-testimonial-section-heading">Word of Mouth</h2>
+          <p class="demo-testimonial-subheading">You should hear what people have to say about us</p>
+        </div>
+
+        <div class="demo-testimonial-container">
+          <div class="demo-testimonial-grid">
+            <div class="demo-testimonial-card" *ngFor="let testimonial of testimonials">
+              <div class="demo-testimonial-background">
+                <div class="demo-quote-symbol"></div>
+                <p class="demo-testimonial-quote">{{ testimonial.quote }}</p>
+              </div>
+              <div class="demo-testimonial-author-details">
+                <p class="demo-testimonial-author">{{ testimonial.name }}</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+
+    </ng-container>
+
+    <ng-template #noTestimonials>
+      <p class="no-testimonials-message">No testimonials available at the moment.</p>
+    </ng-template>
+
+    </div>

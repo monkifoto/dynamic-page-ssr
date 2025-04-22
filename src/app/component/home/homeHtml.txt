@@ -1,0 +1,314 @@
+<!-- <app-theme-loader [businessId]="business?.id || ''"></app-theme-loader> -->
+
+<!------------------------ HH SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'hh'">
+  <app-hero-slider></app-hero-slider>
+
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || '' | replaceKeyword:{ businessName: business?.businessName||''}"
+  [subTitle]="section?.sectionSubTitle || ''  | replaceKeyword:{ businessName: business?.businessName||''}"
+  [content]="section?.sectionContent || '' | replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="true"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-item-list
+[layoutType]="'hh'"
+[services]="business?.services || []"
+[minimal]="true"
+></app-item-list>
+
+  <app-why-us
+  [whyChooseUs]="business?.whyChoose || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-why-us>
+
+<app-features
+  [uniqueService]="business?.uniqueService || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-features>
+
+<app-testimonials *ngIf="!business?.placeId"
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
+
+<app-testimonial-carousel *ngIf="business?.placeId"
+[placeId]="business?.placeId || ''">
+</app-testimonial-carousel>
+
+</section>
+
+<section *ngIf="business?.theme?.themeType === 'demo'">
+  <app-hero-slider
+  [navigation]="'bottom'"
+  [sideButtons]="true"
+  sliderHeight="70vh">
+</app-hero-slider>
+
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || '' | replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="true"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-item-list
+[layoutType]="'hh'"
+[services]="business?.services || []"
+[minimal]="true"
+></app-item-list>
+
+  <app-why-us
+  [whyChooseUs]="business?.whyChoose || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-why-us>
+
+<app-features
+  [uniqueService]="business?.uniqueService || []"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-features>
+
+<app-testimonials
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
+
+</section>
+
+<!------------------------ AE SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'ae'">
+
+  <app-hero-slider></app-hero-slider>
+
+  <app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="false"
+></app-center-text>
+
+  <app-right-text
+  *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-right-text>
+
+<app-left-text
+  *ngIf="business?.sections | sectionFilter:'HomeLeft' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-left-text>
+
+<app-icon-list
+  [services]="[
+  { icon: 'fas fa-dove', title: 'Hospice Care', description: '...' },
+    { icon: 'fas fa-person-cane', title: 'Mobility Assistance', description: '...' },
+    { icon: 'fas fa-people-group', title: 'Companionship Care', description: '...' },
+    { icon: 'fas fa-bowl-food', title: 'Meal Planning', description: '...' },
+    { icon: 'fas fa-prescription-bottle', title: 'Medication', description: '...' },
+    { icon: 'fas fa-shower', title: 'Personal Hygiene', description: '...' },
+    { icon: 'fas fa-bed-pulse', title: 'Medical Care', description: '...' }
+  ]"
+></app-icon-list>
+
+<app-testimonials
+  [testimonials]="business?.testimonials"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+></app-testimonials>
+
+</section>
+
+<!------------------------ CLEMO SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'clemo'">
+
+  <app-hero-slider></app-hero-slider>
+
+<app-right-text
+*ngIf="business?.sections | sectionFilter:'HomeRight' as section"
+[themeType]="business?.theme?.themeType || ''"
+[imageURL]="section?.sectionImageUrl || ''"
+[title]="section?.sectionTitle || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-right-text>
+
+<app-video
+[videoSource]="'https://youtu.be/rVBHH5DwYFA?si=Cr3AncNVTaxqHsfX'">
+</app-video>
+
+
+
+<app-parallax-stats
+  [backgroundImage]="'https://firebasestorage.googleapis.com/v0/b/afhdynamicwebsite.appspot.com/o/businesses%2FSJgFxBYkopnPR4WibCAf%2Fgallery%2F13.jpg?alt=media&amp;token=cc737375-bdbf-4ba3-95d9-66b63a73b45a'"
+  [yearsOfExperience]="20"
+  [happyFamilies]="55"
+  [servicesOffered]="36"
+  [trainedStaff]="4">
+</app-parallax-stats>
+
+<app-testimonial-carousel
+[placeId]="business?.placeId || ''">
+</app-testimonial-carousel>
+
+<app-parallax-text>
+
+</app-parallax-text>
+
+
+<app-google-maps *ngIf="business?.theme?.themeType == 'clemo'"
+[address]="business?.address ||''"
+[layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
+
+</section>
+
+
+<!------------------------ SB SECTION ---------------------->
+
+<section *ngIf="business?.theme?.themeType === 'sb'">
+  <app-hero-slider></app-hero-slider>
+
+<app-center-text
+  *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="false"
+  [_businessName]="business?.businessName || ''"
+></app-center-text>
+
+<app-latest-products
+[layoutType]="'sb'"
+></app-latest-products>
+
+<app-item-list
+[layoutType]="'sb'"
+[services]="business?.services || []"
+[minimal]="true"
+></app-item-list>
+</section>
+
+<!--------------------PRESTIGE SECTION ----------------------->
+<section *ngIf="business?.theme?.themeType === 'prestige'">
+
+  <app-hero-slider></app-hero-slider>
+
+</section>
+
+<!------------------------ SHARED SECTION ---------------------->
+
+<app-consultation
+*ngIf="business?.theme?.themeType != 'clemo'"
+  [id]="business?.id || ''"
+  [layoutType]="business?.theme?.themeType || 'demo' "
+  [businessName]="business?.businessName || 'Demo' "
+></app-consultation>
+
+<!-- <app-google-reviews  *ngIf="business?.theme?.themeType == 'clemo'" [placeId]="business?.placeId || ''"></app-google-reviews> -->
+
+<!-- <app-instagram-feed  *ngIf="business?.theme?.themeType == 'clemo'" ></app-instagram-feed> -->
+
+
+<!------------Single Page   -->
+
+<section *ngIf="business?.theme?.themeType === 'sp'" class="single_page_container">
+<section id="hero">
+  <app-sp-hero-component
+  [navigation]="'side'"
+  [sideButtons]="false"
+  [buttonBorderRadius]="'0px'"
+  [subtitleSize]="'50px'"
+  [subtitleWeight]="'100'"
+  sliderHeight="50vh">
+  ></app-sp-hero-component>
+</section>
+<section id="home" class="single_page_section">
+
+  <app-center-text
+    *ngIf="business?.sections | sectionFilter:'HomeCenterTop' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [subTitle]="section?.sectionSubTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+  [showBtn]="false"
+  [_businessName]="business?.businessName || ''">
+</app-center-text>
+
+</section>
+<section id="services" class="single_page_section">
+
+  <app-item-list class="app-item-list"
+  [layoutType]="business?.theme?.themeType || ''"
+  [services]="business?.services || []"
+></app-item-list>
+
+
+</section>
+<section id="about-us" class="single_page_section">
+  <!-- <app-section-tilte [title]="'About Us'"></app-section-tilte> -->
+
+  <app-right-text
+  *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-right-text>
+
+<app-left-text
+  *ngIf="business?.sections | sectionFilter:'HomeLeft' as section"
+  [themeType]="business?.theme?.themeType || ''"
+  [imageURL]="section?.sectionImageUrl || ''"
+  [title]="section?.sectionTitle || ''"
+  [content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-left-text>
+
+<app-right-text
+*ngIf="business?.sections | sectionFilter:'AboutUsRight' as section"
+[themeType]="business?.theme?.themeType || ''"
+[imageURL]="section?.sectionImageUrl || ''"
+[title]="section?.sectionTitle || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-right-text>
+
+<app-left-text
+*ngIf="business?.sections | sectionFilter:'AboutUsLeft' as section"
+[themeType]="business?.theme?.themeType || ''"
+[imageURL]="section?.sectionImageUrl || ''"
+[title]="section?.sectionTitle || ''"
+[content]="section?.sectionContent || ''| replaceKeyword:{ businessName: business?.businessName||''}"
+></app-left-text>
+
+</section>
+<section id="gallery" class="single_page_section">
+  <app-sp-gallery-component [businessId]="business?.id || ''">
+  </app-sp-gallery-component>
+</section>
+<section id="contact-us" class="single_page_section">
+  <app-sp-contact-us-component
+  ></app-sp-contact-us-component>
+  <app-google-maps
+[address]="business?.address ||''"
+[layoutType]="business?.theme?.themeType || 'demo' "></app-google-maps>
+</section>
+</section>

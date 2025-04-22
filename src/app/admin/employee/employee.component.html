@@ -1,0 +1,48 @@
+<form [formGroup]="form">
+  <h2>Employee Profiles</h2>
+
+  <div class="section-container">
+    <h3>Employees List</h3>
+
+    <div formArrayName="employees">
+      <div *ngFor="let employee of employees.controls; let i = index" [formGroupName]="i" class="employee-card">
+        <div class="row">
+          <div class="col">
+            <label for="employeeName-{{i}}">Employee Name</label>
+            <input id="employeeName-{{i}}" formControlName="name" class="form-control" placeholder="Enter employee name">
+          </div>
+          <div class="col">
+            <label for="employeeRole-{{i}}">Role</label>
+            <input id="employeeRole-{{i}}" formControlName="role" class="form-control" placeholder="Enter employee role">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="employeeBio-{{i}}">Bio</label>
+            <textarea id="employeeBio-{{i}}" formControlName="bio" class="form-control" rows="3" placeholder="Enter employee bio"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="employeePhoto-{{i}}">Photo</label>
+            <input type="file" id="employeePhoto-{{i}}" (change)="onEmployeeFileChange($event, i)" class="form-control">
+            <ng-container *ngIf="uploadProgress['employee_' + i] | async as progress">
+              <div class="progress">
+                <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="col">
+            <img *ngIf="employee.get('photoURL')?.value" [src]="employee.get('photoURL')?.value" alt="Employee Photo" class="employee-photo">
+          </div>
+        </div>
+
+        <button type="button" class="delete-btn" (click)="removeEmployee(i)">Remove Employee</button>
+      </div>
+    </div>
+
+    <button type="button" class="add-btn" (click)="addEmployee()">+ Add Employee</button>
+  </div>
+</form>

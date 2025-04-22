@@ -1,0 +1,30 @@
+export interface IntakeForm {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  referralSource: string;
+  relationToResident: string;
+  residentName: string;
+  age: number;
+  gender: string;
+  medicalHistory: string;
+  height: number;
+  weight: number;
+  reasonForMoving: string;
+  rnAssessment: string;
+  eating: string;
+  personalHygiene: string;
+  bathing: string;
+  toileting: string;
+  mobility: string;
+  transfers: string;
+  medicationAssistance: string;
+  memoryIssues: string;
+  behavior: string;
+  skinCondition: string;
+  additionalInfo: string;
+  currentLivingSituation: string;
+  targetMoveInDate: string;
+  disclosureSummary: string;
+  questions: string;
+}

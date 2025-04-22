@@ -1,0 +1,59 @@
+<app-hero></app-hero>
+
+<div class="testimonial-section">
+  <h1 class="section-title">What Clients Say</h1>
+  <p class="section-description">
+    We place huge value on strong relationships and have seen the benefit they bring to our business.
+    Customer feedback is vital in helping us to get it right.
+  </p>
+  <div *ngIf="googleReviewsLoading && business?.placeId != '0'" class="spinner"></div>
+      <p *ngIf="googleReviewsLoading && business?.placeId != '0'" class="loading-text">Loading Google Reviews...</p>
+  <div class="testimonial-grid">
+    <div class="testimonial-card" *ngFor="let testimonial of testimonials"  [ngClass]="{ 'full-width': (testimonial.rawQuote?.length || 0) > 1000 }">
+
+      <div class="author-info">
+        <img
+          *ngIf="testimonial.photoURL; else fallbackAvatar"
+          [src]="testimonial.photoURL"
+          alt="{{ testimonial.name }}"
+          class="author-photo"
+        />
+        <ng-template #fallbackAvatar>
+          <div class="author-photo placeholder">
+            {{ testimonial.name.charAt(0).toUpperCase() }}
+          </div>
+        </ng-template>
+
+
+      </div>
+
+      <blockquote class="testimonial-quote">
+        <div class="quote-icon">“</div>
+
+        <!-- Google reviews: plain text -->
+        <p class="quote-text-page" *ngIf="testimonial.isGoogle">
+          {{ testimonial.quote }}
+        </p>
+
+        <!-- Business testimonials: sanitized HTML -->
+        <p class="quote-text-page" *ngIf="!testimonial.isGoogle" [innerHTML]="testimonial.quote"></p>
+      </blockquote>
+
+      <div class="author-info">
+        <div>
+          <p class="author-name">{{ testimonial.name }}</p>
+          <p class="author-role">{{ testimonial.relationship }}</p>
+          <div *ngIf="testimonial.isGoogle" class="google-stars">★★★★★</div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<div class="googleReviewLink">
+  <a [href]="googleReviewLink" target="_blank" class="afhBtn" *ngIf="business?.placeId != '0'">
+    Leave us a Google Review
+  </a>
+</div>

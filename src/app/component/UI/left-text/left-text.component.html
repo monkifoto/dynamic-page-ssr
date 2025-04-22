@@ -1,0 +1,76 @@
+<section class="left-text-section"
+*ngIf="themeType === 'hh'"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+
+  <div class="text-container">
+    <div  class="heading-container">
+      <h2 class="styled-heading">{{title}}</h2>
+    </div>
+    <p [innerHTML]="sanitizedContent"></p>
+  </div>
+
+  <div class="image-container">
+    <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
+  </div>
+</section>
+
+<section
+  class="content-container"
+  *ngIf="
+    themeType === 'ae' ||
+    themeType === 'sb' ||
+    themeType === 'sp'
+  "
+>
+  <div class="content-area">
+    <div class="row">
+      <div class="text-container">
+        <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':titleFontStyle }">{{ titleParts.part1 }}</h2>
+        <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h3>
+
+          <div class="separator2"></div>
+          <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+      </div>
+
+      <div class="left-image-container">
+        <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-container" *ngIf="themeType === 'clemo'">
+  <div class="content-area">
+    <div class="row">
+      <div class="left-image-container">
+        <img [src]="sectionImageUrl" [alt]="title" />
+      </div>
+      <div class="left-text-container">
+        <h3 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px' }">{{ title }}</h3>
+        <h2 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px' }">{{ subTitle }}</h2>
+        <!-- <div class="separator2"></div> -->
+        <p [innerHTML]="sanitizedContent"></p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section *ngIf="themeType === 'prestige'" class="left-text-section"
+[ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
+[ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
+<div class="text-container">
+  <h3 [ngStyle]="{ 'color': subtitleColor, 'font-size': subtitleFontSize+'px', 'font-style':textFontStyle }">{{ titleParts.part1 }}</h3>
+  <h2 [ngStyle]="{ 'color': titleColor, 'font-size': titleFontSize+'px', 'font-style':textFontStyle }"><span *ngIf="titleParts.part2"> {{ titleParts.part2 }}</span></h2>
+    <div class="separator2"></div>
+    <p class="center-text-description" [ngStyle]="{ 'color': textColor, 'font-size': textFontSize+'px', 'font-style':textFontStyle }" [innerHTML]="sanitizedContent"></p>
+</div>
+
+  <div class="image-container">
+    <img src="{{ sectionImageUrl }}" alt="{{ title }}" />
+  </div>
+</section>

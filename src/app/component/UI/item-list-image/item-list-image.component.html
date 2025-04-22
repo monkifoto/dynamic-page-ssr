@@ -1,0 +1,45 @@
+<div *ngIf="!isMinimal">
+  <section
+    class="our-services-section"
+
+  >
+    <div class="heading-container">
+      <div class="text-container">
+      <h3 [ngStyle]="{ color: titleColor }">{{ titleParts.part1 }}</h3 >
+      <h2><span *ngIf="titleParts.part2" [ngStyle]="{ color: titleColor }"> {{ titleParts.part2 }}</span></h2>
+        <div *ngIf="titleParts.part2" class="separator2"></div>
+
+      </div>
+      <!-- <h2 class="styled-heading" [ngStyle]="{ color: titleColor }">
+        {{ title }}
+      </h2> -->
+    </div>
+
+    <h3
+      class="our-services-description"
+      [ngStyle]="{ color: subtitleColor }"
+    >
+      {{ subTitle }}
+    </h3>
+
+    <div class="parent"  [ngStyle]="{
+      'background-image': sectionImageUrl
+        ? 'url(' + sectionImageUrl + ')'
+        : 'none',
+      'background-color': backgroundColor,
+      color: textColor
+    }">
+      <div *ngFor="let service of items" class="child">
+        <div class="content">
+        <div class="content-header" >
+          <!-- <i [ngClass]="service.icon" class="content-icon"></i> -->
+          <h2>{{ service.title }}</h2>
+        </div>
+        <div class="content-text">
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>

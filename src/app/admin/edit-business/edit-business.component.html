@@ -1,0 +1,330 @@
+<div class="admin-container">
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="showAutoSaveMessage" class="auto-save-message">
+      ✅ {{ autoSaveMessage }}
+    </div>
+    <div class="layout-container">
+      <!-- Sidebar Navigation -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <a
+            class="business-id-link"
+            [routerLink]="['/home']"
+            [queryParams]="{ id: business.id }"
+            target="_blank"
+            *ngIf="business?.id && business?.businessName"
+          >
+            🔗 View Public Page<br />
+            <strong>{{ business.businessName }}</strong><br />
+            <small>ID: {{ business.id }}</small>
+          </a>
+        </div>
+        <ul class="nav flex-column nav-tabs" id="businessTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="basic-info-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#basic-info"
+              type="button"
+              role="tab"
+              aria-controls="basic-info"
+              aria-selected="true"
+            >
+              BASIC INFO
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="locations-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#locations"
+              type="button"
+              role="tab"
+              aria-controls="locations"
+              aria-selected="false"
+            >
+              LOCATIONS
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="hero-slider-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#hero-slider-theme"
+              type="button"
+              role="tab"
+              aria-controls="hero-slider-theme"
+              aria-selected="false"
+            >
+              HERO SLIDER
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="page-heroes-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#page-heroes"
+              type="button"
+              role="tab"
+              aria-controls="page-heroes"
+              aria-selected="false"
+            >
+              PAGE HEROES
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="about-us-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#about-us"
+              type="button"
+              role="tab"
+              aria-controls="about-us"
+              aria-selected="false"
+            >
+              SECTION MANAGER
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="content-photos-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#content-photos"
+              type="button"
+              role="tab"
+              aria-controls="content-photos"
+              aria-selected="false"
+            >
+              IMAGES
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="media-reviews-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#media-reviews"
+              type="button"
+              role="tab"
+              aria-controls="media-reviews"
+              aria-selected="false"
+            >
+              MEDIA & REVIEWS
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="contact-us-page-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#contact-us-page"
+              type="button"
+              role="tab"
+              aria-controls="contact-us-page"
+              aria-selected="false"
+            >
+              CONTACT US
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="employee-profiles-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#employee-profiles"
+              type="button"
+              role="tab"
+              aria-controls="employee-profiles"
+              aria-selected="false"
+            >
+              EMPLOYEE PROFILES
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="color-theme-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#color-theme"
+              type="button"
+              role="tab"
+              aria-controls="color-theme"
+              aria-selected="false"
+            >
+              THEME
+              <span *ngIf="showAutoSaveMessage" class="saved-badge">✔</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <div class="tab-content" id="businessTabContent">
+          <!-- Basic Info Tab -->
+          <div
+            class="tab-pane fade show active"
+            id="basic-info"
+            role="tabpanel"
+            aria-labelledby="basic-info-tab"
+          >
+            <app-basic-info
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-basic-info>
+          </div>
+
+          <!-- NEW: Locations Tab -->
+          <div
+            class="tab-pane fade"
+            id="locations"
+            role="tabpanel"
+            aria-labelledby="locations-tab"
+          >
+            <h3>Manage Locations</h3>
+            <app-business-locations
+              [businessId]="businessId"
+              (locationsUpdated)="updateLocations($event)"
+            >
+            </app-business-locations>
+          </div>
+
+          <div
+            class="tab-pane fade"
+            id="services-page"
+            role="tabpanel"
+            aria-labelledby="services-page-tab"
+          >
+            <app-services-page
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-services-page>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="about-us"
+            role="tabpanel"
+            aria-labelledby="about-us-tab"
+          >
+            <app-section-manager
+              [form]="businessForm"
+              [businessId]="businessId"
+            ></app-section-manager>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="content-photos"
+            role="tabpanel"
+            aria-labelledby="content-photos-tab"
+          >
+            <app-photos
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-photos>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="media-reviews"
+            role="tabpanel"
+            aria-labelledby="media-reviews-tab"
+          >
+            <app-reviews
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-reviews>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="contact-us-page"
+            role="tabpanel"
+            aria-labelledby="contact-us-page-tab"
+          >
+            <app-contact-us-page
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-contact-us-page>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="employee-profiles"
+            role="tabpanel"
+            aria-labelledby="employee-profiles-tab"
+          >
+            <app-employee
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-employee>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="color-theme"
+            role="tabpanel"
+            aria-labelledby="color-theme-tab"
+          >
+            <app-color-admin
+              [form]="businessForm"
+              [business]="business"
+              [businessId]="businessId"
+            ></app-color-admin>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="hero-slider-theme"
+            role="tabpanel"
+            aria-labelledby="hero-slider-tab"
+          >
+            <app-admin-hero-slider
+              [business]="business"
+              [businessId]="businessId"
+            ></app-admin-hero-slider>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="page-heroes"
+            role="tabpanel"
+            aria-labelledby="page-heroes-tab"
+          >
+            <h3>Manage Page Hero Images</h3>
+            <app-hero-manager [businessId]="businessId"></app-hero-manager>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Save</button>
+  </form>
+</div>
+<div
+  class="alert alert-success mt-3"
+  role="alert"
+  *ngIf="showConfirmation"
+>
+  {{ confirmationMessage }}
+  <button
+    type="button"
+    class="btn-close float-end"
+    aria-label="Close"
+    (click)="closeConfirmation()"
+  ></button>
+</div>

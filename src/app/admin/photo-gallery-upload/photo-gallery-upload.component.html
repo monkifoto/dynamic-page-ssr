@@ -1,0 +1,68 @@
+
+
+
+<div class="upload-container">
+
+  <div class="upload-location">
+    <h3>Please upload photos to individual galleryies: Gallery, Hero Images, Lifestyle</h3>
+    <label for="uploadLocation">Select Upload Location:</label>
+    <select id="uploadLocation" [(ngModel)]="uploadLocation" (change)="loadImages()">
+      <option value="gallery">Gallery</option>
+      <option value="heroImages">Hero Images</option>
+      <option value="lifeStyle">Lifestyle</option>
+    </select>
+  </div>
+
+
+  <div class="drag-drop-area"
+       (dragover)="onDragOver($event)"
+       (dragleave)="onDragLeave($event)"
+       (drop)="onDrop($event)">
+    <p *ngIf="!filesToUpload.length">Drag and drop images here, or click to select files</p>
+    <input type="file" multiple (change)="uploadFiles($event)" />
+  </div>
+
+  <div *ngIf="filesToUpload && filesToUpload.length > 0">
+    <h3>Files to be uploaded:</h3>
+    <ul>
+      <li *ngFor="let file of filesToUpload">{{ file.name }}</li>
+    </ul>
+  </div>
+
+  <div *ngFor="let fileName of uploadedImages | keyvalue">
+    <div *ngIf="uploadProgress[fileName.key] | async as progress">
+      <div class="progress-container">
+        <div class="progress-bar" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </div>
+    <div class="thumbnail" *ngIf="uploadedImages[fileName.key]">
+      <img [src]="uploadedImages[fileName.key]" alt="{{fileName.key}}" />
+    </div>
+  </div>
+</div>
+
+
+<section class="gallery">
+  <div class="section-heading">Explore Our Gallery</div>
+  <div class="gallery-grid">
+    <div *ngFor="let image of images" class="gallery-item">
+      <div class="delete-button" (click)="deleteImage(image)">
+        <i class="fa-solid fa-trash-can"></i>
+      </div>
+      <img [src]="image.url" class="gallery-image" alt="Gallery Image">
+      <input [(ngModel)]="image.title" placeholder="Enter Title">
+      <textarea [(ngModel)]="image.description" placeholder="Enter Description"></textarea>
+      <input [(ngModel)]="image.link" placeholder="Enter Link:">
+      <input [(ngModel)]="image.order" placeholder="Enter Order:">
+
+      <button (click)="saveImageDetails(image)">Save</button>
+    </div>
+  </div>
+</section>
+
+
+<app-image-viewer-modal
+*ngIf="selectedImageUrl"
+[imageUrl]="selectedImageUrl"
+(closeModal)="onCloseModal()">
+</app-image-viewer-modal>

@@ -1,0 +1,167 @@
+/****************************************** TESTIMONIALS (Updated for Screenshot Match) ******************************************/
+
+.testimonials-container.modern-carousel {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: var(--background-color);
+  font-family: 'Inter', sans-serif;
+
+}
+
+.testimonial-content {
+  display: flex;
+  max-width: var(--site-max-width);
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--dark-background-color);
+}
+
+.testimonial-intro {
+  flex: 1;
+  min-width: 280px;
+}
+
+.testimonial-intro h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.testimonial-intro .highlight {
+  font-weight: 800;
+}
+
+.intro-subtext {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.afhBtn {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.carousel-arrows {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  display: none;
+}
+
+.carousel-arrows button {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.carousel-arrows button:hover {
+  background-color: var(--background-color);
+}
+
+.testimonial-quote {
+  flex: 2;
+  min-width: 300px;
+}
+
+.quote-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  color: #333;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  color: var(--dark-background-color);
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.author-photo.placeholder {
+  background-color: #ccc;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.author-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.author-role {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.google-stars {
+  color: #ffb400;
+  font-size: 1rem;
+}
+
+/* Pagination dots below testimonial */
+.testimonial-dots {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.testimonial-dots div {
+  width: 20px;
+  height: 4px;
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.testimonial-dots .active {
+  background-color: #333;
+}
+
+.no-testimonials-message {
+  font-size: 1rem;
+  color: #999;
+}
+
+/****************************************** END TESTIMONIALS ******************************************/

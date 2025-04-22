@@ -1,0 +1,158 @@
+<div class="theme-admin-container">
+  <h2>Edit Theme Colors</h2>
+
+  <div *ngIf="themeForm">
+    <form [formGroup]="themeForm" (ngSubmit)="onSubmit()">
+
+
+      <div class="theme-selection">
+        <label>Select Theme</label>
+        <select formControlName="themeFileName" (change)="onThemeFileChange($event)">
+          <option *ngFor="let theme of availableThemes" [value]="theme.fileName">{{ theme.name }}</option>
+        </select>
+      </div>
+
+      <div class="color-picker">
+        <label for="themeType">Theme Type</label>
+       <input type="text" id="themeType" formControlName="themeType">
+      </div>
+
+
+      <div class="color-picker">
+        <label for="backgroundColor">Background Color</label>
+        <input type="color" id="backgroundColor" formControlName="backgroundColor"
+          (input)="updateHexInput($event, 'backgroundColor')">
+        <input type="text" formControlName="backgroundColor" class="hex-input"
+          (input)="updateColorInput($event, 'backgroundColor')"
+          [ngClass]="{'invalid': themeForm.get('backgroundColor')?.errors?.['invalidHex']}">
+        <div class="error-message" *ngIf="themeForm.get('backgroundColor')?.errors?.['invalidHex']"></div>
+      </div>
+
+      <div class="color-picker">
+        <label for="darkBackgroundColor">Dark Background Color</label>
+        <input type="color" id="darkBackgroundColor" formControlName="darkBackgroundColor"
+          (input)="updateHexInput($event, 'darkBackgroundColor')">
+        <input type="text" formControlName="darkBackgroundColor" class="hex-input"
+          (input)="updateColorInput($event, 'darkBackgroundColor')"
+          [ngClass]="{'invalid': themeForm.get('darkBackgroundColor')?.errors?.['invalidHex']}">
+        <div class="error-message" *ngIf="themeForm.get('darkBackgroundColor')?.errors?.['invalidHex']"></div>
+      </div>
+
+      <div class="color-picker">
+        <label for="primaryColor">Primary Color</label>
+        <input type="color" id="primaryColor" formControlName="primaryColor"
+          (input)="updateHexInput($event, 'primaryColor')">
+        <input type="text" formControlName="primaryColor" class="hex-input"
+          (input)="updateColorInput($event, 'primaryColor')"
+          [ngClass]="{'invalid': themeForm.get('primaryColor')?.errors?.['invalidHex']}">
+        <div class="error-message" *ngIf="themeForm.get('primaryColor')?.errors?.['invalidHex']"></div>
+      </div>
+
+      <div class="color-picker">
+        <label for="secondaryColor">Secondary Color</label>
+        <input type="color" id="secondaryColor" formControlName="secondaryColor"
+          (input)="updateHexInput($event, 'secondaryColor')">
+        <input type="text" formControlName="secondaryColor" class="hex-input"
+          (input)="updateColorInput($event, 'secondaryColor')"
+          [ngClass]="{'invalid': themeForm.get('secondaryColor')?.errors?.['invalidHex']}">
+        <div class="error-message" *ngIf="themeForm.get('secondaryColor')?.errors?.['invalidHex']"></div>
+      </div>
+
+      <div class="color-picker">
+        <label for="accentColor">Accent Color</label>
+        <input type="color" id="accentColor" formControlName="accentColor"
+          (input)="updateHexInput($event, 'accentColor')">
+        <input type="text" formControlName="accentColor" class="hex-input"
+          (input)="updateColorInput($event, 'accentColor')"
+          [ngClass]="{'invalid': themeForm.get('accentColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="buttonColor">Button Color</label>
+        <input type="color" id="buttonColor" formControlName="buttonColor"
+          (input)="updateHexInput($event, 'buttonColor')">
+        <input type="text" formControlName="buttonColor" class="hex-input"
+          (input)="updateColorInput($event, 'buttonColor')"
+          [ngClass]="{'invalid': themeForm.get('buttonColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="buttonHoverColor">Button Hover Color</label>
+        <input type="color" id="buttonHoverColor" formControlName="buttonHoverColor"
+          (input)="updateHexInput($event, 'buttonHoverColor')">
+        <input type="text" formControlName="buttonHoverColor" class="hex-input"
+          (input)="updateColorInput($event, 'buttonHoverColor')"
+          [ngClass]="{'invalid': themeForm.get('buttonHoverColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="textColor">Text Color</label>
+        <input type="color" id="textColor" formControlName="textColor" (input)="updateHexInput($event, 'textColor')">
+        <input type="text" formControlName="textColor" class="hex-input" (input)="updateColorInput($event, 'textColor')"
+          [ngClass]="{'invalid': themeForm.get('textColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="navBackgroundColor">Navigation Background Color</label>
+        <input type="color" id="navBackgroundColor" formControlName="navBackgroundColor"
+          (input)="updateHexInput($event, 'navBackgroundColor')">
+        <input type="text" formControlName="navBackgroundColor" class="hex-input"
+          (input)="updateColorInput($event, 'navBackgroundColor')"
+          [ngClass]="{'invalid': themeForm.get('navBackgroundColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="navTextColor">Navigation Text Color</label>
+        <input type="color" id="navTextColor" formControlName="navTextColor"
+          (input)="updateHexInput($event, 'navTextColor')">
+        <input type="text" formControlName="navTextColor" class="hex-input"
+          (input)="updateColorInput($event, 'navTextColor')"
+          [ngClass]="{'invalid': themeForm.get('navTextColor')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="navActiveBackground">Navigation Active Background</label>
+        <input type="color" id="navActiveBackground" formControlName="navActiveBackground"
+          (input)="updateHexInput($event, 'navActiveBackground')">
+        <input type="text" formControlName="navActiveBackground" class="hex-input"
+          (input)="updateColorInput($event, 'navActiveBackground')"
+          [ngClass]="{'invalid': themeForm.get('navActiveBackground')?.errors?.['invalidHex']}">
+      </div>
+
+      <div class="color-picker">
+        <label for="navActiveText">Navigation Active Text</label>
+        <input type="color" id="navActiveText" formControlName="navActiveText"
+          (input)="updateHexInput($event, 'navActiveText')">
+        <input type="text" formControlName="navActiveText" class="hex-input"
+          (input)="updateColorInput($event, 'navActiveText')"
+          [ngClass]="{'invalid': themeForm.get('navActiveText')?.errors?.['invalidHex']}">
+      </div>
+
+
+
+    <button type="button" class="afhBtn" (click)="openSaveConfirmation()">Save Changes</button>
+    <button type="button" class="afhBtn" (click)="resetToDefault()">Reset to Default</button>
+      <!-- <button type="submit">Save Changes</button>
+      <button type="button" (click)="resetToDefault()">Reset to Default</button> -->
+    </form>
+  </div>
+</div>
+
+
+<div class="modal-backdrop" *ngIf="showSaveModal">
+  <div class="modal-container">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Save Changes</h5>
+        <button class="afhBtn" (click)="cancelSave()">×</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to save these changes?
+      </div>
+      <div class="modal-footer">
+        <button class="afhBtn" (click)="cancelSave()">Cancel</button>
+        <button class="afhBtn" (click)="confirmSave()">Confirm Save</button>
+      </div>
+    </div>
+  </div>
+</div>

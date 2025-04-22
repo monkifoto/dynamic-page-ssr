@@ -1,0 +1,80 @@
+form {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #2c3e50;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* Focused input elements */
+input,
+select:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Textarea has vertical resizing */
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  form {
+    padding: 20px;
+  }
+}
