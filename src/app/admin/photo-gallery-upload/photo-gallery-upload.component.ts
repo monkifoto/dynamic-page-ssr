@@ -19,12 +19,16 @@ import { UploadService } from '../../services/upload.service';
 import { WebContentService } from '../../services/web-content.service';
 import { environment } from '../../../environments/environment';
 import { initializeApp } from 'firebase/app';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ImageViewerModalComponent } from '../../component/image-viewer-modal/image-viewer-modal.component';
 
 @Component({
   selector: 'app-photo-gallery-upload',
   templateUrl: './photo-gallery-upload.component.html',
   styleUrls: ['./photo-gallery-upload.component.css'],
-  standalone: false,
+  standalone: true,
+  imports:[CommonModule, FormsModule, ImageViewerModalComponent]
 })
 export class PhotoGalleryUploadComponent implements OnInit {
   @Input() businessId!: string;

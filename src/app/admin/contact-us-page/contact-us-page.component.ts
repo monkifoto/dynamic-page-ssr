@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../model/business-questions.model';
 
 @Component({
     selector: 'app-contact-us-page',

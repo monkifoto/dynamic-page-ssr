@@ -1,5 +1,5 @@
 <section class="gallery ae-gallery">
-  <div class="section-heading"><app-section-tilte [title]="'Our Home'"></app-section-tilte></div>
+  <div class="section-heading"><app-section-title [title]="'Our Home'"></app-section-title></div>
   <div class="gallery-grid gallery-container ae-gallery-container ">
     <div *ngFor="let image of images" class="gallery-item" (click)="onImageClick(image.url)">
       <img [src]="image.url" alt="Gallery Image">

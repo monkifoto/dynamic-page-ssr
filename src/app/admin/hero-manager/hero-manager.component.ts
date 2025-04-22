@@ -1,10 +1,11 @@
 // hero-manager.component.ts
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { BusinessPageHeroService } from 'src/app/services/business-page-hero.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { BusinessPageHeroService } from '../../services/business-page-hero.service';
+import { UploadService } from '../../services/upload.service';
 import { Observable } from 'rxjs';
-import { BusinessService } from 'src/app/services/business.service';
+import { BusinessService } from '../../services/business.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-hero-manager',

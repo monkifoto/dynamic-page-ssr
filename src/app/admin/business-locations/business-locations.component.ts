@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { BusinessService } from 'src/app/services/business.service';
-import { BusinessDataService } from '../../../services/business-data.service';
+import { BusinessService } from '../../services/business.service';
+import { BusinessDataService } from '../../services/business-data.service';
 import { take } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-business-locations',

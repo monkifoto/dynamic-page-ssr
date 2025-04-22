@@ -3,8 +3,7 @@ import { Section } from '../model/section.model';
 
 @Pipe({
     name: 'sectionFilter',
-    standalone: true,
-    imports:[CommonModule]
+    standalone: true
 })
 export class SectionFilterPipe implements PipeTransform {
   transform(sections: Section[], page: string, location: string): Section | null {

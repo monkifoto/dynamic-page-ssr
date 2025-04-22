@@ -12,6 +12,8 @@ import {
   FormArray,
   Validators,
   FormControl,
+  FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { BusinessService } from '../../services/business.service';
 import { UploadService } from '../../services/upload.service';
@@ -19,7 +21,7 @@ import { Business } from '../../model/business-questions.model';
 import { BusinessModel } from '../../model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EmployeeComponent } from '../employee/employee.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
@@ -31,6 +33,13 @@ import {
   ref as storageRef,
 Storage } from '@angular/fire/storage';
 import { BusinessSectionsService } from '../../services/business-sections.service';
+import { CommonModule } from '@angular/common';
+import { HeroManagerComponent } from '../hero-manager/hero-manager.component';
+import { AdminHeroSliderComponent } from '../admin-hero-slider/admin-hero-slider.component';
+import { ColorAdminComponent } from '../color-admin/color-admin.component';
+import { ContactUsPageComponent } from '../contact-us-page/contact-us-page.component';
+import { PhotosComponent } from '../photos/photos.component';
+import { BasicInfoComponent } from '../basic-info/basic-info.component';
 
 
 @Component({
@@ -39,7 +48,10 @@ import { BusinessSectionsService } from '../../services/business-sections.servic
     styleUrls: ['./edit-business.component.css'],
     encapsulation: ViewEncapsulation.Emulated,
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, HeroManagerComponent, AdminHeroSliderComponent, ColorAdminComponent,
+      EmployeeComponent, ContactUsPageComponent,ReviewsComponent, PhotosComponent,
+      SectionManagerComponent, BusinessLocationsComponent,BasicInfoComponent, ServicesPageComponent, RouterModule, FormsModule, ReactiveFormsModule
+    ]
 })
 export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;

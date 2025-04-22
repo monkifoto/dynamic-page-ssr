@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
-import { Business, SliderConfig } from 'src/app/model/business-questions.model';
-import { BusinessService } from 'src/app/services/business.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { Business, SliderConfig } from '../../model/business-questions.model';
+import { BusinessService } from '../../services/business.service';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
     selector: 'app-admin-hero-slider',

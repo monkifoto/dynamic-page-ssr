@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ThemeService } from 'src/app/services/theme-service.service';
+import { ThemeService } from '../../services/theme-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
-import { Business } from 'src/app/model/business-questions.model';
-import { BusinessService } from 'src/app/services/business.service';
-import { isPlatformBrowser } from '@angular/common';
+import { Business } from '../../model/business-questions.model';
+import { BusinessService } from '../../services/business.service';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
 declare var $: any;

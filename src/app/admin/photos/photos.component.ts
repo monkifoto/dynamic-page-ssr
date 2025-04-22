@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
-import { Business } from 'src/app/model/business-questions.model';
-import { UploadService } from 'src/app/services/upload.service';
+import { Business } from '../../model/business-questions.model';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
     selector: 'app-photos',

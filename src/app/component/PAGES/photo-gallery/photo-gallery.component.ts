@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ViewContainerRef, Type, ComponentF
 import { from, map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebContentService } from '../../../services/web-content.service';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../../model/business-questions.model';
 import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
 
@@ -12,10 +12,11 @@ import { CenterTextComponent } from '../../UI/center-text/center-text.component'
 import { RightTextComponent } from '../../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../../UI/left-text/left-text.component';
 import { ItemListComponent } from '../../UI/item-list/item-list.component';
-import { BusinessSectionsService } from 'src/app/services/business-sections.service';
+import { BusinessSectionsService } from '../../../services/business-sections.service';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { HeroComponent } from '../../UI/hero/hero.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     templateUrl: './photo-gallery.component.html',
     styleUrls: ['./photo-gallery.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, HeroComponent]
 })
 export class PhotoGalleryComponent implements OnInit {
   @Input()

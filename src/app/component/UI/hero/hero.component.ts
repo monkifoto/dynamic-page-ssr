@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BusinessDataService } from '../../../services/business-data.service';
-import { PageHero } from 'src/app/model/business-questions.model';
+import { PageHero } from '../../../model/business-questions.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-hero',

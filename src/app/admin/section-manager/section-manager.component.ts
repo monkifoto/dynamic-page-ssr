@@ -5,18 +5,21 @@ import {
   FormBuilder,
   AbstractControl,
   FormControl,
+  FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { BusinessSectionsService } from 'src/app/services/business-sections.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { BusinessSectionsService } from '../../services/business-sections.service';
+import { UploadService } from '../../services/upload.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-section-manager',
     templateUrl: './section-manager.component.html',
     styleUrls: ['./section-manager.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class SectionManagerComponent implements OnInit {
   @Input() form!: FormGroup;

@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type, ComponentRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
-import { BusinessSectionsService } from 'src/app/services/business-sections.service';
-import { Business } from 'src/app/model/business-questions.model';
-import { switchMap } from 'rxjs';
+import { BusinessSectionsService } from '../../../services/business-sections.service';
+import { Business } from '../../../model/business-questions.model';
+import { Observable, switchMap } from 'rxjs';
 import { CenterTextComponent } from '../../UI/center-text/center-text.component';
 import { RightTextComponent } from '../../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../../UI/left-text/left-text.component';
@@ -12,8 +12,10 @@ import { ItemListComponent } from '../../UI/item-list/item-list.component';
 import { CallToActionComponent } from '../../UI/call-to-action/call-to-action.component';
 import { ConsultationComponent } from '../../UI/consultation/consultation.component';
 import { ItemListImageComponent } from '../../UI/item-list-image/item-list-image.component';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { TestimonialImageComponent } from '../../UI/testimonial-image/testimonial-image.component';
+import { HeroComponent } from '../../UI/hero/hero.component';
 
 
 @Component({
@@ -21,13 +23,13 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     templateUrl: './services.component.html',
     styleUrls: ['./services.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, RouterModule, TestimonialImageComponent, HeroComponent]
 })
 export class ServicesComponent implements OnInit, AfterViewInit {
   sections: any[] = [];
   businessId: string = '';
   business: Business | null = null;
-  business$ = this.businessDataService.businessData$;
+  business$: Observable<Business | null>;
 
   componentsMap: Record<string, Type<any>> = {
     'center-text': CenterTextComponent,
@@ -51,7 +53,9 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
 
-  ) {}
+  ) {
+    this.business$ = this.businessDataService.businessData$;
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');

@@ -7,7 +7,8 @@ import { switchMap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { HeroComponent } from '../../UI/hero/hero.component';
 
 
 
@@ -19,7 +20,7 @@ declare var google: any;
     templateUrl: './location-page.component.html',
     styleUrls: ['./location-page.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, HeroComponent]
 })
 export class LocationPageComponent implements OnInit {
   business: Business | null = null;

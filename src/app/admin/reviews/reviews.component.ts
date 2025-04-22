@@ -1,15 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
-import { Business, Testimonial } from 'src/app/model/business-questions.model';
-import { UploadService } from 'src/app/services/upload.service';
+import { Business, Testimonial } from '../../model/business-questions.model';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
     selector: 'app-reviews',
     templateUrl: './reviews.component.html',
     styleUrls: ['./reviews.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, ReactiveFormsModule]
 })
 export class ReviewsComponent implements OnInit {
   @Input() form!: FormGroup;

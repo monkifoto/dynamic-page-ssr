@@ -8,6 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { filter, first, Observable, of, switchMap } from 'rxjs';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
+import { HeroComponent } from "../../UI/hero/hero.component";
 
 declare var google: any;
 @Component({
@@ -15,7 +16,7 @@ declare var google: any;
     templateUrl: './testimonials.component.html',
     styleUrls: ['./testimonials.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports: [CommonModule, HeroComponent]
 })
 export class TestimonialsListComponent implements OnInit {
   testimonials: any[] = [];

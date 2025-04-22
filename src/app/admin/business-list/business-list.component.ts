@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { BusinessService } from 'src/app/services/business.service';
-import { Business } from 'src/app/model/business-questions.model';
-import { Router } from '@angular/router';
+import { BusinessService } from '../../services/business.service';
+import { Business } from '../../model/business-questions.model';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-business-list',
     templateUrl: './business-list.component.html',
     styleUrls: ['./business-list.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, RouterModule]
 })
 export class BusinessListComponent implements OnInit {
   businesses: Business[] = [];

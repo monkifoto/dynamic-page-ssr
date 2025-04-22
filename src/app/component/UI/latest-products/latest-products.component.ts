@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SectionTitleComponent } from '../section-title/section-title.component';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     templateUrl: './latest-products.component.html',
     styleUrls: ['./latest-products.component.scss'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, SectionTitleComponent]
 })
 export class LatestProductsComponent implements OnInit {
   @Input() layoutType: string = '';

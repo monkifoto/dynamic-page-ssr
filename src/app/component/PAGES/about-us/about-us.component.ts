@@ -11,9 +11,9 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
-import { BusinessSectionsService } from 'src/app/services/business-sections.service';
-import { Business } from 'src/app/model/business-questions.model';
-import { switchMap } from 'rxjs';
+import { BusinessSectionsService } from '../../../services/business-sections.service';
+import { Business } from '../../../model/business-questions.model';
+import { Observable, switchMap } from 'rxjs';
 import { CenterTextComponent } from '../../UI/center-text/center-text.component';
 import { RightTextComponent } from '../../UI/right-text/right-text.component';
 import { LeftTextComponent } from '../../UI/left-text/left-text.component';
@@ -24,21 +24,23 @@ import { LatestProductsComponent } from '../../UI/latest-products/latest-product
 import { MeetTheTeamComponent } from '../../UI/meet-the-team/meet-the-team.component';
 import { TextWrapperComponent } from '../../text-wrapper/text-wrapper.component';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
+import { HeroComponent } from '../../UI/hero/hero.component';
+import { TestimonialImageComponent } from '../../UI/testimonial-image/testimonial-image.component';
 
 @Component({
     selector: 'app-about-us',
     templateUrl: './about-us.component.html',
     styleUrls: ['./about-us.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, HeroComponent, TestimonialImageComponent]
 })
 export class AboutUsComponent implements OnInit {
   sections: any[] = [];
   businessId: string = '';
   business: Business | null = null;
-  business$ = this.businessDataService.businessData$;
+  business$: Observable<Business | null>;
 
   componentsMap: Record<string, Type<any>> = {
     'center-text': CenterTextComponent,
@@ -63,9 +65,12 @@ export class AboutUsComponent implements OnInit {
     private businessDataService: BusinessDataService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.business$ = this.businessDataService.businessData$;
+  }
 
   ngOnInit(): void {
+
     if (isPlatformBrowser(this.platformId)) {
       const id = this.route.snapshot.queryParamMap.get('id');
       if (id) {

@@ -131,10 +131,7 @@
       <!-- Full version -->
       <div *ngIf="isMinimal">
         <!-- <h2 class="styled-heading" [ngStyle]="{ 'color': titleColor }">{{title}}</h2> -->
-        <app-section-tilte
-          [titleColor]="titleColor"
-          [title]="title"
-        ></app-section-tilte>
+        <app-section-title [titleColor]="titleColor" [title]="title" ></app-section-title>
         <div
           [ngClass]="{
             'parallax-container': isParallax && sectionImageUrl,
@@ -359,7 +356,7 @@
     class="sb-services-section"
     *ngIf="themeType == 'sb' || themeType == 'sp'"
   >
-    <app-section-tilte [title]="'Our Services'"></app-section-tilte>
+    <app-section-title [title]="'Our Services'"></app-section-title>
     <div class="sb-services-grid">
       <div *ngFor="let service of items" class="sb-service-item">
         <div class="sb-service-icon-wrapper">

@@ -10,8 +10,14 @@ import { BusinessDataService } from '../../../services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from '../../../services/email.service';
 import { environment } from '../../../../environments/environment';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeroComponent } from '../../UI/hero/hero.component';
+import { FaqComponent } from '../../UI/faq/faq.component';
+import { InformationComponent } from '../../UI/Deprecated/information/information.component';
+import { GoogleMapsComponent } from '../../UI/google-maps/google-maps.component';
+import { PhoneFormatPipe } from '../../../pipe/phone-format.pipe';
 
 
 
@@ -20,7 +26,14 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     templateUrl: './contact-us.component.html',
     styleUrls: ['./contact-us.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule,
+       FormsModule,
+       ReactiveFormsModule,
+      HeroComponent,
+       FaqComponent,
+      InformationComponent,
+      GoogleMapsComponent,
+    PhoneFormatPipe]
 })
 export class ContactUsComponent  implements OnInit{
 

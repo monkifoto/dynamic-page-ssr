@@ -2,7 +2,7 @@
   class="cta-container"
   [ngClass]="{'full-width': fullWidth, 'centered': !fullWidth, 'shadow': boxShadow }"
   [ngStyle]="{'background-color': backgroundColor, 'color': textColor , 'text-align': alignText, 'border-radius': borderRadius + 'px'  }">
-  <!-- <app-section-tilte [title]="title"></app-section-tilte> -->
+  <!-- <app-section-title [title]="title"></app-section-title> -->
   <h2 [ngStyle]="{ 'color': titleColor ,'font-size': titleFontSize+'px', 'font-style':titleFontStyle }">{{ title }}</h2>
   <h3 [ngStyle]="{ 'color': subtitleColor ,'font-size': subtitleFontSize+'px', 'font-style':subtitleFontStyle }">{{ subTitle }}</h3>
   <p [ngStyle]="{ 'color': textColor, 'font-size': textFontSize , 'font-style': textFontStyle} ">{{ content }}</p>

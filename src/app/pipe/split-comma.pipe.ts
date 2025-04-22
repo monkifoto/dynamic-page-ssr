@@ -2,8 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'splitComma',
-    standalone: true,
-    imports:[CommonModule]
+    standalone: true
 })
 export class SplitCommaPipe implements PipeTransform {
   transform(value: string): any[] {

@@ -11,15 +11,15 @@ import { BusinessListComponent } from './business-list/business-list.component';
 @NgModule({
   declarations: [
     // LoginComponent,
-    AdminComponent,
-    BusinessListComponent,
     // HeroManagerComponent,
     // BusinessLocationsComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    AdminComponent,
+    BusinessListComponent
   ],
   exports:[
     // BusinessLocationsComponent

@@ -1,23 +1,24 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IntakeForm } from 'src/app/model/intake-form.model';
-import { IntakeService } from 'src/app/services/intake.service';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IntakeForm } from '../../../model/intake-form.model';
+import { IntakeService } from '../../../services/intake.service';
 import { BusinessDataService } from '../../../services/business-data.service';
 import { EmailService } from '../../../services/email.service';
 // import { Modal } from 'bootstrap';
 import { MetaService } from '../../../services/meta-service.service';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../../model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { HeroComponent } from '../../UI/hero/hero.component';
 
 @Component({
     selector: 'app-resident-intake-form',
     templateUrl: './resident-intake-form.component.html',
     styleUrls: ['./resident-intake-form.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, HeroComponent, ReactiveFormsModule]
 })
 export class ResidentIntakeFormComponent implements OnInit {
   businessId: string | null = null;

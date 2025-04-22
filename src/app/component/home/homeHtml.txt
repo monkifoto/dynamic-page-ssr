@@ -265,7 +265,7 @@
 
 </section>
 <section id="about-us" class="single_page_section">
-  <!-- <app-section-tilte [title]="'About Us'"></app-section-tilte> -->
+  <!-- <app-section-title [title]="'About Us'"></app-section-title> -->
 
   <app-right-text
   *ngIf="business?.sections | sectionFilter:'HomeRight' as section"
