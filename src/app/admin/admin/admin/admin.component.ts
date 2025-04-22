@@ -6,7 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class AdminComponent {
   constructor(private router: Router, private authService: AuthService) {}

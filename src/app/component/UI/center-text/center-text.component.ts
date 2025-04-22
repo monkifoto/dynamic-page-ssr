@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
     selector: 'app-center-text',
     templateUrl: './center-text.component.html',
     styleUrls: ['./center-text.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class CenterTextComponent implements OnInit {
   @Input() themeType!: string;

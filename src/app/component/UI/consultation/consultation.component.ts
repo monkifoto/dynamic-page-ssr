@@ -1,13 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-consultation',
     templateUrl: './consultation.component.html',
     styleUrls: ['./consultation.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ConsultationComponent{
  @Input() themeType!: string;
@@ -62,7 +64,7 @@ export class ConsultationComponent{
         this.businessId = businessId;
       }
     });
-    
+
     this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
   }
 }

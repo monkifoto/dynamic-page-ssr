@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service'; // Adjust the path as necessary
-import { environment } from 'src/environments/environment';
+import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
+import { environment } from '../../../../environments/environment';
+import { CommonModule } from '@angular/common';
 
 declare var google: any; // Declare google object for TypeScript
 
@@ -8,7 +9,8 @@ declare var google: any; // Declare google object for TypeScript
     selector: 'app-google-maps',
     templateUrl: './google-maps.component.html',
     styleUrls: ['./google-maps.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class GoogleMapsComponent implements OnInit, OnChanges {
   @Input() address: string = ''; // Input for the address to display on the map

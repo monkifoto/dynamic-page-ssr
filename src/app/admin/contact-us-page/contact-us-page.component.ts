@@ -6,7 +6,8 @@ import { Business } from 'src/app/model/business-questions.model';
     selector: 'app-contact-us-page',
     templateUrl: './contact-us-page.component.html',
     styleUrls: ['./contact-us-page.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ContactUsPageComponent implements OnInit {
   @Input() form!: FormGroup;

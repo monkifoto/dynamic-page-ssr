@@ -10,7 +10,8 @@ import { BusinessService } from 'src/app/services/business.service';
     selector: 'app-hero-manager',
     templateUrl: './hero-manager.component.html',
     styleUrls: ['./hero-manager.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class HeroManagerComponent implements OnInit {
   @Input() businessId!: string;

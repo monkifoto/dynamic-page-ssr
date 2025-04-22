@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 
 declare var google: any;

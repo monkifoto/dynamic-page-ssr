@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface TabData {
   title: string;
@@ -14,7 +15,8 @@ interface TabData {
     selector: 'app-stats',
     templateUrl: './stats.component.html',
     styleUrls: ['./stats.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class StatsComponent {
   @Input() backgroundImage: string = '';

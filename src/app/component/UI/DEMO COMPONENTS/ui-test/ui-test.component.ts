@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
     selector: 'app-ui-test',
     templateUrl: './ui-test.component.html',
     styleUrls: ['./ui-test.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class UiTestComponent {
 

@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { WebContentService } from 'src/app/services/web-content.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { SectionTitleComponent } from '../section-title/section-title.component';
+import { WebContentService } from '../../../services/web-content.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap, filter } from 'rxjs/operators';
-import { Employee } from 'src/app/model/business-questions.model';
+import { Employee } from '../../../model/business-questions.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-meet-the-team',
     templateUrl: './meet-the-team.component.html',
     styleUrls: ['./meet-the-team.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule,SectionTitleComponent]
 })
 export class MeetTheTeamComponent implements OnInit {
   employees$!: Observable<Employee[]>;

@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-icon-list',
     templateUrl: './icon-list.component.html',
     styleUrls: ['./icon-list.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class IconListComponent implements OnInit {
   @Input() sectionTitle: string = 'Our Services';  // ✅ Dynamically set from the section

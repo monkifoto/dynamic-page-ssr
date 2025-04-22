@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { PageHero } from 'src/app/model/business-questions.model';
 
 @Component({
     selector: 'app-hero',
     templateUrl: './hero.component.html',
     styleUrls: ['./hero.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class HeroComponent implements OnInit {
   @Input() layoutType: string = 'hh';

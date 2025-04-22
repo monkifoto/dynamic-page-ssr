@@ -6,7 +6,8 @@ import { Business, ListItem } from 'src/app/model/business-questions.model';
     selector: 'app-services-page',
     templateUrl: './services-page.component.html',
     styleUrls: ['./services-page.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ServicesPageComponent implements OnInit {
   @Input() form!: FormGroup;

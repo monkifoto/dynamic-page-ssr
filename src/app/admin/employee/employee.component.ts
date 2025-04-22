@@ -8,7 +8,8 @@ import { UploadService } from 'src/app/services/upload.service';
     selector: 'app-employee',
     templateUrl: './employee.component.html',
     styleUrls: ['./employee.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class EmployeeComponent {
   @Input() form!: FormGroup;

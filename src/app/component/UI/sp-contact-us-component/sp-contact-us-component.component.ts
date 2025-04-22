@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { WebContentService } from 'src/app/services/web-content.service';
+import { WebContentService } from '../../../services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MetaService } from 'src/app/services/meta-service.service';
+import { MetaService } from '../../../services/meta-service.service';
 // import { Modal } from 'bootstrap';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { EmailService } from 'src/app/services/email.service';
+import { EmailService } from '../../../services/email.service';
 
 @Component({
     selector: 'app-sp-contact-us-component',
     templateUrl: './sp-contact-us-component.component.html',
     styleUrls: ['./sp-contact-us-component.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class SpContactUsComponentComponent implements OnInit {
   business: Business | null = null;

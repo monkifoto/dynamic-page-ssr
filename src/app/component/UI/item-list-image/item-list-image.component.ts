@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -5,7 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     selector: 'app-item-list-image',
     templateUrl: './item-list-image.component.html',
     styleUrls: ['./item-list-image.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ItemListImageComponent implements OnInit {
   @Input() title: string = 'Our Services';

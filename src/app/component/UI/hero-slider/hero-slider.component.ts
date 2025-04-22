@@ -1,8 +1,8 @@
 import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { Business, SliderConfig } from 'src/app/model/business-questions.model';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { Business, SliderConfig } from '../../../model/business-questions.model';
+import { BusinessDataService } from '../../../services/business-data.service';
 import {
   trigger,
   transition,
@@ -38,7 +38,8 @@ import {
             ], { params: { directionLeave: '-100%' } })
         ])
     ],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class HeroSliderComponent implements OnInit ,OnDestroy {
   isBrowser: boolean = false;

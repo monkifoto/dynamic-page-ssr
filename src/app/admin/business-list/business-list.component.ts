@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
     selector: 'app-business-list',
     templateUrl: './business-list.component.html',
     styleUrls: ['./business-list.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class BusinessListComponent implements OnInit {
   businesses: Business[] = [];

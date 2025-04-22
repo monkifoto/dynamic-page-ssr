@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -6,7 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
     selector: 'app-latest-products',
     templateUrl: './latest-products.component.html',
     styleUrls: ['./latest-products.component.scss'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class LatestProductsComponent implements OnInit {
   @Input() layoutType: string = '';

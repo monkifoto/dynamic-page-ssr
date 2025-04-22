@@ -5,16 +5,17 @@ import { WebContentService } from '../../services/web-content.service';
 import { Business } from '../../model/business-questions.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ThemeService } from 'src/app/services/theme-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
     selector: 'app-footer',
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class FooterComponent implements OnInit {
   business: Business | null = null;

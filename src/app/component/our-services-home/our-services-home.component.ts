@@ -4,7 +4,8 @@ import { Component, Input } from '@angular/core';
     selector: 'app-our-services-home',
     templateUrl: './our-services-home.component.html',
     styleUrls: ['./our-services-home.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 
 

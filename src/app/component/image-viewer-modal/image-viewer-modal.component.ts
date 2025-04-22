@@ -4,7 +4,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     selector: 'app-image-viewer-modal',
     templateUrl: './image-viewer-modal.component.html',
     styleUrls: ['./image-viewer-modal.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ImageViewerModalComponent {
   @Input() imageUrl!: string;

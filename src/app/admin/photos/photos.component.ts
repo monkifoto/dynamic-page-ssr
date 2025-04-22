@@ -8,7 +8,8 @@ import { UploadService } from 'src/app/services/upload.service';
     selector: 'app-photos',
     templateUrl: './photos.component.html',
     styleUrls: ['./photos.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class PhotosComponent implements OnInit{
   @Input() form!: FormGroup;

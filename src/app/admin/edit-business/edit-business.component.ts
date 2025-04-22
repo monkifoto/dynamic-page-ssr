@@ -13,26 +13,24 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { BusinessService } from 'src/app/services/business.service';
-import { UploadService } from 'src/app/services/upload.service';
-import {
-  Business,
-  BusinessModel,
-} from 'src/app/model/business-questions.model';
+import { BusinessService } from '../../services/business.service';
+import { UploadService } from '../../services/upload.service';
+import { Business } from '../../model/business-questions.model';
+import { BusinessModel } from '../../model/business-questions.model';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeComponent } from '../employee/employee.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
-import { AboutUsComponent } from 'src/app/component/PAGES/about-us/about-us.component';
+import { AboutUsComponent } from '../../component/PAGES/about-us/about-us.component';
 import { SectionManagerComponent } from '../section-manager/section-manager.component';
 import { BusinessLocationsComponent } from '../business-locations/business-locations.component';
 import {
   getDownloadURL,
   ref as storageRef,
 Storage } from '@angular/fire/storage';
-import { BusinessSectionsService } from 'src/app/services/business-sections.service';
+import { BusinessSectionsService } from '../../services/business-sections.service';
 
 
 @Component({
@@ -40,7 +38,8 @@ import { BusinessSectionsService } from 'src/app/services/business-sections.serv
     templateUrl: './edit-business.component.html',
     styleUrls: ['./edit-business.component.css'],
     encapsulation: ViewEncapsulation.Emulated,
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class EditBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild(EmployeeComponent) employeeComponent!: EmployeeComponent;

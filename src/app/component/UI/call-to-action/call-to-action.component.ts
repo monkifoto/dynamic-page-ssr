@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-call-to-action',
     templateUrl: './call-to-action.component.html',
     styleUrls: ['./call-to-action.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class CallToActionComponent implements OnInit {
 

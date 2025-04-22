@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IntakeForm } from 'src/app/model/intake-form.model';
 import { IntakeService } from 'src/app/services/intake.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
-import { EmailService } from 'src/app/services/email.service';
+import { BusinessDataService } from '../../../services/business-data.service';
+import { EmailService } from '../../../services/email.service';
 // import { Modal } from 'bootstrap';
-import { MetaService } from 'src/app/services/meta-service.service';
+import { MetaService } from '../../../services/meta-service.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
@@ -16,7 +16,8 @@ import { isPlatformBrowser } from '@angular/common';
     selector: 'app-resident-intake-form',
     templateUrl: './resident-intake-form.component.html',
     styleUrls: ['./resident-intake-form.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ResidentIntakeFormComponent implements OnInit {
   businessId: string | null = null;

@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-section-tilte',
+    selector: 'app-section-title', // Corrected the selector name
     templateUrl: './section-title.component.html',
     styleUrls: ['./section-title.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class SectionTitleComponent {
   @Input() title!: string;

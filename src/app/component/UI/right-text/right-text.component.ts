@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -6,7 +7,8 @@ import { Router } from '@angular/router';
     selector: 'app-right-text',
     templateUrl: './right-text.component.html',
     styleUrls: ['./right-text.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class RightTextComponent {
   @Input() themeType!: string;

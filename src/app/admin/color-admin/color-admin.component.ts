@@ -13,7 +13,8 @@ declare var $: any;
     selector: 'app-color-admin',
     templateUrl: './color-admin.component.html',
     styleUrls: ['./color-admin.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ColorAdminComponent implements OnInit {
   themeColors$: Observable<any> | undefined;

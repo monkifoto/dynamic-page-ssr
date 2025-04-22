@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Business } from 'src/app/model/business-questions.model';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
-import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
+import { Business } from '../../../model/business-questions.model';
+import { MetaService } from '../../../services/meta-service.service';
+import { BusinessDataService } from '../../../services/business-data.service';
+import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { filter, first, Observable, of, switchMap } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
 
 declare var google: any;
@@ -14,7 +14,8 @@ declare var google: any;
     selector: 'app-testimonials-list',
     templateUrl: './testimonials.component.html',
     styleUrls: ['./testimonials.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class TestimonialsListComponent implements OnInit {
   testimonials: any[] = [];
@@ -60,7 +61,7 @@ export class TestimonialsListComponent implements OnInit {
     }
   }
 
-  
+
   private loadTestimonials(): void {
     if (this.business?.testimonials) {
       const formattedTestimonials = this.business.testimonials.map((testimonial: any) => ({

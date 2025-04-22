@@ -8,7 +8,8 @@ import { UploadService } from 'src/app/services/upload.service';
     selector: 'app-reviews',
     templateUrl: './reviews.component.html',
     styleUrls: ['./reviews.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ReviewsComponent implements OnInit {
   @Input() form!: FormGroup;

@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component,Input } from '@angular/core';
 
 @Component({
     selector: 'app-video',
     templateUrl: './video.component.html',
     styleUrls: ['./video.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class VideoComponent {
   @Input() videoSource: string = '';

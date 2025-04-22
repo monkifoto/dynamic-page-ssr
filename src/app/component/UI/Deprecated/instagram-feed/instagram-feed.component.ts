@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
     selector: 'app-instagram-feed',
     templateUrl: './instagram-feed.component.html',
     styleUrls: ['./instagram-feed.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class InstagramFeedComponent implements OnInit {
   instagramPosts: any[] = [];

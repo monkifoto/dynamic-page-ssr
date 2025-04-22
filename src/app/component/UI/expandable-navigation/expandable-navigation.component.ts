@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -9,7 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
     selector: 'app-expandable-navigation',
     templateUrl: './expandable-navigation.component.html',
     styleUrls: ['./expandable-navigation.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';

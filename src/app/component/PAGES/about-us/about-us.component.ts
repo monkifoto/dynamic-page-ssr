@@ -9,8 +9,8 @@ import {
   ComponentRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { MetaService } from '../../../services/meta-service.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
@@ -31,7 +31,8 @@ import { PLATFORM_ID, Inject } from '@angular/core';
     selector: 'app-about-us',
     templateUrl: './about-us.component.html',
     styleUrls: ['./about-us.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class AboutUsComponent implements OnInit {
   sections: any[] = [];

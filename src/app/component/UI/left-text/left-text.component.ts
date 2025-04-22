@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -6,7 +7,8 @@ import { Router } from '@angular/router';
     selector: 'app-left-text',
     templateUrl: './left-text.component.html',
     styleUrls: ['./left-text.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class LeftTextComponent {
   @Input() themeType!: string;

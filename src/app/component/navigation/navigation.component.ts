@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessDataService } from 'src/app/services/business-data.service'; // Import BusinessDataService
+import { BusinessDataService } from '../../../services/business-data.service'; // Import BusinessDataService
 import { Business } from 'src/app/model/business-questions.model';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -9,7 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 
 export class NavigationComponent implements OnInit {

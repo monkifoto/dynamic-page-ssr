@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Type, ComponentRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { MetaService } from '../../../services/meta-service.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { BusinessSectionsService } from 'src/app/services/business-sections.service';
 import { Business } from 'src/app/model/business-questions.model';
 import { switchMap } from 'rxjs';
@@ -20,7 +20,8 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     selector: 'app-services',
     templateUrl: './services.component.html',
     styleUrls: ['./services.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ServicesComponent implements OnInit, AfterViewInit {
   sections: any[] = [];

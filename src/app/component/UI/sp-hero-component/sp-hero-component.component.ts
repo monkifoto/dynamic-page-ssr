@@ -2,7 +2,7 @@ import { Component, HostListener, Inject, Input, OnInit, OnDestroy, PLATFORM_ID 
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { Business } from 'src/app/model/business-questions.model';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 
 @Component({
   selector: 'app-sp-hero-component',

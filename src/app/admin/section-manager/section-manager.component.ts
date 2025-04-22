@@ -15,7 +15,8 @@ import { ChangeDetectorRef } from '@angular/core';
     selector: 'app-section-manager',
     templateUrl: './section-manager.component.html',
     styleUrls: ['./section-manager.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class SectionManagerComponent implements OnInit {
   @Input() form!: FormGroup;

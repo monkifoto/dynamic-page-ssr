@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'phoneFormat',
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class PhoneFormatPipe implements PipeTransform {
   transform(value: string | number | undefined): string {

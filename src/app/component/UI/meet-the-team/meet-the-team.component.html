@@ -1,7 +1,5 @@
-
-
 <div *ngIf="employees$" class="meet-the-team">
-  <app-section-tilte [title]="'Meet the Team'" [titleColor]="'var(--primary-color)'"></app-section-tilte>
+  <app-section-title [title]="'Meet the Team'" [titleColor]="'var(--primary-color)'"></app-section-title>
   <div class="team-list">
     <div class="team-member" *ngFor="let employee of employees$ | async">
       <img [src]="employee.photoURL" alt="{{ employee.name }}" class="team-photo">

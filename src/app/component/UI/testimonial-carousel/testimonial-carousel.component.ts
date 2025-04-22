@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
 import { HttpClient } from '@angular/common/http';
-import { isPlatformServer } from '@angular/common';
+import { CommonModule, isPlatformServer } from '@angular/common';
 import { BusinessDataService } from '../../../services/business-data.service';
 import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
 import { Business } from '../../../model/business-questions.model';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 declare var google: any;
 
@@ -16,30 +16,31 @@ declare var google: any;
   selector: 'app-testimonial-carousel',
   templateUrl: './testimonial-carousel.component.html',
   styleUrls: ['./testimonial-carousel.component.css'],
-  // animations: [
-  //   trigger('slideIn', [
-  //     transition(':enter', [
-  //       style({ opacity: 0, transform: 'translateX(-100%)' }),
-  //       animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-  //     ]),
-  //     transition(':leave', [
-  //       animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
-  //     ]),
-  //   ]),
-  //   trigger('fadeInLeft', [
-  //     transition(':enter', [
-  //       style({ opacity: 0, transform: 'translateX(-100%)' }),
-  //       animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-  //     ]),
-  //   ]),
-  //   trigger('fadeInRight', [
-  //     transition(':enter', [
-  //       style({ opacity: 0, transform: 'translateX(100%)' }),
-  //       animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
-  //     ]),
-  //   ]),
-  // ],
-  standalone: false
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+    trigger('fadeInLeft', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+    ]),
+    trigger('fadeInRight', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(100%)' }),
+        animate('0.5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+    ]),
+  ],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   @Input() businessId!: string;

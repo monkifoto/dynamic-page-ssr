@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessDataService } from 'src/app/services/business-data.service';
-import { Business } from 'src/app/model/business-questions.model';
-import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
+import { BusinessDataService } from '../../../services/business-data.service';
+import { Business } from '../../../model/business-questions.model';
+import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
 import { switchMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -18,7 +18,8 @@ declare var google: any;
     selector: 'app-location-page',
     templateUrl: './location-page.component.html',
     styleUrls: ['./location-page.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class LocationPageComponent implements OnInit {
   business: Business | null = null;

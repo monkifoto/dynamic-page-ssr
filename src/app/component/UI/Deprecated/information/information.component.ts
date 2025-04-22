@@ -4,7 +4,8 @@ import { Component, Input } from '@angular/core';
     selector: 'app-information',
     templateUrl: './information.component.html',
     styleUrls: ['./information.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class InformationComponent {
   @Input() phoneNumber!: string;

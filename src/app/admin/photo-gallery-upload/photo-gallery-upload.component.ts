@@ -15,9 +15,9 @@ import {
 import { from, Observable } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { UploadService } from 'src/app/services/upload.service';
-import { WebContentService } from 'src/app/services/web-content.service';
-import { environment } from 'src/environments/environment';
+import { UploadService } from '../../services/upload.service';
+import { WebContentService } from '../../services/web-content.service';
+import { environment } from '../../../environments/environment';
 import { initializeApp } from 'firebase/app';
 
 @Component({

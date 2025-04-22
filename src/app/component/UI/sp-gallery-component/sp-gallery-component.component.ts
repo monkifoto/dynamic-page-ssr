@@ -1,16 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { from, map, Observable, switchMap } from 'rxjs';
-import { WebContentService } from 'src/app/services/web-content.service';
+import { WebContentService } from '../../../services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { MetaService } from '../../../services/meta-service.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 
 
 @Component({
     selector: 'app-sp-gallery-component',
     templateUrl: './sp-gallery-component.component.html',
     styleUrls: ['./sp-gallery-component.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class SpGalleryComponentComponent {
   @Input()

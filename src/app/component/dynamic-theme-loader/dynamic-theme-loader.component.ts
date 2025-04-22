@@ -15,7 +15,8 @@ import { ComponentRef } from '@angular/core';
     selector: 'app-theme-loader',
     template: `<div #themeContainer></div>`,
     styleUrls: ['./dynamic-theme-loader.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class DynamicThemeLoaderComponent implements OnChanges {
   @Input() businessId: string = '';

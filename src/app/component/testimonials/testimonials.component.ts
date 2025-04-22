@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { Testimonial } from 'src/app/model/business-questions.model';
+import { Testimonial } from '../../model/business-questions.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-testimonials',
     templateUrl: './testimonials.component.html',
     styleUrls: ['./testimonials.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class TestimonialsComponent {
   @Input() testimonials!: Testimonial[] | undefined;
@@ -49,17 +51,4 @@ export class TestimonialsComponent {
     this.startAutoAdvance();
   }
 
-  // currentIndex: number = 0;
-
-  // prevSlide(): void {
-  //   if (this.testimonials) {
-  //     this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
-  //   }
-  // }
-
-  // nextSlide(): void {
-  //   if (this.testimonials) {
-  //     this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
-  //   }
-  // }
 }

@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { WebContentService } from 'src/app/services/web-content.service';
-import { Business, BusinessLocation } from 'src/app/model/business-questions.model';
+import { WebContentService } from '../../../services/web-content.service';
+import { Business } from '../../../model/business-questions.model';
+import { BusinessLocation } from '../../../model/business-questions.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MetaService } from 'src/app/services/meta-service.service';
+import { MetaService } from '../../../services/meta-service.service';
 // import { Modal } from 'bootstrap';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { EmailService } from 'src/app/services/email.service';
-import { environment } from 'src/environments/environment';import { isPlatformBrowser } from '@angular/common';
+import { EmailService } from '../../../services/email.service';
+import { environment } from '../../../../environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
 
@@ -17,7 +19,8 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     selector: 'app-contact-us',
     templateUrl: './contact-us.component.html',
     styleUrls: ['./contact-us.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class ContactUsComponent  implements OnInit{
 

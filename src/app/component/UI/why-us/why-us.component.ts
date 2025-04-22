@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -5,18 +6,19 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-why-us',
     templateUrl: './why-us.component.html',
     styleUrls: ['./why-us.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class WhyUsComponent implements OnInit {
   @Input() themeType!: string;
   @Input() _businessName: string = '';
-  @Input() title: string = 'title';  // ✅ Dynamically set from the section
-  @Input() subTitle: string = 'subTitle';  // ✅ Dynamically set from the section
-  @Input() items: any[] = []; // ✅ List of items in the section
-  @Input() isMinimal: boolean = false; // ✅ Controls minimal/full view
-  @Input() showLearnMore: boolean = false; // ✅ Toggle Learn More button
-  @Input() sectionImageUrl: string | null = null; // ✅ Background image
-  @Input() isParallax: boolean = true; // ✅ Controls whether parallax effect is applied
+  @Input() title: string = 'title';
+  @Input() subTitle: string = 'subTitle';
+  @Input() items: any[] = [];
+  @Input() isMinimal: boolean = false;
+  @Input() showLearnMore: boolean = false;
+  @Input() sectionImageUrl: string | null = null;
+  @Input() isParallax: boolean = true;
   @Input() layoutType: string ='demo';
   @Input() page: string ='';
   @Input() location: string ='';

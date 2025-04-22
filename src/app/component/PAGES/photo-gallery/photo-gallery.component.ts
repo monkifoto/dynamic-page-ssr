@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, Type, ComponentFactoryResolver, Injector } from '@angular/core';
 import { from, map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WebContentService } from 'src/app/services/web-content.service';
+import { WebContentService } from '../../../services/web-content.service';
 import { Business } from 'src/app/model/business-questions.model';
-import { MetaService } from 'src/app/services/meta-service.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { MetaService } from '../../../services/meta-service.service';
+import { BusinessDataService } from '../../../services/business-data.service';
 
 
 // Import section components
@@ -22,7 +22,8 @@ import { Inject, PLATFORM_ID } from '@angular/core';
     selector: 'app-photo-gallery',
     templateUrl: './photo-gallery.component.html',
     styleUrls: ['./photo-gallery.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class PhotoGalleryComponent implements OnInit {
   @Input()

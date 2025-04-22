@@ -8,7 +8,8 @@ import { UploadService } from 'src/app/services/upload.service';
     selector: 'app-admin-hero-slider',
     templateUrl: './admin-hero-slider.component.html',
     styleUrls: ['./admin-hero-slider.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 export class AdminHeroSliderComponent implements OnInit {
   sliderForm: FormGroup;
