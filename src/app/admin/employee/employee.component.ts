@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
 import { Business, Employee } from '../../model/business-questions.model';
 import { UploadService } from '../../services/upload.service';
@@ -10,7 +10,7 @@ import { UploadService } from '../../services/upload.service';
     templateUrl: './employee.component.html',
     styleUrls: ['./employee.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class EmployeeComponent {
   @Input() form!: FormGroup;

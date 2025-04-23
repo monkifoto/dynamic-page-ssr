@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Business } from '../../model/business-questions.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Business } from '../../model/business-questions.model';
     templateUrl: './contact-us-page.component.html',
     styleUrls: ['./contact-us-page.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class ContactUsPageComponent implements OnInit {
   @Input() form!: FormGroup;

@@ -1,6 +1,6 @@
 // hero-manager.component.ts
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BusinessPageHeroService } from '../../services/business-page-hero.service';
 import { UploadService } from '../../services/upload.service';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './hero-manager.component.html',
     styleUrls: ['./hero-manager.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class HeroManagerComponent implements OnInit {
   @Input() businessId!: string;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, RouterOutlet]
 })
 export class AdminComponent {
   constructor(private router: Router, private authService: AuthService) {}

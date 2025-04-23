@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme-service.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { Business } from '../../model/business-questions.model';
@@ -14,7 +14,7 @@ declare var $: any;
     templateUrl: './color-admin.component.html',
     styleUrls: ['./color-admin.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class ColorAdminComponent implements OnInit {
   themeColors$: Observable<any> | undefined;

@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
 import { Business } from '../../model/business-questions.model';
 import { UploadService } from '../../services/upload.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-photos',
     templateUrl: './photos.component.html',
     styleUrls: ['./photos.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
 })
 export class PhotosComponent implements OnInit{
   @Input() form!: FormGroup;

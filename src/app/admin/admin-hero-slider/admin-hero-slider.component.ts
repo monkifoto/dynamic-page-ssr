@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Business, SliderConfig } from '../../model/business-questions.model';
 import { BusinessService } from '../../services/business.service';
 import { UploadService } from '../../services/upload.service';
@@ -10,7 +10,7 @@ import { UploadService } from '../../services/upload.service';
     templateUrl: './admin-hero-slider.component.html',
     styleUrls: ['./admin-hero-slider.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class AdminHeroSliderComponent implements OnInit {
   sliderForm: FormGroup;

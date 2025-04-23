@@ -1,13 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Business } from 'src/app/model/business-questions.model';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Business } from '../../model/business-questions.model';
 
 @Component({
     selector: 'app-basic-info',
     templateUrl: './basic-info.component.html',
     styleUrls: ['./basic-info.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class BasicInfoComponent  implements OnChanges, OnInit{
   @Input() form!: FormGroup;

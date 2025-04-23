@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BusinessService } from '../../services/business.service';
 import { BusinessDataService } from '../../services/business-data.service';
 import { take } from 'rxjs';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './business-locations.component.html',
     styleUrls: ['./business-locations.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class BusinessLocationsComponent implements OnInit {
   @Input() businessId!: string;
