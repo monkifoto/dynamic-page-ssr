@@ -15,23 +15,21 @@ import { InformationComponent } from '../../UI/Deprecated/information/informatio
 import { GoogleMapsComponent } from '../../UI/google-maps/google-maps.component';
 import { PhoneFormatPipe } from '../../../pipe/phone-format.pipe';
 import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-contact-us',
-  standalone: true,
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.css'],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HeroComponent,
-    FaqComponent,
-    InformationComponent,
-    GoogleMapsComponent,
-    PhoneFormatPipe,
-  ],
+    selector: 'app-contact-us',
+    templateUrl: './contact-us.component.html',
+    styleUrls: ['./contact-us.component.css'],
+    standalone: true,
+    imports:[CommonModule,
+       FormsModule,
+       ReactiveFormsModule,
+      HeroComponent,
+       FaqComponent,
+      InformationComponent,
+      GoogleMapsComponent,
+    PhoneFormatPipe, HttpClientModule]
 })
 export class ContactUsComponent {
   business: Business | null = null;

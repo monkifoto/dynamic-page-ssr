@@ -1,8 +1,8 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { GoogleMapsLoaderService } from '../../../../services/google-maps-loader.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 declare var google: any;
 
@@ -10,7 +10,8 @@ declare var google: any;
   selector: 'app-google-reviews',
   templateUrl: './google-reviews.component.html',
   styleUrls: ['./google-reviews.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [CommonModule, HttpClientModule]
 })
 export class GoogleReviewsComponent implements OnInit {
   @Input() placeId: string = '';
