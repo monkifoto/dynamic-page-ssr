@@ -13,33 +13,36 @@ import {
   group,
 } from '@angular/animations';
 
-
 @Component({
-    selector: 'app-hero-slider',
-    templateUrl: './hero-slider.component.html',
-    styleUrls: ['./hero-slider.component.css'],
-    animations: [
-        trigger('slideFadeIn', [
-            transition(':enter', [
-                query('h1, h2, .clemo-separator', [
-                    style({ opacity: 0, transform: 'translateY(20px)' }),
-                    stagger(150, animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))),
-                ]),
-            ]),
+  selector: 'app-hero-slider',
+  templateUrl: './hero-slider.component.html',
+  styleUrls: ['./hero-slider.component.css'],
+  animations: [
+    trigger('slideFadeIn', [
+      transition(':enter', [
+        query('h1, h2, .clemo-separator', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(150, animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))),
         ]),
-        trigger('slideTransition', [
-            transition('* => enter', [
-                style({ opacity: 0, transform: 'translateX({{directionEnter}})', position: 'absolute', top: 0, left: 0, width: '100%' }),
-                animate('1200ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
-            ], { params: { directionEnter: '100%' } }),
-            transition('* => leave', [
-                style({ position: 'absolute', top: 0, left: 0, width: '100%' }),
-                animate('1200ms ease', style({ opacity: 0, transform: 'translateX({{directionLeave}})' }))
-            ], { params: { directionLeave: '-100%' } })
-        ])
-    ],
-    standalone: true,
-    imports:[CommonModule, RouterModule ]
+      ]),
+    ]),
+    trigger('slideTransition', [
+      transition('* => enter', [
+        style({ opacity: 0, transform: 'translateX({{directionEnter}})', position: 'absolute', top: 0, left: 0, width: '100%' }),
+        animate('1200ms ease', style({ opacity: 1, transform: 'translateX(0)' }))
+      ], { params: { directionEnter: '100%' } }),
+      transition('* => leave', [
+        style({ position: 'absolute', top: 0, left: 0, width: '100%' }),
+        animate('1200ms ease', style({ opacity: 0, transform: 'translateX({{directionLeave}})' }))
+      ], { params: { directionLeave: '-100%' } }),
+      // Add the done state transition
+      transition(':leave', [
+        animate('1200ms ease', style({ opacity: 0 }))
+      ])
+    ])
+  ],
+  standalone: true,
+  imports: [CommonModule, RouterModule]
 })
 export class HeroSliderComponent implements OnInit ,OnDestroy {
   isBrowser: boolean = false;

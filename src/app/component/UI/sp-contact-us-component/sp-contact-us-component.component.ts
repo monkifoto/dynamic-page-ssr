@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebContentService } from '../../../services/web-content.service';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../../model/business-questions.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MetaService } from '../../../services/meta-service.service';
@@ -8,6 +8,7 @@ import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from '../../../services/email.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-sp-contact-us-component',

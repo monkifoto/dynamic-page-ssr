@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ViewContainerRef, OnChanges, ComponentFactoryResolver, Type } from '@angular/core';
-import { ThemeService } from 'src/app/services/theme-service.service';
+import { ThemeService } from '../../services/theme-service.service';
 import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
 import { CenterTextComponent } from '../UI/center-text/center-text.component';
 import { ItemListComponent } from '../UI/item-list/item-list.component';
@@ -10,6 +10,7 @@ import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimo
 import { ConsultationComponent } from '../UI/consultation/consultation.component';
 import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
 import { ComponentRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-theme-loader',

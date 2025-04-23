@@ -1,16 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Business } from 'src/app/model/business-questions.model';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Business } from '../../../model/business-questions.model';
 import { BusinessDataService } from '../../../services/business-data.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-expandable-navigation',
     templateUrl: './expandable-navigation.component.html',
     styleUrls: ['./expandable-navigation.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, RouterModule]
 })
 export class ExpandableNavigationComponent  implements OnInit {
   businessId: string = '';

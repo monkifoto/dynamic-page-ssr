@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessDataService } from '../../../services/business-data.service'; // Import BusinessDataService
-import { Business } from 'src/app/model/business-questions.model';
+import { BusinessDataService } from '../../services/business-data.service';
+import { Business } from '../../model/business-questions.model';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-navigation',

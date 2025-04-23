@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { WebContentService } from '../../services/web-content.service';
 import { Business } from '../../model/business-questions.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { ThemeService } from 'src/app/services/theme-service.service';
-import { BusinessDataService } from '../../../services/business-data.service';
+import { AuthService } from '../../services/auth.service';
+import { ThemeService } from '../../services/theme-service.service';
+import { BusinessDataService } from '../../services/business-data.service';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
