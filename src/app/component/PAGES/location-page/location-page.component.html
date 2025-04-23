@@ -23,11 +23,9 @@
           {{ location?.fax }}
         </p>
       </div>
-      <div class="map--open-maps-link" data-item="block-link">
+      <div class="map--open-maps-link" data-item="block-link" *ngIf="location">
         <a
-          href="https://google.com/maps/place/'{{ location.street }}+{{
-            location.city
-          }}+{{ location.zipcode }}'"
+          [href]="'https://google.com/maps/place/' + location.street + ' ' + location.city + ' ' + location.zipcode"
           target="_blank"
           rel="noreferrer"
           aria-label="Open in maps"
@@ -51,7 +49,9 @@
         </button>
       </div>
     </div>
-    <div class="col"><img src="{{ location?.image }}" /></div>
+    <div class="col">
+      <img *ngIf="location?.image" [src]="location.image" />
+    </div>
   </div>
   <div class="row">
     <div class="col">

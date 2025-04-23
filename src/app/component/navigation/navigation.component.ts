@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BusinessDataService } from '../../services/business-data.service';
 import { Business } from '../../model/business-questions.model';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ExpandableNavigationComponent } from '../UI/expandable-navigation/expandable-navigation.component';
 
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.css'],
     standalone: true,
-    imports:[CommonModule]
+    imports:[CommonModule, RouterModule, ExpandableNavigationComponent]
 })
 
 export class NavigationComponent implements OnInit {

@@ -77,12 +77,11 @@ export class LocationPageComponent implements OnInit {
       console.log("🔢 Requested Location Index:", this.locationIndex);
 
       this.businessDataService.getLocations().subscribe((locations) => {
-        if (locations && this.locationIndex! < locations.length) {
-          this.location = locations[this.locationIndex!];
-          console.log("✅ Loaded Firestore Location:", this.location);
+        if (locations && this.locationIndex !== null && this.locationIndex < locations.length) {
+          this.location = locations[this.locationIndex];
           this.loadMap();
         } else {
-          console.error("❌ Location index is out of range. Available Firestore locations:", locations.length);
+          console.error("❌ Invalid or missing locationIndex or locations array.");
         }
       });
     });
@@ -94,6 +93,11 @@ export class LocationPageComponent implements OnInit {
 
     if (this.useMockMap) {
       console.log('Mock map mode: displaying static map image.');
+      return;
+    }
+
+    if (!this.location) {
+      console.warn('⛔ Cannot load map: location is null');
       return;
     }
 
