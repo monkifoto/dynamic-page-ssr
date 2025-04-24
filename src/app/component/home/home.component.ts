@@ -35,13 +35,17 @@ import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.co
 import { StatsComponent } from '../UI/stats/stats.component';
 import { VideoComponent } from '../UI/video/video.component';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  standalone: false
+  standalone: true,
+  imports:[CenterTextComponent,HeroSliderComponent, RightTextComponent, LeftTextComponent, ItemListComponent,
+     IconListComponent,FeaturesComponent, TestimonialsComponent, TestimonialCarouselComponent, WhyUsComponent,GoogleMapsComponent,
+     LatestProductsComponent,CallToActionComponent,ConsultationComponent,ItemListImageComponent, CommonModule
+  ]
 })
 export class HomeComponent implements OnInit {
   sections: any[] = [];

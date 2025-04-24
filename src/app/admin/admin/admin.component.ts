@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-admin',
@@ -11,17 +11,29 @@ import { CommonModule } from '@angular/common';
     imports:[CommonModule, RouterOutlet]
 })
 export class AdminComponent {
-  constructor(private router: Router, private authService: AuthService) {}
+  isBrowser: boolean;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   // Navigate to the business list page
   loadBusinessList() {
+    if (this.isBrowser) {
     this.router.navigate(['/admin/businessList']);
+    }
   }
 
   // Logout the user and navigate to the login page
   logout() {
+    if (this.isBrowser) {
     this.authService.logout().then(() => {
       this.router.navigate(['/login']);
     });
+  }
   }
 }

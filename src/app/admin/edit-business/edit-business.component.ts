@@ -4,8 +4,10 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  PLATFORM_ID, Inject,
   inject
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -73,6 +75,21 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   autoSaveMessage: string = ''; // Holds the save status message
   showAutoSaveMessage: boolean = false;
   private isSubmitting: boolean = false;
+  activeTab: string = 'basic-info';
+
+  tabList = [
+    { id: 'basic-info', label: 'Basic Info' },
+    { id: 'locations', label: 'Locations' },
+    { id: 'hero-slider-theme', label: 'Hero Slider' },
+    { id: 'page-heroes', label: 'Page Heroes' },
+    { id: 'about-us', label: 'Section Manager' },
+    { id: 'content-photos', label: 'Images' },
+    { id: 'media-reviews', label: 'Media & Reviews' },
+    { id: 'contact-us-page', label: 'Contact Us' },
+    { id: 'employee-profiles', label: 'Employee Profiles' },
+    { id: 'color-theme', label: 'Theme' },
+    { id: 'services-page', label: 'Services Page' }
+  ];
 
 
   uploads: { uploadProgress: number; downloadUrl?: string }[] = [];
@@ -84,8 +101,10 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private storage: Storage,
-    private businessSectionsService: BusinessSectionsService
+    private businessSectionsService: BusinessSectionsService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
+
     this.initializeForm();
   }
 
@@ -94,7 +113,7 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
       this.businessId = params.get('id')!;
 
       if (this.businessId) {
-        console.log('Edit-Business: ngOnInit: Business', this.business);
+        console.log('Edit-Business: ngOnInit — Business?', this.business?.businessName || '[none]');
         this.loadBusinessData();
       } else {
         console.log('Loading default data');
@@ -496,13 +515,14 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Attach event listener after view initialization
-    const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
-    tabs.forEach((tab) => {
-      tab.addEventListener('shown.bs.tab', (event: any) => {
-        this.autoSave();
+    if (isPlatformBrowser(this.platformId)) {
+      const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+      tabs.forEach((tab) => {
+        tab.addEventListener('shown.bs.tab', (event: any) => {
+          this.autoSave();
+        });
       });
-    });
+    }
   }
 
   autoSave(): void {

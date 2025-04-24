@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from '../auth.guard';
 import { BusinessListComponent } from './business-list/business-list.component';
-import { AdminComponent } from './admin/admin/admin.component';
 import { EditBusinessComponent } from './edit-business/edit-business.component';
 import { PhotoGalleryUploadComponent } from './photo-gallery-upload/photo-gallery-upload.component';
 import { HomeComponent } from '../component/home/home.component';
 
-const routes: Routes = [
+export const adminRoutes: Routes = [
   {
     path: '',
     component: AdminComponent,
@@ -21,9 +20,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class AdminRoutingModule { }
