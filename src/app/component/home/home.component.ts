@@ -42,10 +42,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports:[CenterTextComponent,HeroSliderComponent, RightTextComponent, LeftTextComponent, ItemListComponent,
-     IconListComponent,FeaturesComponent, TestimonialsComponent, TestimonialCarouselComponent, WhyUsComponent,GoogleMapsComponent,
-     LatestProductsComponent,CallToActionComponent,ConsultationComponent,ItemListImageComponent, CommonModule
-  ]
+  imports:[CommonModule]
 })
 export class HomeComponent implements OnInit {
   sections: any[] = [];

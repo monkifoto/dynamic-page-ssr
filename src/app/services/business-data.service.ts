@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID, Optional } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, firstValueFrom } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { BusinessService } from './business.service';
 import { BusinessPageHeroService } from './business-page-hero.service';
@@ -20,29 +20,28 @@ export class BusinessDataService {
   public businessData$: Observable<Business | null> =
     this.businessDataSubject.asObservable();
 
-    constructor(
-      private businessService: BusinessService,
-      private businessPageHeroService: BusinessPageHeroService,
-      @Inject(PLATFORM_ID) private platformId: Object,
-      @Optional() @Inject(SSR_BUSINESS_ID) private ssrBusinessId: string
-    ) {
-      if (isPlatformServer(this.platformId) && this.ssrBusinessId) {
-        console.log('✅ Using SSR businessId:', this.ssrBusinessId);
-        this.businessIdSubject.next(this.ssrBusinessId);
+  constructor(
+    private businessService: BusinessService,
+    private businessPageHeroService: BusinessPageHeroService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Optional() @Inject(SSR_BUSINESS_ID) private ssrBusinessId: string
+  ) {
+    if (isPlatformServer(this.platformId) && this.ssrBusinessId) {
+      console.log('✅ Using SSR businessId:', this.ssrBusinessId);
+      this.businessIdSubject.next(this.ssrBusinessId);
 
-        // ✅ Preload data on the server
-        this.loadBusinessData(this.ssrBusinessId).pipe(first()).subscribe({
-          next: (business) => {
-            console.log('✅ Preloaded business data on server:', business?.businessName);
-          },
-          error: (err) => {
-            console.error('❌ Error preloading business data on server:', err);
-          }
-        });
-      }
+      // ✅ Preload data on the server
+      this.loadBusinessData(this.ssrBusinessId).pipe(first()).subscribe({
+        next: (business) => {
+          console.log('✅ Preloaded business data on server:', business?.businessName);
+        },
+        error: (err) => {
+          console.error('❌ Error preloading business data on server:', err);
+        }
+      });
     }
+  }
 
-  // ✅ Called at app start
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
 
@@ -66,49 +65,28 @@ export class BusinessDataService {
         this.businessDataSubject.next(business);
         this.businessIdSubject.next(businessId);
 
-        this.businessService.getLocations(businessId).subscribe((locations) => {
-          this.locationsSubject.next(locations);
-        });
-
-        this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
-          this.pageHeroSubject.next(pageHero);
-        });
+        // ⬇️ Move async side effects out of tap
+        this.loadBusinessExtras(businessId);
       })
     );
   }
 
-  // loadBusinessData(businessId: string): Observable<Business | null> {
-  //   console.log('BusinessDataService - loadBusinessData for ID:', businessId);
+  // 🔁 Separated to avoid uncompleted subscriptions in SSR
+  private async loadBusinessExtras(businessId: string) {
+    try {
+      const locations = await firstValueFrom(this.businessService.getLocations(businessId));
+      this.locationsSubject.next(locations);
+    } catch (err) {
+      console.error('Error loading locations:', err);
+    }
 
-  //   return this.businessService.getBusinessData(businessId).pipe(
-  //     map((business) => {
-  //       if (!business) return null;
-
-  //       // Ensure sections are always defined
-  //       if (!business.sections) {
-  //         business.sections = [];
-  //         console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
-  //       }
-
-  //       return business;
-  //     }),
-  //     tap((business) => {
-  //       this.businessDataSubject.next(business);
-  //       this.businessIdSubject.next(businessId);
-
-  //       // These calls only make sense in browser context
-  //       if (!isPlatformServer(this.platformId)) {
-  //         this.businessService.getLocations(businessId).subscribe((locations) => {
-  //           this.locationsSubject.next(locations);
-  //         });
-
-  //         this.businessPageHeroService.getPageHeroes(businessId).subscribe((pageHero) => {
-  //           this.pageHeroSubject.next(pageHero);
-  //         });
-  //       }
-  //     })
-  //   );
-  // }
+    try {
+      const heroes = await firstValueFrom(this.businessPageHeroService.getPageHeroes(businessId));
+      this.pageHeroSubject.next(heroes);
+    } catch (err) {
+      console.error('Error loading hero data:', err);
+    }
+  }
 
   getBusinessData(): Observable<Business | null> {
     return this.businessDataSubject.asObservable();

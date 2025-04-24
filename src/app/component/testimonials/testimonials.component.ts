@@ -1,30 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Testimonial } from '../../model/business-questions.model';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-testimonials',
-    templateUrl: './testimonials.component.html',
-    styleUrls: ['./testimonials.component.css'],
-    standalone: true,
-    imports:[CommonModule]
+  selector: 'app-testimonials',
+  templateUrl: './testimonials.component.html',
+  styleUrls: ['./testimonials.component.css'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class TestimonialsComponent {
   @Input() testimonials!: Testimonial[] | undefined;
   @Input() layoutType: string = 'demo';
 
   currentIndex: number = 0;
-
   autoAdvanceInterval: any;
+  isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
-    if (Array.isArray(this.testimonials) && this.testimonials.length > 0) {
+    if (this.isBrowser && Array.isArray(this.testimonials) && this.testimonials.length > 0) {
       this.startAutoAdvance();
     }
   }
 
   ngOnDestroy() {
-    this.stopAutoAdvance();
+    if (this.isBrowser) {
+      this.stopAutoAdvance();
+    }
   }
 
   setSlide(index: number) {
@@ -50,5 +56,4 @@ export class TestimonialsComponent {
     this.stopAutoAdvance();
     this.startAutoAdvance();
   }
-
 }

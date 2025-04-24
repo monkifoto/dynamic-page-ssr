@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject, Input, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../../model/business-questions.model';
 import { BusinessDataService } from '../../../services/business-data.service';
 
 @Component({

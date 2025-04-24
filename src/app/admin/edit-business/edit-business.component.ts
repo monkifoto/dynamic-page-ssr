@@ -21,7 +21,7 @@ import { BusinessService } from '../../services/business.service';
 import { UploadService } from '../../services/upload.service';
 import { Business } from '../../model/business-questions.model';
 import { BusinessModel } from '../../model/business-questions.model';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EmployeeComponent } from '../employee/employee.component';
@@ -109,12 +109,23 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(take(1)).subscribe((params) => {
+    this.route.paramMap.pipe(take(1)).subscribe(async (params) => {
       this.businessId = params.get('id')!;
-
       if (this.businessId) {
-        console.log('Edit-Business: ngOnInit — Business?', this.business?.businessName || '[none]');
-        this.loadBusinessData();
+        console.log('Edit-Business: ngOnInit: Business', this.business);
+        const business = await firstValueFrom(this.businessService.getBusiness(this.businessId));
+        if (business && !this.isFormPopulated) {
+          this.business = business;
+          this.populateForm(business);
+          this.isFormPopulated = true;
+
+          if (business.logoImage && this.isFirebaseStoragePath(business.logoImage)) {
+            const fileRef = storageRef(this.storage, business.logoImage);
+            getDownloadURL(fileRef).then((url) => {
+              business.logoImage = url;
+            });
+          }
+        }
       } else {
         console.log('Loading default data');
         this.loadDefaultData();
@@ -122,10 +133,23 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+    tabs.forEach((tab) => {
+      tab.addEventListener('shown.bs.tab', (event: any) => {
+        this.autoSave();
+      });
+    });
+  }
+
   loadBusinessData(): void {
     // const storage = inject(Storage);
-    this.businessService.getBusiness(this.businessId).subscribe(
-      (business) => {
+    firstValueFrom(this.businessService.getBusiness(this.businessId)).then((business: Business | undefined) => {
+      if (!business) {
+        console.error('Error: Business data is undefined.');
+        return;
+      }
         if (business && !this.isFormPopulated) {
           this.business = business;
           this.populateForm(business);
@@ -514,16 +538,6 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
-      tabs.forEach((tab) => {
-        tab.addEventListener('shown.bs.tab', (event: any) => {
-          this.autoSave();
-        });
-      });
-    }
-  }
 
   autoSave(): void {
     if (this.businessForm.valid) {

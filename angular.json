@@ -104,10 +104,50 @@
           }
         },
         "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/dynamic-page-ssr/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
           "configurations": {
+            "production": {
+              "outputPath": "dist/dynamic-page-ssr/server",
+              "sourceMap": false,
+              "optimization": true
+            },
             "test": {
               "outputPath": "dist/dynamic-page-ssr/server/test",
               "tsConfig": "tsconfig.server.json"
+            }
+          }
+        },
+        "prerender":{
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "browserTarget": "dynamic-page-ssr:build:production",
+            "serverTarget" : "dynamic-page-ssr:server:production",
+            "routes": [
+              "home",
+              "about-us",
+              "services",
+              "contact-us",
+              "gallery",
+              "resident-form",
+              "testimonials",
+              "faq",
+              "location"
+            ],
+            "discoverRoutes": false
+          },
+          "configurations": {
+            "test": {
+              "browserTarget": "dynamic-page-ssr:build:test",
+              "serverTarget": "dynamic-page-ssr:server:test",
+              "routes": [
+                "home"
+              ],
+              "discoverRoutes": false
             }
           }
         }

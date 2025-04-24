@@ -57,23 +57,23 @@ export class MetaService {
 
   loadAndApplyMeta(businessId?: string): void {
     if (businessId) {
-      // Explicit load (used in detail pages or dynamic components)
       this.businessDataService.loadBusinessData(businessId).subscribe((business) => {
         if (business) {
-          this.applyTags(business);
+          this.setMetaTagsFromBusiness(business);
         }
       });
     } else {
-      // Default: use already-loaded data (SSR-safe)
       this.businessDataService.getBusinessData().subscribe((business) => {
         if (business) {
-          this.applyTags(business);
+          this.setMetaTagsFromBusiness(business);
         }
       });
     }
   }
 
-  private applyTags(business: Business): void {
+  setMetaTagsFromBusiness(business: Business): void {
+    if (!business) return;
+
     const metaData = {
       title: business.metaTitle || business.businessName || 'Default Title',
       description: business.metaDescription || 'Default Description',
@@ -88,6 +88,4 @@ export class MetaService {
       this.updateFavicon(business.faviconUrl);
     }
   }
-
-
 }

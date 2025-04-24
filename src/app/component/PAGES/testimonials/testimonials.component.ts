@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Business } from '../../../model/business-questions.model';
 import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
 import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
-import { filter, first, Observable, of, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID, Inject } from '@angular/core';
 import { HeroComponent } from "../../UI/hero/hero.component";
+import { firstValueFrom } from 'rxjs';
 
 declare var google: any;
+
 @Component({
-    selector: 'app-testimonials-list',
-    templateUrl: './testimonials.component.html',
-    styleUrls: ['./testimonials.component.css'],
-    standalone: true,
-    imports: [CommonModule, HeroComponent]
+  selector: 'app-testimonials-list',
+  templateUrl: './testimonials.component.html',
+  styleUrls: ['./testimonials.component.css'],
+  standalone: true,
+  imports: [CommonModule, HeroComponent]
 })
 export class TestimonialsListComponent implements OnInit {
   testimonials: any[] = [];
   themeType: string | null = null;
   business: Business | null = null;
   googleReviewsLoading = true;
+  isBrowser: boolean;
+
   constructor(
     private businessDataService: BusinessDataService,
     private metaService: MetaService,
@@ -30,38 +32,35 @@ export class TestimonialsListComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
-
-  ngOnInit(): void {
-    this.businessDataService.businessData$.pipe(
-      first()
-    ).subscribe((data) => {
-      if (data) {
-        this.business = data;
-        this.loadData();
-      } else {
-        // fallback only if needed (likely never hit with AppInitializer)
-        const businessId = this.route.snapshot.queryParamMap.get('id');
-        if (businessId) {
-          this.businessDataService.loadBusinessData(businessId).pipe(first()).subscribe((business) => {
-            if (business) {
-              this.business = business;
-              this.loadData();
-            }
-          });
-        }
-      }
-    });
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
+  async ngOnInit(): Promise<void> {
+    console.log("SSR Rendering: Testimonial Page");
 
-  private loadData(): void {
-    this.loadTestimonials();
-    if (isPlatformBrowser(this.platformId) && this.business?.placeId !== '0') {
-      this.loadGoogleReviews();
+    let businessData = await firstValueFrom(this.businessDataService.businessData$);
+
+    if (!businessData) {
+      const businessId = this.route.snapshot.queryParamMap.get('id');
+      if (businessId) {
+        businessData = await firstValueFrom(this.businessDataService.loadBusinessData(businessId));
+      }
+    }
+
+    if (businessData) {
+      this.business = businessData;
+      this.loadData();
     }
   }
 
+  private loadData(): void {
+    this.loadTestimonials();
+
+    if (this.isBrowser && this.business?.placeId !== '0') {
+      this.loadGoogleReviews();
+    }
+  }
 
   private loadTestimonials(): void {
     if (this.business?.testimonials) {
@@ -75,7 +74,6 @@ export class TestimonialsListComponent implements OnInit {
       this.testimonials = [...this.testimonials, ...formattedTestimonials];
     }
   }
-
 
   private loadGoogleReviews(): void {
     if (!this.business?.placeId) {
@@ -120,7 +118,3 @@ export class TestimonialsListComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }
-function take(arg0: number): import("rxjs").OperatorFunction<Business | null, unknown> {
-  throw new Error('Function not implemented.');
-}
-

@@ -1,4 +1,6 @@
-import { Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component, HostListener, Inject, Input, OnDestroy, OnInit, PLATFORM_ID
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Business, SliderConfig } from '../../../model/business-questions.model';
@@ -10,7 +12,6 @@ import {
   animate,
   query,
   stagger,
-  group,
 } from '@angular/animations';
 
 @Component({
@@ -35,7 +36,6 @@ import {
         style({ position: 'absolute', top: 0, left: 0, width: '100%' }),
         animate('1200ms ease', style({ opacity: 0, transform: 'translateX({{directionLeave}})' }))
       ], { params: { directionLeave: '-100%' } }),
-      // Add the done state transition
       transition(':leave', [
         animate('1200ms ease', style({ opacity: 0 }))
       ])
@@ -44,20 +44,25 @@ import {
   standalone: true,
   imports: [CommonModule, RouterModule]
 })
-export class HeroSliderComponent implements OnInit ,OnDestroy {
-  isBrowser: boolean = false;
+export class HeroSliderComponent implements OnInit, OnDestroy {
+  isBrowser = false;
   business: Business | null = null;
   slides: any[] = [];
-  @Input() navigation: 'side' | 'bottom' = 'side';  // Default: side navigation
-  @Input() sideButtons: boolean = true;  // Default: show side buttons
-  @Input() sliderHeight: string = '100vh'; // Default height is 100vh
-  @Input() buttonBorderRadius: string = '25px'; // Default border radius
-  @Input() subtitleSize: string = '1.5rem'; // Default subtitle size
-  @Input() subtitleWeight: string = '1.5rem'; // Default subtitle size
-
   currentSlide = 0;
-  sliderOpacity = 1; // Initial opacity for the slider
-  enableTransitions = true;
+  sliderOpacity = 1;
+  enableTransitions = false;
+  intervalId: any;
+
+  @Input() navigation: 'side' | 'bottom' = 'side';
+  @Input() sideButtons = true;
+  @Input() sliderHeight = '100vh';
+  @Input() buttonBorderRadius = '25px';
+  @Input() subtitleSize = '1.5rem';
+  @Input() subtitleWeight = '1.5rem';
+
+  slideDirection: 'left' | 'right' = 'left';
+  previousSlide = 0;
+  isTransitioning = false;
 
   constructor(
     private router: Router,
@@ -68,22 +73,20 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
   }
 
   ngOnInit(): void {
-    setTimeout(() => this.enableTransitions = true, 50);
-    console.log('HeroSliderComponent - ngOnInit');
-    this.fetchHeroSliderData();
-
     if (this.isBrowser) {
+      setTimeout(() => this.enableTransitions = true, 50);
       this.autoSlide();
     }
+
+    console.log('HeroSliderComponent - ngOnInit');
+    this.fetchHeroSliderData();
   }
 
   fetchHeroSliderData(): void {
     this.businessDataService.businessData$.subscribe((data) => {
       if (data) {
-        //console.log('HeroSliderComponent - Retrieved business data:', data);
         this.business = data;
 
-        // Load slides
         if (this.business.heroSlider && Array.isArray(this.business.heroSlider)) {
           this.slides = this.business.heroSlider.map((slide: any) => ({
             title: this.replaceKeywords(slide.title),
@@ -97,7 +100,6 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
           this.slides = [];
         }
 
-        // Load slider configuration if available
         if (this.business.sliderConfig) {
           this.applySliderConfig(this.business.sliderConfig);
         } else {
@@ -119,28 +121,19 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
 
     console.log('HeroSliderComponent - Applied slider config:', config);
   }
+
   replaceKeywords(text: string): string {
-    if (!text || !this.business?.businessName) {
-      return text;
-    }
+    if (!text || !this.business?.businessName) return text;
     return text.replace(/{{businessName}}/g, this.business.businessName);
   }
 
-  // navigateToSlide(index: number): void {
-  //   this.currentSlide = index;
-  // }
-  private intervalId: any;
   autoSlide(): void {
-    this.intervalId = setInterval(() => {
-      if (this.slides?.length > 1) {
+    if (this.isBrowser && this.slides?.length > 1) {
+      this.intervalId = setInterval(() => {
         this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-      }
-    }, 15000);
+      }, 15000);
+    }
   }
-
-  slideDirection: 'left' | 'right' = 'left';
-  previousSlide = 0;
-  isTransitioning = false;
 
   navigateToSlide(index: number): void {
     if (this.isTransitioning || index === this.currentSlide) return;
@@ -174,7 +167,6 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
     this.isTransitioning = false;
   }
 
-  // Scroll event listener to adjust opacity
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
     if (!this.isBrowser) return;
@@ -184,7 +176,7 @@ export class HeroSliderComponent implements OnInit ,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
+    if (this.isBrowser && this.intervalId) {
       clearInterval(this.intervalId);
     }
   }

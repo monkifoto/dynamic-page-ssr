@@ -42,6 +42,13 @@ testem.log
 Thumbs.db
 /environments
 
+# Optional: environment files (if you don't want them versioned)
 src/environments/environment.prod.ts
 src/environments/environment.test.ts
 src/environments/environment.ts
+
+# Angular build cache
+.angular/
+
+# Firebase CLI & emulator data
+.firebase/

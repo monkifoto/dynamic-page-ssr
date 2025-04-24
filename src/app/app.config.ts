@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
 import { APP_INITIALIZER  } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -12,6 +12,11 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { MetaService } from './services/meta-service.service';
+import { BusinessDataService } from './services/business-data.service';
+import { SSR_BUSINESS_ID } from './tokens/server-request.token';
+import { Business } from './model/business-questions.model';
+import { firstValueFrom } from 'rxjs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,10 +31,23 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     {
       provide: APP_INITIALIZER,
-      useFactory: (appInitializerService: AppInitializerService) => () => appInitializerService.initializeApp(),
-      deps: [AppInitializerService],
-      multi: true
-    }
+      multi: true,
+      useFactory: () => {
+        const meta = inject(MetaService);
+        const businessData = inject(BusinessDataService);
+        const businessId = inject(SSR_BUSINESS_ID);
+
+        return () =>
+          Promise.race([
+            firstValueFrom(businessData.loadBusinessData(businessId)).then(data => {
+              if (data) {
+                meta.setMetaTagsFromBusiness(data);
+              }
+            }),
+            new Promise(resolve => setTimeout(resolve, 8000)) // timeout fallback
+          ]);
+        }
+      }
   ]
 };
 

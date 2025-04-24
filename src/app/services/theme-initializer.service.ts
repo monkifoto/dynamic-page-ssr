@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +28,11 @@ export class ThemeInitializerService {
   }
 
   async loadTheme(businessID: string): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       console.log('⛔ Skipping theme load on server');
       return;
     }
+
     try {
       const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
       const themeSnap = await getDoc(themeRef);
@@ -40,11 +42,11 @@ export class ThemeInitializerService {
 
       await this.themeService.applyThemeFile(themeFileName);
 
-      if (this.isBrowser) {
-        this.themeService.getThemeColors(businessID).subscribe({
-          next: (themeColors) => this.applyTheme(themeColors),
-          error: (err) => console.error('Error loading theme colors:', err),
-        });
+      try {
+        const themeColors = await firstValueFrom(this.themeService.getThemeColors(businessID));
+        this.applyTheme(themeColors);
+      } catch (err) {
+        console.error('Error loading theme colors:', err);
       }
     } catch (error) {
       console.error('Error loading business theme:', error);
