@@ -102,14 +102,7 @@ export class ContactUsComponent  implements OnInit{
       }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      const modalElement = document.getElementById('responseModal');
-      if (modalElement) {
-        // this.responseModal = new Modal(modalElement); // Bootstrap modal instance
-      } else {
-        console.error('Modal element not found.');
-      }
-    }, 0); // This delays execution to the next event loop cycle, ensuring the DOM is fully loaded
+
   }
 
   onSubmit() {

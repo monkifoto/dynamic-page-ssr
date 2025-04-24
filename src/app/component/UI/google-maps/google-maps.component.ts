@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Inject, PLATFORM_ID } from '@angular/core';
 import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.service';
 import { environment } from '../../../../environments/environment';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 declare var google: any; // Declare google object for TypeScript
 
@@ -21,7 +21,9 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
   private map: any;
   private geocoder: any;
 
-  constructor(private googleMapsLoader: GoogleMapsLoaderService) {}
+  constructor(private googleMapsLoader: GoogleMapsLoaderService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     console.log('Google Map Address:', this.address);
@@ -54,11 +56,13 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
   }
 
   private initializeMap(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 }, // Default center
       zoom: 8, // Default zoom
     });
     this.geocoder = new google.maps.Geocoder();
+  }
   }
 
   private showAddressOnMap(address: string): void {
@@ -84,9 +88,13 @@ export class GoogleMapsComponent implements OnInit, OnChanges {
   }
 
   private getZoomLevel(radiusInMeters: number): number {
+    if (isPlatformBrowser(this.platformId)) {
     const equatorLength = 40075004; // Earth's circumference in meters
     const widthInPixels = document.getElementById('map')?.offsetWidth || 640; // Default width if unavailable
     const metersPerPixel = equatorLength / (256 * Math.pow(2, this.map.getZoom()));
     return Math.floor(Math.log2(equatorLength / (radiusInMeters * metersPerPixel)));
+    }
+    return 0;
+
   }
 }

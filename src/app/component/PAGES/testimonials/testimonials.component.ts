@@ -6,7 +6,7 @@ import { GoogleMapsLoaderService } from '../../../services/google-maps-loader.se
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HeroComponent } from "../../UI/hero/hero.component";
+import { HeroComponent } from '../../UI/hero/hero.component';
 import { firstValueFrom } from 'rxjs';
 
 declare var google: any;
@@ -16,7 +16,7 @@ declare var google: any;
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.css'],
   standalone: true,
-  imports: [CommonModule, HeroComponent]
+  imports: [CommonModule, HeroComponent],
 })
 export class TestimonialsListComponent implements OnInit {
   testimonials: any[] = [];
@@ -37,14 +37,18 @@ export class TestimonialsListComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log("SSR Rendering: Testimonial Page");
+    console.log('SSR Rendering: Testimonial Page');
 
-    let businessData = await firstValueFrom(this.businessDataService.businessData$);
+    let businessData = await firstValueFrom(
+      this.businessDataService.businessData$
+    );
 
     if (!businessData) {
       const businessId = this.route.snapshot.queryParamMap.get('id');
       if (businessId) {
-        businessData = await firstValueFrom(this.businessDataService.loadBusinessData(businessId));
+        businessData = await firstValueFrom(
+          this.businessDataService.loadBusinessData(businessId)
+        );
       }
     }
 
@@ -64,13 +68,15 @@ export class TestimonialsListComponent implements OnInit {
 
   private loadTestimonials(): void {
     if (this.business?.testimonials) {
-      const formattedTestimonials = this.business.testimonials.map((testimonial: any) => ({
-        ...testimonial,
-        relationship: 'Testimonial',
-        rawQuote: testimonial.quote,
-        quote: this.sanitizeHtml(testimonial.quote),
-        isGoogle: false,
-      }));
+      const formattedTestimonials = this.business.testimonials.map(
+        (testimonial: any) => ({
+          ...testimonial,
+          relationship: 'Testimonial',
+          rawQuote: testimonial.quote,
+          quote: this.sanitizeHtml(testimonial.quote),
+          isGoogle: false,
+        })
+      );
       this.testimonials = [...this.testimonials, ...formattedTestimonials];
     }
   }
@@ -80,34 +86,35 @@ export class TestimonialsListComponent implements OnInit {
       console.error('Place ID is required to fetch Google reviews.');
       return;
     }
+    if (isPlatformBrowser(this.platformId)) {
+      this.googleMapsLoader.loadScript().then(() => {
+        const service = new google.maps.places.PlacesService(
+          document.createElement('div')
+        );
+        service.getDetails(
+          { placeId: this.business?.placeId, fields: ['reviews'] },
+          (place: any, status: string) => {
+            this.googleReviewsLoading = false;
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              const googleReviews =
+                place?.reviews?.map((review: any) => ({
+                  name: review.author_name,
+                  quote: review.text,
+                  rawQuote: review.text,
+                  relationship: 'Google Review',
+                  isGoogle: true,
+                  photoURL: review.profile_photo_url || null,
+                })) || [];
 
-    this.googleMapsLoader.loadScript().then(() => {
-      const service = new google.maps.places.PlacesService(
-        document.createElement('div')
-      );
-      service.getDetails(
-        { placeId: this.business?.placeId, fields: ['reviews'] },
-        (place: any, status: string) => {
-          this.googleReviewsLoading = false;
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            const googleReviews =
-              place?.reviews?.map((review: any) => ({
-                name: review.author_name,
-                quote: review.text,
-                rawQuote: review.text,
-                relationship: 'Google Review',
-                isGoogle: true,
-                photoURL: review.profile_photo_url || null,
-              })) || [];
-
-            // Prepend Google reviews to the testimonials array
-            this.testimonials = [...googleReviews, ...this.testimonials];
-          } else {
-            console.error('Error fetching Google reviews:', status);
+              // Prepend Google reviews to the testimonials array
+              this.testimonials = [...googleReviews, ...this.testimonials];
+            } else {
+              console.error('Error fetching Google reviews:', status);
+            }
           }
-        }
-      );
-    });
+        );
+      });
+    }
   }
 
   get googleReviewLink(): string {

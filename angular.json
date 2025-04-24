@@ -145,7 +145,15 @@
               "browserTarget": "dynamic-page-ssr:build:test",
               "serverTarget": "dynamic-page-ssr:server:test",
               "routes": [
-                "home"
+                "home",
+                "about-us",
+                "services",
+                "contact-us",
+                "gallery",
+                "resident-form",
+                "testimonials",
+                "faq",
+                "location"
               ],
               "discoverRoutes": false
             }

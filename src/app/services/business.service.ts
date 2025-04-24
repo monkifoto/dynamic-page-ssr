@@ -1,15 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  Firestore,
-} from '@angular/fire/firestore';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, getDocs, collection ,
-  setDoc, updateDoc, deleteDoc, addDoc, query, where } from 'firebase/firestore';
-import { environment } from '../../environments/environment';
-
-import {
-  Storage, ref as storageRef, uploadBytesResumable, getDownloadURL as storageGetDownloadURL
-} from '@angular/fire/storage';
+import { Firestore, collection, doc, getDoc, getDocs, query, where, setDoc, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
+import { Storage, ref as storageRef, uploadBytesResumable, getDownloadURL as storageGetDownloadURL } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Business, Theme } from '../model/business-questions.model';
@@ -19,11 +10,13 @@ import { Section } from '../model/section.model';
   providedIn: 'root'
 })
 export class BusinessService {
-  private firestore = getFirestore(initializeApp(environment.firebase));
   private basePath = 'businesses';
   private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
 
-  constructor( private storage: Storage) {}
+  constructor(
+    private firestore: Firestore,
+    private storage: Storage
+  ) {}
 
   createBusiness(business: Business): Observable<Business> {
     const newDocRef = doc(collection(this.firestore, this.basePath));
@@ -32,7 +25,6 @@ export class BusinessService {
       map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Business))
     );
   }
-
 
   getBusinesses(): Observable<Business[]> {
     const colRef = collection(this.firestore, this.basePath);

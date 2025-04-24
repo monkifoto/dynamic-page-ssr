@@ -135,6 +135,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
     }
 
     this.googleMapsLoader.loadScript().then(() => {
+      if (isPlatformBrowser(this.platformId)) {
       const service = new google.maps.places.PlacesService(document.createElement('div'));
       service.getDetails(
         { placeId: this.placeId, fields: ['reviews'] },
@@ -153,6 +154,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
           }
         }
       );
+    }
     });
   }
 

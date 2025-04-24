@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { GoogleMapsLoaderService } from 'src/app/services/google-maps-loader.service';
+import { GoogleMapsLoaderService } from '../../../../services/google-maps-loader.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
 
 declare var google: any;
@@ -67,6 +67,7 @@ export class GoogleReviewsComponent implements OnInit {
   }
 
   private fetchReviews(placeId: string): void {
+    if (isPlatformBrowser(this.platformId)) {
     const service = new google.maps.places.PlacesService(document.createElement('div'));
     service.getDetails(
       { placeId, fields: ['reviews'] },
@@ -78,6 +79,8 @@ export class GoogleReviewsComponent implements OnInit {
         }
       }
     );
+  }
+
   }
 
   private startCarousel(): void {

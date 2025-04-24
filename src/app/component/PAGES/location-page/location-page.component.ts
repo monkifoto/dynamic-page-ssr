@@ -111,12 +111,13 @@ export class LocationPageComponent implements OnInit {
 
   private initializeMap(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-
+    if (isPlatformBrowser(this.platformId)) {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -34.397, lng: 150.644 },
       zoom: 8
     });
     this.geocoder = new google.maps.Geocoder();
+  }
   }
 
   private showAddressOnMap(address: string): void {
