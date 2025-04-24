@@ -1,4 +1,8 @@
 import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from '../auth.guard';
 import { BusinessListComponent } from './business-list/business-list.component';
@@ -12,11 +16,30 @@ export const adminRoutes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'businessList', component: BusinessListComponent },
-      { path: 'new', component: EditBusinessComponent },
-      { path: 'edit-business/:id', component: EditBusinessComponent },
-      { path: 'gallery-upload', component: PhotoGalleryUploadComponent },
-      { path: ':id', component: HomeComponent }
+      {
+        path: 'businessList',
+        canActivate: [() => !isPlatformServer(inject(PLATFORM_ID))],
+        component: BusinessListComponent
+      },
+      {
+        path: 'new',
+        canActivate: [() => !isPlatformServer(inject(PLATFORM_ID))],
+        component: EditBusinessComponent
+      },
+      {
+        path: 'edit-business/:id',
+        canActivate: [() => !isPlatformServer(inject(PLATFORM_ID))],
+        component: EditBusinessComponent
+      },
+      {
+        path: 'gallery-upload',
+        canActivate: [() => !isPlatformServer(inject(PLATFORM_ID))],
+        component: PhotoGalleryUploadComponent
+      },
+      {
+        path: ':id',
+        component: HomeComponent
+      }
     ]
   }
 ];

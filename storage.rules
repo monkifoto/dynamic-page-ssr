@@ -1,0 +1,14 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow anyone to upload files
+    match /{allPaths=**} {
+      allow write;
+      allow read;
+    }
+    match /uploads/{document} {
+      allow read, write: if true;
+    }
+  }
+}

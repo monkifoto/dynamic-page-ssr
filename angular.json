@@ -54,6 +54,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "sourceMap": false,
+              "optimization": true,
+              "extractLicenses": true
             }
           },
           "defaultConfiguration": "production"
@@ -89,6 +101,14 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "server": {
+          "configurations": {
+            "test": {
+              "outputPath": "dist/dynamic-page-ssr/server/test",
+              "tsConfig": "tsconfig.server.json"
+            }
           }
         }
       }

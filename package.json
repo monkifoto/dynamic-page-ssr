@@ -9,7 +9,9 @@
     "test": "ng test",
     "prerender": "ng build --prerender",
     "prerender:test": "ng build --configuration=test --prerender",
-    "serve:ssr:dynamic-page-ssr": "node dist/dynamic-page-ssr/server/server.mjs"
+    "serve:ssr:dynamic-page-ssr": "node dist/dynamic-page-ssr/server/server.mjs",
+    "build:test": "ng build --configuration=test && ng run dynamic-page-ssr:server:test",
+    "deploy:test": "firebase use test && npm run build:test && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
