@@ -11,7 +11,7 @@ import { Section } from '../model/section.model';
 })
 export class BusinessService {
   private basePath = 'businesses';
-  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
+  private defaultBusinessId = 'MGou3rzTVIbP77OLmZa7';
 
   constructor(
     private firestore: Firestore,

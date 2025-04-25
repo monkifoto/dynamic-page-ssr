@@ -24,7 +24,7 @@ import { PLATFORM_ID, Inject } from '@angular/core';
 export class WebContentService {
   private firestore = getFirestore(initializeApp(environment.firebase));
   private storage = getStorage(initializeApp(environment.firebase));
-  private defaultBusinessId = 'Z93oAAVwFAwhmdH2lLtB';
+  private defaultBusinessId = 'MGou3rzTVIbP77OLmZa7';
   private defaultImage = 'assets/sharedAssets/missingTestimonialImage.png';
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}

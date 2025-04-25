@@ -29,16 +29,23 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     provideAnimations(),
     provideClientHydration(withEventReplay()),
+
+    // ✅ Fix: Provide SSR_BUSINESS_ID fallback for browser builds
+    {
+      provide: SSR_BUSINESS_ID,
+      useValue: null // or 'MGou3rzTVIbP77OLmZa7' for local testing
+    },
+
     {
       provide: APP_INITIALIZER,
       multi: true,
       useFactory: () => {
         const meta = inject(MetaService);
         const businessData = inject(BusinessDataService);
+        
 
         return () => {
           const businessId = inject(SSR_BUSINESS_ID);
-
           return Promise.race([
             firstValueFrom(businessData.loadBusinessData(businessId)).then(data => {
               if (data) {
