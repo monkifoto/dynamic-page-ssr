@@ -92,7 +92,7 @@ export class ContactUsComponent  implements OnInit{
           this.businessDataService.getLocations().subscribe((locations) => {
             if (locations.length > 0) {
               this.location = locations[0];
-              console.log('📍 Updated Location [0]:', this.location);
+             // console.log('📍 Updated Location [0]:', this.location);
             } else {
               console.warn('⚠️ No locations available.');
               this.location = null;

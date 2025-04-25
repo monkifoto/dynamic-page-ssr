@@ -76,7 +76,7 @@ export class LatestProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Latest Products LayoutType:", this.layoutType);
+   // console.log("Latest Products LayoutType:", this.layoutType);
     this.displayItems = this.layoutType === 'sb' ? this.products : this.companies;
   }
 

@@ -64,7 +64,7 @@ export class SpContactUsComponentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formData);
+   // console.log(this.formData);
 
     this.emailService.sendEmail(this.formData).subscribe(
       () => {

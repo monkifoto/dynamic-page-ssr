@@ -40,20 +40,20 @@ export class ItemListImageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
-    console.log("📌 Item List Initialized:", {
-      order:this.order,
-      title: this.title,
-      subTitle: this.subTitle,
-      items: this.items,
-      isMinimal: this.isMinimal,
-      sectionImageUrl: this.sectionImageUrl,
-      isParallax: this.isParallax,
-      backgroundColor: this.backgroundColor,
-      titleColor : this.titleColor,
-      subtitleColor: this.subtitleColor,
-      textColor: this.textColor,
-      fullWidth: this.fullWidth
-    });
+    // console.log("📌 Item List Initialized:", {
+    //   order:this.order,
+    //   title: this.title,
+    //   subTitle: this.subTitle,
+    //   items: this.items,
+    //   isMinimal: this.isMinimal,
+    //   sectionImageUrl: this.sectionImageUrl,
+    //   isParallax: this.isParallax,
+    //   backgroundColor: this.backgroundColor,
+    //   titleColor : this.titleColor,
+    //   subtitleColor: this.subtitleColor,
+    //   textColor: this.textColor,
+    //   fullWidth: this.fullWidth
+    // });
   }
 
   private convertToBoolean(value: any): boolean {

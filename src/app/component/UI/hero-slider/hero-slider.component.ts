@@ -78,7 +78,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
       this.autoSlide();
     }
 
-    console.log('HeroSliderComponent - ngOnInit');
+   // console.log('HeroSliderComponent - ngOnInit');
     this.fetchHeroSliderData();
   }
 
@@ -94,7 +94,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
             backgroundImage: slide.backgroundImage,
             buttons: slide.buttons || []
           }));
-          console.log("slide count:", this.slides.length);
+        //  console.log("slide count:", this.slides.length);
         } else {
           console.warn('HeroSliderComponent - No heroSlider data available.');
           this.slides = [];
@@ -103,10 +103,10 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
         if (this.business.sliderConfig) {
           this.applySliderConfig(this.business.sliderConfig);
         } else {
-          console.warn('HeroSliderComponent - No sliderConfig found, using default values.');
+         // console.warn('HeroSliderComponent - No sliderConfig found, using default values.');
         }
       } else {
-        console.error('HeroSliderComponent - No business data available.');
+       // console.error('HeroSliderComponent - No business data available.');
       }
     });
   }
@@ -119,7 +119,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
     this.subtitleSize = config.subtitleSize ?? '1.5rem';
     this.subtitleWeight = config.subtitleWeight ?? '600';
 
-    console.log('HeroSliderComponent - Applied slider config:', config);
+   // console.log('HeroSliderComponent - Applied slider config:', config);
   }
 
   replaceKeywords(text: string): string {
@@ -141,7 +141,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
     this.previousSlide = this.currentSlide;
     this.currentSlide = index;
     this.isTransitioning = true;
-    console.log('HeroSliderComponent - navigateToSlide:', index);
+  //console.log('HeroSliderComponent - navigateToSlide:', index);
   }
 
   prevSlide(): void {

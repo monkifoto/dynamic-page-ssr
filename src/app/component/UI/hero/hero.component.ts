@@ -68,8 +68,8 @@ export class HeroComponent implements OnInit {
 
   private loadHeroForPage(page: string): void {
     this.businessDataService.getPageHeros().subscribe((heroes) => {
-      console.log('Page Heroes:', heroes);
-      console.log('Current Page:', page);
+      // console.log('Page Heroes:', heroes);
+      // console.log('Current Page:', page);
 
       const activeHeroes = heroes.filter((hero) => hero.isActive);
       const matchedHero = activeHeroes.find((hero) => hero.page === page);

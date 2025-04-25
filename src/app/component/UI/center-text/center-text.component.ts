@@ -58,36 +58,36 @@ export class CenterTextComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private router: Router) {}
   ngOnInit(): void {
     this.fullWidth = this.convertToBoolean(this.fullWidth);
-    console.log('Center Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
+    // console.log('Center Text Component Loaded , themeType: '+ this.themeType+  ' Business Name:' + this._businessName + ' Title: ' + this.title);
 
-    console.log("📌 Section Center Text- Initialized:", {
-      order:this.order,
-      title: this.title,
-      titleColor: this.titleColor,
-      titleFontSize: this.titleFontSize,
+    // console.log("📌 Section Center Text- Initialized:", {
+    //   order:this.order,
+    //   title: this.title,
+    //   titleColor: this.titleColor,
+    //   titleFontSize: this.titleFontSize,
 
-      subTitle: this.subTitle,
-      subTitileColor: this.subtitleColor,
-      subtitleFontSize: this.subtitleFontSize,
+    //   subTitle: this.subTitle,
+    //   subTitileColor: this.subtitleColor,
+    //   subtitleFontSize: this.subtitleFontSize,
 
-      showButton: this.showButton ,
-      buttonText: this.buttonText ,
-      buttonLink: this.buttonLink ,
+    //   showButton: this.showButton ,
+    //   buttonText: this.buttonText ,
+    //   buttonLink: this.buttonLink ,
 
-      alignText: this.alignText,
-      boxShadow: this.boxShadow,
-      borderRadius: this.borderRadius,
+    //   alignText: this.alignText,
+    //   boxShadow: this.boxShadow,
+    //   borderRadius: this.borderRadius,
 
-      items: this.items,
-      isMinimal: this.isMinimal,
-      sectionImageUrl: this.sectionImageUrl,
-      isParallax: this.isParallax,
-      backgroundColor: this.backgroundColor,
+    //   items: this.items,
+    //   isMinimal: this.isMinimal,
+    //   sectionImageUrl: this.sectionImageUrl,
+    //   isParallax: this.isParallax,
+    //   backgroundColor: this.backgroundColor,
 
-      subtitleColor: this.subtitleColor,
-      textColor: this.textColor,
-      fullWidth: this.fullWidth
-    });
+    //   subtitleColor: this.subtitleColor,
+    //   textColor: this.textColor,
+    //   fullWidth: this.fullWidth
+    // });
   }
 
 

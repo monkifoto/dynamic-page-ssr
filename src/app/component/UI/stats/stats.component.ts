@@ -64,7 +64,7 @@ export class StatsComponent {
          this.businessId = businessId;
        }
      });
-     console.log('Page: '+ page + ' Parameters = '+ this.businessId);
+    // console.log('Page: '+ page + ' Parameters = '+ this.businessId);
      this.router.navigate(['/'+page], { queryParams: { id: this.businessId } });
    }
 

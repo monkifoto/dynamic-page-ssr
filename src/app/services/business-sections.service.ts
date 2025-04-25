@@ -47,7 +47,7 @@ export class BusinessSectionsService {
   }
 
   saveSection(businessId: string, section: Section): Promise<void> {
-    console.log("🔄 Attempting to save section:", section);
+   // console.log("🔄 Attempting to save section:", section);
 
     if (!section.id || section.id.trim() === '') {
       section.id = this.generateNewId();

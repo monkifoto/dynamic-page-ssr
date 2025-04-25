@@ -16,6 +16,6 @@ export class IconListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log("📌 Icon List Initialized:", { title: this.sectionTitle, items: this.items });
+    // console.log("📌 Icon List Initialized:", { title: this.sectionTitle, items: this.items });
   }
 }

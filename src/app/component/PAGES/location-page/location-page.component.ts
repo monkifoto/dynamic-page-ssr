@@ -67,7 +67,7 @@ export class LocationPageComponent implements OnInit {
         return;
       }
 
-      console.log("✅ Business Data Loaded:", business);
+      //console.log("✅ Business Data Loaded:", business);
 
       this.business = business;
       this.layoutType = business.theme?.themeType;

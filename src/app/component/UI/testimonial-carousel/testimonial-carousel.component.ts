@@ -69,7 +69,7 @@ export class TestimonialCarouselComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    console.log('✅ TestimonialCarousel Init with ID:', this.businessId);
+   // console.log('✅ TestimonialCarousel Init with ID:', this.businessId);
 
     if (!this.isBrowser) {
       console.warn('⛔ Skipping TestimonialCarousel on server');

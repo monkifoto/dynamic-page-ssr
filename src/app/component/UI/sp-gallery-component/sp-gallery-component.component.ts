@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { from, map, Observable, switchMap } from 'rxjs';
 import { WebContentService } from '../../../services/web-content.service';
-import { Business } from 'src/app/model/business-questions.model';
+import { Business } from '../../../model/business-questions.model';
 import { MetaService } from '../../../services/meta-service.service';
 import { BusinessDataService } from '../../../services/business-data.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -57,7 +58,7 @@ constructor(
     imageCategories.forEach(({ key, target }) => {
       this.webContent.getBusinessUploadedImagesById(this.businessId, key).pipe(
         switchMap((images) => {
-          console.log(`Raw Firestore images for ${key}:`, images); // Debugging Step 1
+         // console.log(`Raw Firestore images for ${key}:`, images); // Debugging Step 1
 
           // Convert async calls to a Promise array
           const checks = images.map(async (image) => {
@@ -69,7 +70,7 @@ constructor(
         }),
         map((images) => images.filter((image) => image !== null)),
         map((filteredImages) => {
-          console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
+         // console.log(`Filtered images for ${target}:`, filteredImages); // Debugging Step 2
 
           return filteredImages
             .map(img => ({
@@ -82,7 +83,7 @@ constructor(
             .sort((a, b) => a.order - b.order);
         })
       ).subscribe((sortedImages) => {
-        console.log(`Sorted images for ${target}:`, sortedImages); // Debugging Step 3
+       // console.log(`Sorted images for ${target}:`, sortedImages); // Debugging Step 3
 
         // Ensure target exists
         if (!this[target]) {
