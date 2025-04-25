@@ -8,7 +8,7 @@ export const app = async (request: Request) => {
   const url = new URL(request.url);
   const hostname = url.hostname;
 
-  const businessIdMap: Record<string, string> = {
+  const businessIdMap: { [key: string]: string } = {
     "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
     "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
     "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
