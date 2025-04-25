@@ -1,20 +1,9 @@
 {
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
   "hosting": {
     "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
     "frameworksBackend": {
-      "region": "us-central1"
+      "region": "us-central1",
+      "framework": "angular"
     }
-  },
-  "storage": {
-    "rules": "storage.rules"
   }
 }

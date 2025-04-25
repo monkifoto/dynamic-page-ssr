@@ -35,38 +35,21 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => {
         const meta = inject(MetaService);
         const businessData = inject(BusinessDataService);
-        const businessId = inject(SSR_BUSINESS_ID);
 
         return () => {
-          console.log('🟡 APP_INITIALIZER starting');
+          const businessId = inject(SSR_BUSINESS_ID);
 
-          const loadPromise = firstValueFrom(businessData.loadBusinessData(businessId)).then(data => {
-            if (data) {
-              console.log('✅ APP_INITIALIZER: business data loaded');
-              meta.setMetaTagsFromBusiness(data);
-            } else {
-              console.warn('⚠️ APP_INITIALIZER: No business data returned');
-            }
-          }).catch(err => {
-            console.error('❌ APP_INITIALIZER error', err);
-          });
-
-          const timeoutPromise = new Promise(resolve => {
-            setTimeout(() => {
-              console.warn('⏰ APP_INITIALIZER fallback timeout after 5s');
-              resolve(true);
-            }, 5000);
-          });
-
-          return Promise.race([loadPromise, timeoutPromise])
-            .then(() => {
-              console.log('✅ APP_INITIALIZER complete');
-              return true;
-            });
+          return Promise.race([
+            firstValueFrom(businessData.loadBusinessData(businessId)).then(data => {
+              if (data) {
+                meta.setMetaTagsFromBusiness(data);
+              }
+            }),
+            new Promise(resolve => setTimeout(resolve, 8000))
+          ]);
         };
       }
     }
-
   ]
 };
 

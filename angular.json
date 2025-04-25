@@ -13,6 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@grpc/grpc-js",
+              "@grpc/proto-loader",
+              "@firebase/firestore",
+              "firebase-admin",
+              "firebase-functions"
+            ],
             "outputPath": "dist/dynamic-page-ssr",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -35,49 +42,27 @@
             }
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2MB",
-                  "maximumError": "2.2MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "8kB",
-                  "maximumError": "10kB"
-                }
-              ],
-              "outputHashing": "all"
-            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             },
-            "test": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.test.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "sourceMap": false,
+            "production": {
               "optimization": true,
-              "extractLicenses": true
+              "extractLicenses": true,
+              "sourceMap": false
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "dynamic-page-ssr:build:production"
-            },
             "development": {
               "buildTarget": "dynamic-page-ssr:build:development"
+            },
+            "production": {
+              "buildTarget": "dynamic-page-ssr:build:production"
             }
           },
           "defaultConfiguration": "development"
@@ -111,54 +96,18 @@
             "tsConfig": "tsconfig.server.json"
           },
           "configurations": {
+            "development": {
+              "sourceMap": true,
+              "optimization": false
+            },
             "production": {
-              "outputPath": "dist/dynamic-page-ssr/server",
               "sourceMap": false,
               "optimization": true
-            },
-            "test": {
-              "outputPath": "dist/dynamic-page-ssr/server/test",
-              "tsConfig": "tsconfig.server.json"
             }
-          }
-        },
-        "prerender":{
-          "builder": "@angular-devkit/build-angular:prerender",
-          "options": {
-            "browserTarget": "dynamic-page-ssr:build:production",
-            "serverTarget" : "dynamic-page-ssr:server:production",
-            "routes": [
-              "home",
-              "about-us",
-              "services",
-              "contact-us",
-              "gallery",
-              "resident-form",
-              "testimonials",
-              "faq",
-              "location"
-            ],
-            "discoverRoutes": false
           },
-          "configurations": {
-            "test": {
-              "browserTarget": "dynamic-page-ssr:build:test",
-              "serverTarget": "dynamic-page-ssr:server:test",
-              "routes": [
-                "home",
-                "about-us",
-                "services",
-                "contact-us",
-                "gallery",
-                "resident-form",
-                "testimonials",
-                "faq",
-                "location"
-              ],
-              "discoverRoutes": false
-            }
-          }
+          "defaultConfiguration": "development"
         }
+
       }
     }
   },
