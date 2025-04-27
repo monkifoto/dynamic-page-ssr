@@ -5,7 +5,11 @@
   "projects": {
     "dynamic-page-ssr": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,13 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "allowedCommonJsDependencies": [
-              "@grpc/grpc-js",
-              "@grpc/proto-loader",
-              "@firebase/firestore",
-              "firebase-admin",
-              "firebase-functions"
-            ],
             "outputPath": "dist/dynamic-page-ssr",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -27,37 +24,55 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "css",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
-            },
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "sourceMap": false
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "development": {
-              "buildTarget": "dynamic-page-ssr:build:development"
-            },
             "production": {
               "buildTarget": "dynamic-page-ssr:build:production"
+            },
+            "development": {
+              "buildTarget": "dynamic-page-ssr:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,34 +88,18 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "css",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
               "src/styles.css"
             ],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/dynamic-page-ssr/server",
-            "main": "src/main.server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "development": {
-              "sourceMap": true,
-              "optimization": false
-            },
-            "production": {
-              "sourceMap": false,
-              "optimization": true
-            }
-          },
-          "defaultConfiguration": "development"
         }
       }
     }

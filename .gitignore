@@ -52,3 +52,4 @@ src/environments/environment.ts
 
 # Firebase CLI & emulator data
 .firebase/
+.output
