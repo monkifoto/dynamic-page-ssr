@@ -12,9 +12,7 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeInitializerService {
-  private firestore = getFirestore(
-    getApps().length ? getApps()[0] : initializeApp(environment.firebase)
-  );
+
 
   private isBrowser: boolean;
 
@@ -27,14 +25,24 @@ export class ThemeInitializerService {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
+  private getFirestoreInstance() {
+    if (!getApps().length) {
+      initializeApp(environment.firebase);
+    }
+    return getFirestore();
+  }
+
   async loadTheme(businessID: string): Promise<void> {
     if (!this.isBrowser) {
       console.log('⛔ Skipping theme load on server');
       return;
     }
 
+    await new Promise((resolve) => setTimeout(resolve, 0)); // ⚡️ Yield to next browser tick
+
     try {
-      const themeRef = doc(this.firestore, `businesses/${businessID}/theme/themeDoc`);
+      const firestore = this.getFirestoreInstance();
+      const themeRef = doc(firestore, `businesses/${businessID}/theme/themeDoc`);
       const themeSnap = await getDoc(themeRef);
 
       const themeData = themeSnap.exists() ? themeSnap.data() : null;
@@ -53,6 +61,7 @@ export class ThemeInitializerService {
       await this.themeService.applyThemeFile('default.css');
     }
   }
+
 
   applyTheme(themeColors: any): void {
     if (!this.isBrowser || !this.hasValidColors(themeColors)) {
