@@ -1,15 +1,114 @@
 {
-  "hosting": {
-    "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "frameworksBackend": {
-      "region": "us-central1"
+  "hosting": [
+    {
+      "site": "helpinghandafh-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "vfCMoPjAu2ROVBbKvk0D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "aefamilyhome-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "UiSDf9elSjwcbQs2HZb1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "countrycrestafh-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "yrNc50SvfPqwTSkvvygA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "prestigecareafh-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "pDJgpl34XUnRblyIlBA7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "sbmediahub-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "MGou3rzTVIbP77OLmZa7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "elderlyhomecareafh-com",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "x-business-id",
+              "value": "SJgFxBYkopnPR4WibCAf"
+            }
+          ]
+        }
+      ]
     }
-  },
+  ],
   "functions": {
     "source": "functions",
     "runtime": "nodejs22"

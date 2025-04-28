@@ -3,6 +3,32 @@
     "default": "afhdynamicwebsite-test",
     "afhdynamicwebsite-test": "afhdynamicwebsite-test"
   },
-  "targets": {},
+  "targets": {
+    "afhdynamicwebsite-test": {
+      "hosting": {
+        "helpinghandafh": [
+          "helpinghandafh-com"
+        ],
+        "aefamilyhome": [
+          "aefamilyhome-com"
+        ],
+        "countrycrestafh": [
+          "countrycrestafh-com"
+        ],
+        "prestigecareafh": [
+          "prestigecareafh-com"
+        ],
+        "sbmediahub": [
+          "sbmediahub-com"
+        ],
+        "elderlyhomecareafh": [
+          "elderlyhomecareafh-com"
+        ],
+        "spelderlyhomecareafh": [
+          "sp-elderlyhomecareafh-com"
+        ]
+      }
+    }
+  },
   "etags": {}
 }
