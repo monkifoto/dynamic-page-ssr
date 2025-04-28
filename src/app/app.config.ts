@@ -1,22 +1,21 @@
+
 import { ApplicationConfig, provideZoneChangeDetection, inject, PLATFORM_ID } from '@angular/core';
 import { APP_INITIALIZER } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { AppInitializerService } from './services/app-initializer.service';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MetaService } from './services/meta-service.service';
 import { BusinessDataService } from './services/business-data.service';
 import { SERVER_REQUEST, SSR_BUSINESS_ID } from './tokens/server-request.token';
 import { firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import type { Request as ExpressRequest } from 'express';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,10 +29,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideClientHydration(withEventReplay()),
 
-    // Always provide a fallback for SSR_BUSINESS_ID
     {
       provide: SSR_BUSINESS_ID,
-      useValue: null
+      useValue: null,
     },
 
     {
@@ -49,39 +47,26 @@ export const appConfig: ApplicationConfig = {
         let businessId = '';
 
         if (!isPlatformBrowser(platformId)) {
-          // 🧠 Server context
-          const req = inject(SERVER_REQUEST, { optional: true }) as ExpressRequest | undefined;
-          const hostnameFromFirebase = req?.hostname || '';
+          // 🧠 Server-side rendering
+          const functionTarget = (process.env['FUNCTION_TARGET'] || '').toLowerCase();
+          console.log('🏢 Server-side FUNCTION_TARGET:', functionTarget);
 
-          const matched = hostnameFromFirebase.match(/---ssr(.*?)-/);
-          const keyFromHostname = matched ? matched[1] : '';
-
-          const businessIdMap: { [key: string]: string } = {
-            "helpinghandafhcom": "vfCMoPjAu2ROVBbKvk0D",
-            "aefamilyhomecom": "UiSDf9elSjwcbQs2HZb1",
-            "elderlyhomecareafhcom": "SJgFxBYkopnPR4WibCAf",
-            "prestigecareafhcom": "pDJgpl34XUnRblyIlBA7",
-            "countrycrestafhcom": "yrNc50SvfPqwTSkvvygA",
-            "sbmediahubcom": "MGou3rzTVIbP77OLmZa7"
+          const functionToBusinessIdMap: { [key: string]: string } = {
+            "ssrhelpinghandafhcom": "vfCMoPjAu2ROVBbKvk0D",
+            "ssraefamilyhomecom": "UiSDf9elSjwcbQs2HZb1",
+            "ssrelderlyhomecareafhcom": "SJgFxBYkopnPR4WibCAf",
+            "ssrprestigecareafhcom": "pDJgpl34XUnRblyIlBA7",
+            "ssrcountrycrestafhcom": "yrNc50SvfPqwTSkvvygA",
+            "ssrsbmediahubcom": "MGou3rzTVIbP77OLmZa7"
           };
 
-
-        businessId = businessIdMap[keyFromHostname] || 'MGou3rzTVIbP77OLmZa7';
-
-        console.log('🏢 Server context:', { hostnameFromFirebase, keyFromHostname, businessId });
-          // const businessIdFromHeader = req?.headers?.['x-business-id'] as string | undefined;
-          // const idRaw = req?.query?.['id'];
-          // const idParam = Array.isArray(idRaw) ? idRaw[0] : idRaw;
-
-          // businessId = businessIdFromHeader || (idParam as string) || 'MGou3rzTVIbP77OLmZa7';
-          // console.log('🏢 Server context:', { businessId });
-
+          businessId = functionToBusinessIdMap[functionTarget] || 'MGou3rzTVIbP77OLmZa7';
         } else {
-          // 🌐 Browser context
+          // 🌐 Browser-side rendering
           const url = new URL(window.location.href);
           hostname = url.hostname || '';
 
-          const businessIdMap: { [key: string]: string } = {
+          const hostnameToBusinessIdMap: { [key: string]: string } = {
             "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
             "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
             "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
@@ -106,7 +91,8 @@ export const appConfig: ApplicationConfig = {
             "test.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
           };
 
-          businessId = businessIdToken || businessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+          businessId = businessIdToken || hostnameToBusinessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
+
           console.log('🌎 Browser context:', { hostname, businessId });
         }
 
@@ -131,7 +117,7 @@ export const appConfig: ApplicationConfig = {
             console.error('❌ Error in APP_INITIALIZER:', err);
           }
         };
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
