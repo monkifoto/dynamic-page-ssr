@@ -20,7 +20,14 @@ export class BusinessService {
 
   createBusiness(business: Business): Observable<Business> {
     const newDocRef = doc(collection(this.firestore, this.basePath));
-    return from(setDoc(newDocRef, { ...business, id: newDocRef.id })).pipe(
+
+    const businessWithDate = {
+      ...business,
+      id: newDocRef.id,
+      createdDate: new Date()
+    };
+
+    return from(setDoc(newDocRef,businessWithDate)).pipe(
       switchMap(() => from(getDoc(newDocRef))),
       map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Business))
     );
