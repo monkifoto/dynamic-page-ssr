@@ -16,6 +16,7 @@ import { SERVER_REQUEST, SSR_BUSINESS_ID } from './tokens/server-request.token';
 import { firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../environments/environment';
+import { ThemeInitializerService } from './services/theme-initializer.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -41,6 +42,7 @@ export const appConfig: ApplicationConfig = {
         const platformId = inject(PLATFORM_ID);
         const meta = inject(MetaService);
         const businessData = inject(BusinessDataService);
+        const themeService = inject(ThemeInitializerService);
         const businessIdToken = inject(SSR_BUSINESS_ID, { optional: true });
 
         let hostname = '';
@@ -108,7 +110,7 @@ export const appConfig: ApplicationConfig = {
                 image: business.metaImage || '/assets/default-og.jpg',
                 url: hostname ? `https://${hostname}` : ''
               });
-
+              await themeService.loadTheme(business.id || businessId);
               if (isPlatformBrowser(platformId) && business.faviconUrl) {
                 meta.updateFavicon(business.faviconUrl);
               }

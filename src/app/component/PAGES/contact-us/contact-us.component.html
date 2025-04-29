@@ -565,7 +565,7 @@
             [layoutType]="business.theme.themeType || 'demo'"
           ></app-google-maps>
         </div>
-        
+
         <div class="ae-contact-details">
           <div>
             <h2>Hours</h2>
@@ -673,34 +673,10 @@
       </div>
     </ng-container>
   </div>
-
-  <div
-    class="modal fade"
-    id="responseModal"
-    tabindex="-1"
-    aria-labelledby="responseModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="responseModalLabel">{{ modalTitle }}</h5>
-          <button
-            type="button"
-            class="afhBtn"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          {{ modalMessage }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="afhBtn" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
+  <div *ngIf="modalVisible" class="modal-backdrop">
+    <div class="modal-content">
+      <h2>{{ modalTitle }}</h2>
+      <p>{{ modalMessage }}</p>
+      <button (click)="closeModal()" class="modal-close-btn">Close</button>
     </div>
   </div>
-</div>

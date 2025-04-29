@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmailService {
-  private emailEndpoint = 'https://us-central1-afhdynamicwebsite.cloudfunctions.net/sendContactEmail';
+  private emailEndpoint = environment.emailEndpoint;
 
   constructor(private http: HttpClient) {}
 

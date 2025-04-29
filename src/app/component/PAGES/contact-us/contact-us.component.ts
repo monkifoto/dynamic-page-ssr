@@ -1,42 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebContentService } from '../../../services/web-content.service';
-import { Business } from '../../../model/business-questions.model';
-import { BusinessLocation } from '../../../model/business-questions.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { MetaService } from '../../../services/meta-service.service';
-// import { Modal } from 'bootstrap';
 import { BusinessDataService } from '../../../services/business-data.service';
+import { Business, BusinessLocation } from '../../../model/business-questions.model';
+import { MetaService } from '../../../services/meta-service.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EmailService } from '../../../services/email.service';
-import { environment } from '../../../../environments/environment';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeroComponent } from '../../UI/hero/hero.component';
 import { FaqComponent } from '../../UI/faq/faq.component';
 import { InformationComponent } from '../../UI/Deprecated/information/information.component';
 import { GoogleMapsComponent } from '../../UI/google-maps/google-maps.component';
 import { PhoneFormatPipe } from '../../../pipe/phone-format.pipe';
-
-
+import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'app-contact-us',
-    templateUrl: './contact-us.component.html',
-    styleUrls: ['./contact-us.component.css'],
-    standalone: true,
-    imports:[CommonModule,
-       FormsModule,
-       ReactiveFormsModule,
-      HeroComponent,
-       FaqComponent,
-      InformationComponent,
-      GoogleMapsComponent,
-    PhoneFormatPipe]
+  selector: 'app-contact-us',
+  standalone: true,
+  templateUrl: './contact-us.component.html',
+  styleUrls: ['./contact-us.component.css'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HeroComponent,
+    FaqComponent,
+    InformationComponent,
+    GoogleMapsComponent,
+    PhoneFormatPipe,
+  ],
 })
-export class ContactUsComponent  implements OnInit{
-
+export class ContactUsComponent {
   business: Business | null = null;
   location: BusinessLocation | null = null;
   layoutType: string | undefined = 'demo';
@@ -50,87 +47,85 @@ export class ContactUsComponent  implements OnInit{
     website: ''
   };
 
-  modalTitle: string = '';
-  modalMessage: string = '';
-  // responseModal!: Modal; // Modal instance
+  modalVisible = false;
+  modalTitle = '';
+  modalMessage = '';
 
   constructor(
     private sanitizer: DomSanitizer,
     private businessDataService: BusinessDataService,
     private webContent: WebContentService,
-    private route: ActivatedRoute,private http: HttpClient,
+    private route: ActivatedRoute,
+    private http: HttpClient,
     private emailService: EmailService,
     private router: Router,
     private metaService: MetaService,
-    @Inject(PLATFORM_ID) private platformId: Object){}
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
+  get sanitizedBusinessHours(): SafeHtml {
+    return this.business?.businessHours
+      ? this.sanitizer.bypassSecurityTrustHtml(this.business?.businessHours)
+      : '';
+  }
 
-      get sanitizedBusinessHours(): SafeHtml {
-        return this.business?.businessHours
-          ? this.sanitizer.bypassSecurityTrustHtml(this.business?.businessHours)
-          : '';
-      }
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.formData.website = this.extractBaseDomain(window.location.hostname);
+    }
 
-      ngOnInit(): void {
-        if (isPlatformBrowser(this.platformId)) {
-          this.formData.website = this.extractBaseDomain(window.location.hostname);
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id && isPlatformBrowser(this.platformId)) {
+      window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    }
+
+    this.businessDataService.businessData$.subscribe((business) => {
+      if (!business) return;
+
+      this.business = business;
+      this.layoutType = business.theme?.themeType || 'demo';
+      this.metaService.loadAndApplyMeta(business.id);
+
+      this.businessDataService.getLocations().subscribe((locations) => {
+        if (locations.length > 0) {
+          this.location = locations[0];
+        } else {
+          console.warn('⚠️ No locations available.');
+          this.location = null;
         }
-
-        const id = this.route.snapshot.queryParamMap.get('id');
-        if (id && isPlatformBrowser(this.platformId)) {
-          window.history.replaceState({}, '', this.router.url.split('?')[0]);
-        }
-
-        this.businessDataService.businessData$.subscribe((business) => {
-          if (!business) return;
-
-          this.business = business;
-          this.layoutType = business.theme?.themeType || 'demo';
-          this.metaService.loadAndApplyMeta(business.id);
-
-          // Flatten: get locations once business is confirmed
-          this.businessDataService.getLocations().subscribe((locations) => {
-            if (locations.length > 0) {
-              this.location = locations[0];
-             // console.log('📍 Updated Location [0]:', this.location);
-            } else {
-              console.warn('⚠️ No locations available.');
-              this.location = null;
-            }
-          });
-        });
-      }
-
-  ngAfterViewInit(): void {
-
+      });
+    });
   }
 
   onSubmit() {
     console.log(this.formData);
-        // Use the EmailService to send the email
-        this.emailService.sendEmail(this.formData).subscribe(
-          response => {
-            this.modalTitle = 'Message Sent';
-            this.modalMessage = 'Thank you for your message! We will get back to you soon.';
-            // this.showModal();
-          },
-          error => {
-            console.error('Error sending email', error);
-            this.modalTitle = 'Error';
-            this.modalMessage = 'There was an issue sending your message. Please try again later.';
-            // this.showModal();
-          }
-        );
+    this.emailService.sendEmail(this.formData).subscribe(
+      (response) => {
+        this.showModal('Message Sent', 'Thank you for your message! We will get back to you soon.');
+      },
+      (error) => {
+        console.error('Error sending email', error);
+        this.showModal('Error', 'There was an issue sending your message. Please try again later.');
+      }
+    );
   }
 
-  // Helper function to extract the base domain
+  private showModal(title: string, message: string) {
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.modalVisible = true;
+  }
+
+  closeModal() {
+    this.modalVisible = false;
+  }
+
   private extractBaseDomain(hostname: string): string {
     const parts = hostname.split('.');
-    // Check if hostname has subdomains (e.g., subdomain.example.com)
     if (parts.length > 2) {
-      return parts.slice(-2).join('.'); // Keep the last two parts (e.g., example.com)
+      return parts.slice(-2).join('.');
     }
-    return hostname; // If no subdomains, return as is
+    return hostname;
   }
 
   get formattedAddress(): string {
@@ -140,14 +135,7 @@ export class ContactUsComponent  implements OnInit{
       this.location?.state,
       this.location?.zipcode
     ]
-    .filter(part => part) // ✅ Remove undefined/null values
-    .join(' '); // ✅ Join into a single string
+      .filter(part => part)
+      .join(' ');
   }
-
-  // showModal() {
-  //   if (this.responseModal) {
-  //     this.responseModal.show();  // Use the Bootstrap modal instance to show the modal
-  //   }
-  // }
-
 }

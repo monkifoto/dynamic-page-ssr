@@ -4,6 +4,9 @@ const express = require('express');
 const { join } = require('path');
 const { existsSync } = require('fs');
 
+const { sendContactEmail } = require('./src/send-contact-email');
+exports.sendContactEmail = sendContactEmail;
+
 // Create an Express application
 const app = express();
 
