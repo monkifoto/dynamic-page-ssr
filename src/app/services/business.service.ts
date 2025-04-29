@@ -90,7 +90,11 @@ export class BusinessService {
   }
 
   updateBusiness(id: string, business: Partial<Business>): Promise<void> {
-    return updateDoc(doc(this.firestore, `${this.basePath}/${id}`), business);
+    const updatedBusiness = {
+      ...business,
+      updatedDate: new Date() // Add the current date and time
+    };
+    return updateDoc(doc(this.firestore, `${this.basePath}/${id}`), updatedBusiness);
   }
 
   deleteBusiness(id: string): Promise<void> {
