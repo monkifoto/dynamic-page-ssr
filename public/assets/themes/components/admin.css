@@ -8,7 +8,7 @@ body {
 }
 
 /* Headings */
-h2 {
+.admin-container h2 {
   border-bottom: 2px solid #e67e22; /* Match with active tab color */
   color: #2c3e50; /* Dark Blue */
   margin-bottom: 20px;

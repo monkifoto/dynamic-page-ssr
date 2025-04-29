@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, doc, getDoc, getDocs, query, where, setDoc, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc, getDocs, query, where, setDoc, updateDoc, deleteDoc, addDoc, Timestamp } from '@angular/fire/firestore';
 import { Storage, ref as storageRef, uploadBytesResumable, getDownloadURL as storageGetDownloadURL } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -24,10 +24,10 @@ export class BusinessService {
     const businessWithDate = {
       ...business,
       id: newDocRef.id,
-      createdDate: new Date()
+      createdDate: new Date() // Correctly setting createdDate
     };
 
-    return from(setDoc(newDocRef,businessWithDate)).pipe(
+    return from(setDoc(newDocRef, businessWithDate)).pipe(
       switchMap(() => from(getDoc(newDocRef))),
       map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Business))
     );
@@ -36,7 +36,21 @@ export class BusinessService {
   getBusinesses(): Observable<Business[]> {
     const colRef = collection(this.firestore, this.basePath);
     return from(getDocs(colRef)).pipe(
-      map((snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() } as Business)))
+      map((snap) =>
+        snap.docs.map((d) => {
+          const businessData = { id: d.id, ...d.data() } as Business;
+
+          // Convert Firestore Timestamps to JavaScript Dates
+          if (businessData.createdDate instanceof Timestamp) {
+            businessData.createdDate = businessData.createdDate.toDate(); // Convert to Date
+          }
+          if (businessData.updatedDate instanceof Timestamp) {
+            businessData.updatedDate = businessData.updatedDate.toDate(); // Convert to Date
+          }
+
+          return businessData;
+        })
+      )
     );
   }
 
@@ -64,6 +78,15 @@ export class BusinessService {
         if (!docSnap.exists()) return of(undefined);
         const business = { ...docSnap.data(), id: resolvedBusinessId } as Business;
 
+        // Convert Firestore Timestamps to JavaScript Dates
+        if (business.createdDate instanceof Timestamp) {
+          business.createdDate = business.createdDate.toDate(); // Convert to Date
+        }
+        if (business.updatedDate instanceof Timestamp) {
+          business.updatedDate = business.updatedDate.toDate(); // Convert to Date
+        }
+
+        // Continue with the rest of your logic...
         const sectionsRef = collection(this.firestore, `${this.basePath}/${resolvedBusinessId}/sections`);
         return from(getDocs(sectionsRef)).pipe(
           switchMap((sectionSnaps) => {
@@ -88,6 +111,7 @@ export class BusinessService {
       })
     );
   }
+
 
   updateBusiness(id: string, business: Partial<Business>): Promise<void> {
     const updatedBusiness = {

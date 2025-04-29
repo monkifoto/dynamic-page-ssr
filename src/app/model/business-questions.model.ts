@@ -6,6 +6,8 @@ export interface Business {
   // [x: string]: {};
   id: string;
 
+  createdDate?: Date;
+  updatedDate?: Date;
   //Business Information
   businessName: string;
   providerName: string;

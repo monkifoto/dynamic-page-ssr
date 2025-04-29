@@ -10,7 +10,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Provider</th>
-        <th>Active</th>
+        <th>Active/Last Update</th>
         <th>Live</th>
         <th>Actions</th>
       </tr>
@@ -27,7 +27,9 @@
         </td>
         <td>{{ business.businessName }}</td>
         <td><strong>{{ business.providerName}} </strong><br> {{business.phone}}<br>{{business.email}}</td>
-        <td>{{ business.isActive}}</td>
+        <td>{{ business.isActive}}<br/>
+          <p>Created Date: {{ business.createdDate | date:'shortDate' }}</p>
+          <p>Updated Date: {{ business.updatedDate | date:'shortDate' }}</p></td>
         <td>{{ business.isLive}}</td>
         <td>
           <button type="button" class="afhBtn"  (click)="editBusiness(business.id)">Edit</button>
