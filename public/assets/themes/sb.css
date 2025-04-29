@@ -5,6 +5,7 @@
 @import url(components/SB/sb-meet-the-team.css);
 @import url(components/SB/sb-page-hero.css);
 @import url(components/SB/sb-item-list.css);
+@import url(components/admin.css);
 
 :root{
   --primary-color: #fffaf2;

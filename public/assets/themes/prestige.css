@@ -9,6 +9,7 @@
 @import url(components/Prestige/prestige-contact-us.css);
 @import url(components/shared.css);
 @import url(components/Prestige/prestige-locations.css);
+@import url(components/admin.css);
 
 :root {
   --primary-color: #fffaf2;
