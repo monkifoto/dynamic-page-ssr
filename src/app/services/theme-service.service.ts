@@ -8,6 +8,8 @@ import { environment } from '../../environments/environment';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { TransferState, makeStateKey } from '@angular/core';
+import { RendererFactory2, Renderer2, inject } from '@angular/core';
+
 
 
 @Injectable({
@@ -17,8 +19,11 @@ export class ThemeService {
   private firestore = getFirestore(initializeApp(environment.firebase));
   // private themeLink: HTMLLinkElement;
   private isBrowser: boolean;
+  private renderer: Renderer2;
+  private themeAppliedOnce = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private transferState: TransferState) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private transferState: TransferState, rendererFactory: RendererFactory2) {
+    this.renderer = rendererFactory.createRenderer(null, null);
     this.isBrowser = isPlatformBrowser(platformId);
 
     if (this.isBrowser) {
@@ -220,4 +225,34 @@ export class ThemeService {
       document.head.appendChild(link);
     });
   }
+
+  loadTheme(businessId: string): Promise<void> {
+    if (this.themeAppliedOnce) return Promise.resolve();
+    this.themeAppliedOnce = true;
+
+    return new Promise((resolve) => {
+      this.getThemeColors(businessId).subscribe({
+        next: (theme) => {
+          if (this.isBrowser && theme?.themeFileName) {
+            this.applyThemeFile(theme.themeFileName);
+          }
+
+          if (this.hasValidColors(theme)) {
+            this.applyTheme(theme);
+          }
+
+          resolve();
+        },
+        error: (err) => {
+          console.error('ThemeService.loadTheme error:', err);
+          if (this.isBrowser) {
+            this.applyThemeFile(this.defaultTheme.themeFileName || 'styles.css');
+          }
+          resolve();
+        }
+      });
+    });
+  }
+
+
 }

@@ -12,60 +12,16 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeInitializerService {
-
-
-  private isBrowser: boolean;
-
   constructor(
-    private http: HttpClient,
     private themeService: ThemeService,
-    private businessService: BusinessService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
+  ) {}
+
+  loadTheme(businessID: string): Promise<void> {
+    return this.themeService.loadTheme(businessID);
   }
 
-  private getFirestoreInstance() {
-    if (!getApps().length) {
-      initializeApp(environment.firebase);
-    }
-    return getFirestore();
-  }
-
-  async loadTheme(businessID: string): Promise<void> {
-    if (!this.isBrowser) {
-      console.log('⛔ Skipping theme load on server');
-      return;
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 0)); // ⚡️ Yield to next browser tick
-
-    try {
-      const firestore = this.getFirestoreInstance();
-      const themeRef = doc(firestore, `businesses/${businessID}/theme/themeDoc`);
-      const themeSnap = await getDoc(themeRef);
-
-      const themeData = themeSnap.exists() ? themeSnap.data() : null;
-      const themeFileName = themeData?.['themeFileName'] || 'default.css';
-
-      await this.themeService.applyThemeFile(themeFileName);
-
-      try {
-        const themeColors = await firstValueFrom(this.themeService.getThemeColors(businessID));
-        console.log('🎨 Theme file to load:', themeFileName);
-        console.log('🎯 Raw theme data:', themeData);
-        console.log('📦 Theme colors from Firestore:', themeColors);
-        this.applyTheme(themeColors);
-      } catch (err) {
-        console.error('Error loading theme colors:', err);
-      }
-    } catch (error) {
-      console.error('Error loading business theme:', error);
-      await this.themeService.applyThemeFile('default.css');
-    }
-  }
-
-
+  // Convenience passthroughs (for admin or external use)
   get defaultTheme() {
     return this.themeService.getDefaultTheme;
   }
@@ -75,7 +31,7 @@ export class ThemeInitializerService {
   }
 
   getThemeColors(businessId: string) {
-    return this.themeService.getThemeColors(businessId); // returns Observable
+    return this.themeService.getThemeColors(businessId);
   }
 
   applyTheme(themeColors: any): void {

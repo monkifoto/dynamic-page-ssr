@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./component/footer/footer.component";
 import { NavigationComponent } from "./component/navigation/navigation.component";
 // import { ThemeInitializerService } from './services/theme-initializer.service';
-// import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { SSR_BUSINESS_ID } from './tokens/server-request.token';
 
 @Component({
@@ -21,14 +21,8 @@ export class AppComponent {
     @Inject(SSR_BUSINESS_ID) private businessId: string | null
   ) {}
   ngOnInit() {
-  //   if (isPlatformBrowser(this.platformId)) {
-  //     console.log('🌐 Running in browser context');
-  //     const id = this.businessId || 'MGou3rzTVIbP77OLmZa7';
-  //     this.themeService.loadTheme(id).catch((err) => {
-  //       console.error('❌ Error loading theme:', err);
-  //     });
-  //   } else {
-  //     console.log('⛔ Skipping theme load on server');
-  //   }
+    if (isPlatformBrowser(this.platformId)) {
+      console.log('🔍 TRANSFER_STATE in browser:', (window as any)['TRANSFER_STATE']);
+    }
   }
 }

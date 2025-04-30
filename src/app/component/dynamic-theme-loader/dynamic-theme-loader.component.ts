@@ -38,30 +38,31 @@ export class DynamicThemeLoaderComponent implements OnChanges {
   };
 
   ngOnChanges(): void {
-    if (this.businessId) {
-      this.loadTheme();
-    }
+    // if (this.businessId) {
+    //   console.trace(DynamicThemeLoaderComponent.name, 'ngOnChanges', this.businessId);
+    //   this.loadTheme();
+    // }
   }
 
-  private loadTheme(): void {
-    this.container.clear();
+  // private loadTheme(): void {
+  //   this.container.clear();
 
-    this.themeService.getBusinessTheme(this.businessId).subscribe(themeData => {
-      const themeType = themeData?.themeType || 'demo';
-      const themeFile = themeData?.themeFileName || 'styles.css';
+  //   this.themeService.getBusinessTheme(this.businessId).subscribe(themeData => {
+  //     const themeType = themeData?.themeType || 'demo';
+  //     const themeFile = themeData?.themeFileName || 'styles.css';
 
-      // Apply the theme CSS
-      this.themeService.applyThemeFile(themeFile).then(() => {
-        console.log(`Theme applied: ${themeFile}`);
-      });
+  //     // Apply the theme CSS
+  //     this.themeService.applyThemeFile(themeFile).then(() => {
+  //       console.log(`Theme applied: ${themeFile}`);
+  //     });
 
-      // Get the components for the given theme type
-      const componentsToLoad = this.themeComponentsMap[themeType] || this.themeComponentsMap['demo'];
+  //     // Get the components for the given theme type
+  //     const componentsToLoad = this.themeComponentsMap[themeType] || this.themeComponentsMap['demo'];
 
-      // Dynamically create each component in the array
-      componentsToLoad.forEach(component => {
-        this.container.createComponent(component);
-      });
-    });
-  }
+  //     // Dynamically create each component in the array
+  //     componentsToLoad.forEach(component => {
+  //       this.container.createComponent(component);
+  //     });
+  //   });
+ // }
 }
