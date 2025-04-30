@@ -52,6 +52,9 @@ export class ThemeInitializerService {
 
       try {
         const themeColors = await firstValueFrom(this.themeService.getThemeColors(businessID));
+        console.log('🎨 Theme file to load:', themeFileName);
+        console.log('🎯 Raw theme data:', themeData);
+        console.log('📦 Theme colors from Firestore:', themeColors);
         this.applyTheme(themeColors);
       } catch (err) {
         console.error('Error loading theme colors:', err);
@@ -63,42 +66,23 @@ export class ThemeInitializerService {
   }
 
 
-  applyTheme(themeColors: any): void {
-    if (!this.isBrowser || !this.hasValidColors(themeColors)) {
-      console.warn('Skipping theme application. Invalid data or not in browser.');
-      return;
-    }
-
-    const root = document.documentElement;
-    root.style.setProperty('--primary-color', themeColors.primaryColor);
-    root.style.setProperty('--secondary-color', themeColors.secondaryColor);
-    root.style.setProperty('--accent-color', themeColors.accentColor);
-    root.style.setProperty('--background-color', themeColors.backgroundColor);
-    root.style.setProperty('--dark-background-color', themeColors.darkBackgroundColor);
-    root.style.setProperty('--text-color', themeColors.textColor);
-    root.style.setProperty('--nav-background-color', themeColors.navBackgroundColor);
-    root.style.setProperty('--nav-text-color', themeColors.navTextColor);
-    root.style.setProperty('--nav-active-background', themeColors.navActiveBackground);
-    root.style.setProperty('--nav-active-text', themeColors.navActiveText);
-    root.style.setProperty('--button-color', themeColors.buttonColor);
-    root.style.setProperty('--button-hover-color', themeColors.buttonHoverColor);
+  get defaultTheme() {
+    return this.themeService.getDefaultTheme;
   }
 
-  private hasValidColors(themeColors: any): boolean {
-    const keys = [
-      'primaryColor',
-      'secondaryColor',
-      'accentColor',
-      'backgroundColor',
-      'darkBackgroundColor',
-      'textColor',
-      'navBackgroundColor',
-      'navTextColor',
-      'navActiveBackground',
-      'navActiveText',
-      'buttonColor',
-      'buttonHoverColor',
-    ];
-    return keys.every((key) => themeColors?.[key]);
+  applyThemeFile(fileName: string): Promise<void> {
+    return this.themeService.applyThemeFile(fileName);
+  }
+
+  getThemeColors(businessId: string) {
+    return this.themeService.getThemeColors(businessId); // returns Observable
+  }
+
+  applyTheme(themeColors: any): void {
+    this.themeService.applyTheme(themeColors);
+  }
+
+  hasValidColors(themeColors: any): boolean {
+    return this.themeService.hasValidColors(themeColors);
   }
 }

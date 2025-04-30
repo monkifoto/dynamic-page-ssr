@@ -13,6 +13,8 @@ import {
   query,
   stagger,
 } from '@angular/animations';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hero-slider',
@@ -36,8 +38,9 @@ import {
         style({ position: 'absolute', top: 0, left: 0, width: '100%' }),
         animate('1200ms ease', style({ opacity: 0, transform: 'translateX({{directionLeave}})' }))
       ], { params: { directionLeave: '-100%' } }),
-      transition(':leave', [
-        animate('1200ms ease', style({ opacity: 0 }))
+      transition('* => hidden', [
+        style({ opacity: 0, display: 'none' }),
+        animate('0ms')
       ])
     ])
   ],
@@ -52,6 +55,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   sliderOpacity = 1;
   enableTransitions = false;
   intervalId: any;
+  dataSub: Subscription | null = null;
 
   @Input() navigation: 'side' | 'bottom' = 'side';
   @Input() sideButtons = true;
@@ -74,41 +78,53 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.isBrowser) {
+      const saved = sessionStorage.getItem('currentSlide');
+      if (saved && !isNaN(+saved)) {
+        this.currentSlide = +saved;
+      }
       setTimeout(() => this.enableTransitions = true, 50);
-      this.autoSlide();
     }
-
-   // console.log('HeroSliderComponent - ngOnInit');
     this.fetchHeroSliderData();
   }
 
   fetchHeroSliderData(): void {
-    this.businessDataService.businessData$.subscribe((data) => {
-      if (data) {
-        this.business = data;
+    if (this.dataSub) {
+      this.dataSub.unsubscribe();
+    }
 
-        if (this.business.heroSlider && Array.isArray(this.business.heroSlider)) {
-          this.slides = this.business.heroSlider.map((slide: any) => ({
-            title: this.replaceKeywords(slide.title),
-            subtitle: this.replaceKeywords(slide.subtitle),
-            backgroundImage: slide.backgroundImage,
-            buttons: slide.buttons || []
-          }));
-        //  console.log("slide count:", this.slides.length);
-        } else {
-          console.warn('HeroSliderComponent - No heroSlider data available.');
-          this.slides = [];
-        }
+    this.dataSub = this.businessDataService.businessData$
+      .pipe(distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)))
+      .subscribe((data) => {
+        if (data) {
+          const previousSlideIndex = this.currentSlide;
 
-        if (this.business.sliderConfig) {
-          this.applySliderConfig(this.business.sliderConfig);
-        } else {
-         // console.warn('HeroSliderComponent - No sliderConfig found, using default values.');
+          this.business = data;
+
+          if (this.business.heroSlider && Array.isArray(this.business.heroSlider)) {
+            this.slides = this.business.heroSlider.map((slide: any) => ({
+              title: this.replaceKeywords(slide.title),
+              subtitle: this.replaceKeywords(slide.subtitle),
+              backgroundImage: slide.backgroundImage,
+              buttons: slide.buttons || []
+            }));
+
+            this.currentSlide = previousSlideIndex < this.slides.length
+              ? previousSlideIndex
+              : 0;
+
+            if (this.isBrowser && this.slides.length > 1) {
+              this.autoSlide();
+            }
+          } else {
+            console.warn('HeroSliderComponent - No heroSlider data available.');
+            this.slides = [];
+          }
+
+          if (this.business.sliderConfig) {
+            this.applySliderConfig(this.business.sliderConfig);
+          }
         }
-      } else {
-       // console.error('HeroSliderComponent - No business data available.');
-      }
-    });
+      });
   }
 
   applySliderConfig(config: SliderConfig): void {
@@ -118,8 +134,6 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
     this.buttonBorderRadius = config.buttonBorderRadius ?? '25px';
     this.subtitleSize = config.subtitleSize ?? '1.5rem';
     this.subtitleWeight = config.subtitleWeight ?? '600';
-
-   // console.log('HeroSliderComponent - Applied slider config:', config);
   }
 
   replaceKeywords(text: string): string {
@@ -128,20 +142,30 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   }
 
   autoSlide(): void {
-    if (this.isBrowser && this.slides?.length > 1) {
-      this.intervalId = setInterval(() => {
-        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-      }, 15000);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
+
+    console.log('⏳ AutoSlide start');
+
+    this.intervalId = setInterval(() => {
+      console.log('➡️ AutoSlide firing: current =', this.currentSlide);
+      this.previousSlide = this.currentSlide;
+      this.slideDirection = 'left';
+      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+      this.isTransitioning = true;
+      sessionStorage.setItem('currentSlide', String(this.currentSlide));
+    }, 15000);
   }
 
   navigateToSlide(index: number): void {
+    console.log('🧭 Manual nav to:', index);
     if (this.isTransitioning || index === this.currentSlide) return;
     this.slideDirection = index > this.currentSlide ? 'left' : 'right';
     this.previousSlide = this.currentSlide;
     this.currentSlide = index;
     this.isTransitioning = true;
-  //console.log('HeroSliderComponent - navigateToSlide:', index);
+    sessionStorage.setItem('currentSlide', String(this.currentSlide));
   }
 
   prevSlide(): void {
@@ -150,6 +174,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
     this.previousSlide = this.currentSlide;
     this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
     this.isTransitioning = true;
+    sessionStorage.setItem('currentSlide', String(this.currentSlide));
   }
 
   nextSlide(): void {
@@ -158,6 +183,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
     this.previousSlide = this.currentSlide;
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
     this.isTransitioning = true;
+    sessionStorage.setItem('currentSlide', String(this.currentSlide));
   }
 
   onSlideTransitionDone(i: number): void {
@@ -176,8 +202,12 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('💥 HeroSliderComponent destroyed');
     if (this.isBrowser && this.intervalId) {
       clearInterval(this.intervalId);
+    }
+    if (this.dataSub) {
+      this.dataSub.unsubscribe();
     }
   }
 }

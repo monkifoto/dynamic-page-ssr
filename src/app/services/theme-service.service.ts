@@ -7,6 +7,8 @@ import { Theme } from '../model/business-questions.model';
 import { environment } from '../../environments/environment';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { TransferState, makeStateKey } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class ThemeService {
   // private themeLink: HTMLLinkElement;
   private isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private transferState: TransferState) {
     this.isBrowser = isPlatformBrowser(platformId);
 
     if (this.isBrowser) {
@@ -48,6 +50,10 @@ export class ThemeService {
     themeType: 'demo'
   };
 
+  get getDefaultTheme(): Theme {
+    return this.defaultTheme;
+  }
+
   getBusinessTheme(businessId: string): Observable<Theme> {
     const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`) as DocumentReference<Theme>;
     return from(getDoc(themeRef)).pipe(
@@ -62,22 +68,37 @@ export class ThemeService {
   }
 
   getThemeColors(businessId: string): Observable<any> {
+    const STATE_KEY = makeStateKey<any>(`theme-${businessId}`);
+
+    if (this.transferState.hasKey(STATE_KEY) && this.isBrowser) {
+      const cached = this.transferState.get(STATE_KEY, null as any);
+      this.transferState.remove(STATE_KEY);
+      console.log('♻️ Using cached theme from TransferState:', cached);
+      return of(cached);
+    }
+
     const businessRef = doc(this.firestore, `businesses/${businessId}`);
     const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
 
     return from(getDoc(businessRef)).pipe(
       take(1),
-      switchMap(businessSnap => {
+      switchMap((businessSnap) => {
         if (!businessSnap.exists()) {
-          console.error('Theme Service - GetTheme Colors - Business document does not exist! for Business ID:', businessId);
-          return throwError(() => new Error('Theme Service - Business document does not exist'));
+          console.error('Theme Service - Business document does not exist for ID:', businessId);
+          return throwError(() => new Error('Business document does not exist'));
         }
 
         return from(getDoc(themeRef)).pipe(
-          switchMap(themeSnap => {
-            if (themeSnap.exists()) {
-              return of(themeSnap.data());
-            } else {
+          switchMap((themeSnap) => {
+            const themeData = themeSnap.exists() ? themeSnap.data() : this.defaultTheme;
+
+            // ✅ Cache into TransferState during SSR
+            if (!this.isBrowser) {
+              this.transferState.set(STATE_KEY, themeData);
+              console.log('📝 Writing theme to TransferState (SSR)');
+            }
+
+            if (!themeSnap.exists()) {
               return from(setDoc(themeRef, this.defaultTheme)).pipe(
                 switchMap(() => {
                   this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
@@ -85,17 +106,19 @@ export class ThemeService {
                 })
               );
             }
+
+            return of(themeData);
           })
         );
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error fetching theme:', error);
         this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
-
         return of(this.defaultTheme);
       })
     );
   }
+
 
   updateColors(businessId: string, colors: any): Promise<void> {
     const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
@@ -126,10 +149,57 @@ export class ThemeService {
   }
 
   applyThemeFile(themeFileName: string): Promise<void> {
-    if (!this.isBrowser) return Promise.resolve(); // SSR-safe
-    const themePath = `assets/themes/${themeFileName}`;
-    return this.loadCss(themePath);
+    if (!this.isBrowser) return Promise.resolve();
+
+    const existing = document.querySelector(`link[href="/assets/themes/${themeFileName}"]`);
+
+    if (existing) {
+      console.log(`🎯 Theme already present: ${themeFileName}`);
+      return Promise.resolve();
+    }
+
+    return this.loadCss(`assets/themes/${themeFileName}`);
   }
+
+  applyTheme(themeColors: any): void {
+    if (!this.isBrowser) return;
+
+    const root = document.documentElement;
+
+    root.style.setProperty('--primary-color', themeColors.primaryColor);
+    root.style.setProperty('--secondary-color', themeColors.secondaryColor);
+    root.style.setProperty('--accent-color', themeColors.accentColor);
+    root.style.setProperty('--background-color', themeColors.backgroundColor);
+    root.style.setProperty('--dark-background-color', themeColors.darkBackgroundColor);
+    root.style.setProperty('--text-color', themeColors.textColor);
+    root.style.setProperty('--nav-background-color', themeColors.navBackgroundColor);
+    root.style.setProperty('--nav-text-color', themeColors.navTextColor);
+    root.style.setProperty('--nav-active-background', themeColors.navActiveBackground);
+    root.style.setProperty('--nav-active-text', themeColors.navActiveText);
+    root.style.setProperty('--button-color', themeColors.buttonColor);
+    root.style.setProperty('--button-hover-color', themeColors.buttonHoverColor);
+
+    console.log('✅ Theme colors applied to :root');
+  }
+
+  hasValidColors(themeColors: any): boolean {
+    const keys = [
+      'primaryColor',
+      'secondaryColor',
+      'accentColor',
+      'backgroundColor',
+      'darkBackgroundColor',
+      'textColor',
+      'navBackgroundColor',
+      'navTextColor',
+      'navActiveBackground',
+      'navActiveText',
+      'buttonColor',
+      'buttonHoverColor',
+    ];
+    return keys.every((key) => !!themeColors?.[key]);
+  }
+
 
   private loadCss(url: string): Promise<void> {
     if (!this.isBrowser) return Promise.resolve();

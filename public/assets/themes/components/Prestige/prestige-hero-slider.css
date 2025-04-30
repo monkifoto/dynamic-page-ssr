@@ -272,6 +272,21 @@
   margin: 0;
   opacity: 0.8;
 }
+.clemo-home-overlay {
+  will-change: background-image, opacity;
+  backface-visibility: hidden;
+}
+.visually-hidden{
+  display: none;
+  visibility: hidden;
+}
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M11.354 1.354a.5.5 0 0 1 0 .707L5.707 7.707l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>");
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path d='M4.646 1.354a.5.5 0 0 0 0 .707L10.293 7.707 4.646 13.354a.5.5 0 1 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0z'/></svg>");
+}
 
 @keyframes scroll {
   0% {

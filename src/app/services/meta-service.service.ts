@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { BusinessDataService } from './business-data.service';
 import { Business } from '../model/business-questions.model';
 
@@ -12,8 +12,21 @@ export class MetaService {
     private meta: Meta,
     private title: Title,
     private businessDataService: BusinessDataService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private document: Document
   ) {}
+
+  appendStyleLink(href: string) {
+    const existing = this.document.head.querySelector(`link[href="${href}"]`);
+    if (!existing) {
+      const link = this.document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      this.document.head.appendChild(link);
+      console.log(`✅ SSR-injected theme: ${href}`);
+    }
+  }
+
 
   updateMetaTags(metaData: {
     title: string;
@@ -24,21 +37,38 @@ export class MetaService {
   }) {
     this.title.setTitle(metaData.title);
     this.meta.updateTag({ name: 'description', content: metaData.description });
+
     if (metaData.keywords) {
       this.meta.updateTag({ name: 'keywords', content: metaData.keywords });
     }
 
+    // Google / Search Engine Tags
+    this.meta.updateTag({ itemprop: 'name', content: metaData.title });
+    this.meta.updateTag({ itemprop: 'description', content: metaData.description });
+    if (metaData.image) {
+      this.meta.updateTag({ itemprop: 'image', content: metaData.image });
+    }
+
+    // Open Graph / Facebook Meta Tags
+    if (metaData.url) {
+      this.meta.updateTag({ property: 'og:url', content: metaData.url });
+    }
+    this.meta.updateTag({ property: 'og:type', content: 'website' });
     this.meta.updateTag({ property: 'og:title', content: metaData.title });
     this.meta.updateTag({ property: 'og:description', content: metaData.description });
-
     if (metaData.image) {
       this.meta.updateTag({ property: 'og:image', content: metaData.image });
     }
 
-    if (metaData.url) {
-      this.meta.updateTag({ property: 'og:url', content: metaData.url });
+    // Twitter Meta Tags
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: metaData.title });
+    this.meta.updateTag({ name: 'twitter:description', content: metaData.description });
+    if (metaData.image) {
+      this.meta.updateTag({ name: 'twitter:image', content: metaData.image });
     }
   }
+
 
   updateFavicon(faviconUrl: string) {
     if (!isPlatformBrowser(this.platformId)) return;

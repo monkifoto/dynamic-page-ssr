@@ -7,7 +7,9 @@ import { BusinessPageHeroService } from './business-page-hero.service';
 import { Business } from '../model/business-questions.model';
 import { first } from 'rxjs/operators';
 import { SSR_BUSINESS_ID } from '../tokens/server-request.token';
-
+import { TransferState, makeStateKey } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { distinctUntilChanged } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,13 +20,18 @@ export class BusinessDataService {
   private pageHeroSubject = new BehaviorSubject<any[]>([]);
 
   public businessData$: Observable<Business | null> =
-    this.businessDataSubject.asObservable();
+  this.businessDataSubject
+    .asObservable()
+    .pipe(
+      distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr))
+    );
 
   constructor(
     private businessService: BusinessService,
     private businessPageHeroService: BusinessPageHeroService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Optional() @Inject(SSR_BUSINESS_ID) private ssrBusinessId: string
+    @Optional() @Inject(SSR_BUSINESS_ID) private ssrBusinessId: string,
+    private transferState: TransferState
   ) {
     if (isPlatformServer(this.platformId) && this.ssrBusinessId) {
       console.log('✅ Using SSR businessId:', this.ssrBusinessId);
@@ -45,15 +52,28 @@ export class BusinessDataService {
   loadBusinessData(businessId: string): Observable<Business | null> {
     console.log('BusinessDataService - loadBusinessData for ID:', businessId);
 
+    const STATE_KEY = makeStateKey<Business>(`business-${businessId}`);
+
+    // ✅ If cached in memory (already set by preload), return it
     if (this.businessDataSubject.value) {
       return this.businessDataSubject.asObservable();
     }
 
+    // ✅ If TransferState exists (SSR → Browser), use it
+    if (this.transferState.hasKey(STATE_KEY) && isPlatformBrowser(this.platformId)) {
+      const cached = this.transferState.get<Business>(STATE_KEY, null as any);
+      this.transferState.remove(STATE_KEY);
+      this.businessDataSubject.next(cached);
+      this.businessIdSubject.next(businessId);
+      this.loadBusinessExtras(businessId);
+      return of(cached);
+    }
+
+    // ✅ Fetch from Firestore and cache into TransferState (SSR only)
     return this.businessService.getBusinessData(businessId).pipe(
       map((business) => {
         if (!business) return null;
 
-        // Ensure sections are always defined
         if (!business.sections) {
           business.sections = [];
           console.warn('⚠️ No sections found in Firestore. Initializing empty array.');
@@ -65,11 +85,15 @@ export class BusinessDataService {
         this.businessDataSubject.next(business);
         this.businessIdSubject.next(businessId);
 
-        // ⬇️ Move async side effects out of tap
+        if (business && isPlatformServer(this.platformId)) {
+          this.transferState.set(STATE_KEY, business);
+        }
+
         this.loadBusinessExtras(businessId);
       })
     );
   }
+
 
   // 🔁 Separated to avoid uncompleted subscriptions in SSR
   private async loadBusinessExtras(businessId: string) {

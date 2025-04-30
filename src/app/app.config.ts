@@ -6,7 +6,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore, getDoc, doc } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -101,6 +101,19 @@ export const appConfig: ApplicationConfig = {
         return async () => {
           try {
             const business = await firstValueFrom(businessData.loadBusinessData(businessId));
+            console.log('✅ Loaded business data:', business?.businessName);
+
+            const firestore = getFirestore(); // call directly if needed
+            const themeRef = doc(firestore, `businesses/${businessId}/theme/themeDoc`);
+            const themeSnap = await getDoc(themeRef);
+            const theme = themeSnap.exists() ? themeSnap.data() : themeService.defaultTheme;
+            const themeFile = theme?.themeFileName || 'styles.css';
+
+            if (!isPlatformBrowser(platformId)) {
+              console.log('🌐 SSR: injecting stylesheet for theme:', themeFile);
+              meta.appendStyleLink(`/assets/themes/${themeFile}`);
+            }
+
 
             if (business) {
               meta.updateMetaTags({
@@ -110,10 +123,20 @@ export const appConfig: ApplicationConfig = {
                 image: business.metaImage || '/assets/default-og.jpg',
                 url: hostname ? `https://${hostname}` : ''
               });
+
               await themeService.loadTheme(business.id || businessId);
               if (isPlatformBrowser(platformId) && business.faviconUrl) {
                 meta.updateFavicon(business.faviconUrl);
               }
+              const themeFile = theme?.themeFileName || 'styles.css';
+              await themeService.applyThemeFile(themeFile);
+              const themeColors = await firstValueFrom(themeService.getThemeColors(businessId));
+                if (themeService.hasValidColors(themeColors)) {
+                  themeService.applyTheme(themeColors);
+                } else {
+                  console.warn('⚠️ Invalid theme colors:', themeColors);
+                }
+
             }
           } catch (err) {
             console.error('❌ Error in APP_INITIALIZER:', err);
