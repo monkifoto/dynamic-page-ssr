@@ -1,31 +1,57 @@
 {
   "projects": {
     "default": "afhdynamicwebsite-test",
-    "afhdynamicwebsite-test": "afhdynamicwebsite-test"
+    "afhdynamicwebsite-test": "afhdynamicwebsite-test",
+    "afhdynamicwebsite-prod": "afhdynamicwebsite"
   },
   "targets": {
     "afhdynamicwebsite-test": {
       "hosting": {
         "helpinghandafh": [
-          "helpinghandafh-com"
+          "helpinghandafh-com-test"
         ],
         "aefamilyhome": [
-          "aefamilyhome-com"
+          "aefamilyhome-com-test"
         ],
         "countrycrestafh": [
-          "countrycrestafh-com"
+          "countrycrestafh-com-test"
         ],
         "prestigecareafh": [
-          "prestigecareafh-com"
+          "prestigecareafh-com-test"
         ],
         "sbmediahub": [
-          "sbmediahub-com"
+          "sbmediahub-com-test"
         ],
         "elderlyhomecareafh": [
-          "elderlyhomecareafh-com"
+          "elderlyhomecareafh-com-test"
         ],
-        "spelderlyhomecareafh": [
-          "sp-elderlyhomecareafh-com"
+        "serenitypark": [
+          "serenitypark-com-test"
+        ]
+      }
+    },
+    "afhdynamicwebsite": {
+      "hosting": {
+        "helpinghandafh": [
+          "helpinghandafh-com-prod"
+        ],
+        "aefamilyhome": [
+          "aefamilyhome-com-prod"
+        ],
+        "countrycrestafh": [
+          "countrycrestafh-com-prod"
+        ],
+        "prestigecareafh": [
+          "prestigecareafh-com-prod"
+        ],
+        "sbmediahub": [
+          "sbmediahub-com-prod"
+        ],
+        "elderlyhomecareafh": [
+          "elderlyhomecareafh-com-prod"
+        ],
+        "serenitypark": [
+          "serenitypark-com-prod"
         ]
       }
     }

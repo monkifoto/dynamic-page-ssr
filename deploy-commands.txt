@@ -1,0 +1,26 @@
+firebase deploy --only hosting:elderlyhomecareafh-com-prod --project afhdynamicwebsite
+
+firebase deploy --only hosting:elderlyhomecareafh-com-test --project afhdynamicwebsite-test
+
+
+firebase deploy --only hosting:prestigecareafh-com-prod --project afhdynamicwebsite
+
+firebase deploy --only hosting:prestigecareafh-com-test --project afhdynamicwebsite-test
+
+
+firebase deploy --only hosting:helpinghandafh-com-test,functions:firebase-frameworks-helpinghandafh-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:aefamilyhome-com-test,functions:firebase-frameworks-aefamilyhome-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:countrycrestafh-com-test,functions:firebase-frameworks-countrycrestafh-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:prestigecareafh-com-test,functions:firebase-frameworks-prestigecareafh-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:sbmediahub-com-test,functions:firebase-frameworks-sbmediahub-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:elderlyhomecareafh-com-test,functions:firebase-frameworks-elderlyhomecareafh-com-test --project afhdynamicwebsite-test
+firebase deploy --only hosting:serenitypark-com-test,functions:firebase-frameworks-serenitypark-com-test --project afhdynamicwebsite-test
+
+
+firebase deploy --only hosting:helpinghandafh-com-prod,functions:firebase-frameworks-helpinghandafh-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:aefamilyhome-com-prod,functions:firebase-frameworks-aefamilyhome-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:countrycrestafh-com-prod,functions:firebase-frameworks-countrycrestafh-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:prestigecareafh-com-prod,functions:firebase-frameworks-prestigecareafh-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:sbmediahub-com-prod,functions:firebase-frameworks-sbmediahub-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:elderlyhomecareafh-com-prod,functions:firebase-frameworks-elderlyhomecareafh-com-prod --project afhdynamicwebsite
+firebase deploy --only hosting:serenitypark-com-prod,functions:firebase-frameworks-serenitypark-com-prod --project afhdynamicwebsite

@@ -53,13 +53,28 @@ export const appConfig: ApplicationConfig = {
           const functionTarget = (process.env['FUNCTION_TARGET'] || '').toLowerCase();
           console.log('🏢 Server-side FUNCTION_TARGET:', functionTarget);
           const functionToBusinessIdMap: { [key: string]: string } = {
-            "ssrhelpinghandafhcom": "vfCMoPjAu2ROVBbKvk0D",
-            "ssraefamilyhomecom": "UiSDf9elSjwcbQs2HZb1",
-            "ssrelderlyhomecareafhcom": "SJgFxBYkopnPR4WibCAf",
-            "ssrprestigecareafhcom": "pDJgpl34XUnRblyIlBA7",
-            "ssrcountrycrestafhcom": "yrNc50SvfPqwTSkvvygA",
-            "ssrsbmediahubcom": "MGou3rzTVIbP77OLmZa7"
+            "ssrhelpinghandafhcomtest": "vfCMoPjAu2ROVBbKvk0D",
+            "ssrhelpinghandafhcomprod": "vfCMoPjAu2ROVBbKvk0D",
+
+            "ssraefamilyhomecomtest": "UiSDf9elSjwcbQs2HZb1",
+            "ssraefamilyhomecomprod": "UiSDf9elSjwcbQs2HZb1",
+
+            "ssrelderlyhomecareafhcomtest": "SJgFxBYkopnPR4WibCAf",
+            "ssrelderlyhomecareafhcomprod": "SJgFxBYkopnPR4WibCAf",
+
+            "ssrprestigecareafhcomtest": "pDJgpl34XUnRblyIlBA7",
+            "ssrprestigecareafhcomprod": "pDJgpl34XUnRblyIlBA7",
+
+            "ssrcountrycrestafhcomtest": "yrNc50SvfPqwTSkvvygA",
+            "ssrcountrycrestafhcomprod": "yrNc50SvfPqwTSkvvygA",
+
+            "ssrsbmediahubcomtest": "MGou3rzTVIbP77OLmZa7",
+            "ssrsbmediahubcomprod": "MGou3rzTVIbP77OLmZa7",
+
+            "ssrserenityparkcomtest": "It4V1NeoAXQhXLJyQsf9",
+            "ssrserenityparkcomprod": "It4V1NeoAXQhXLJyQsf9",
           };
+
           businessId = functionToBusinessIdMap[functionTarget] || 'MGou3rzTVIbP77OLmZa7';
         } else {
           const url = new URL(window.location.href);
@@ -86,7 +101,10 @@ export const appConfig: ApplicationConfig = {
             "test.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
             "test.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
             "test.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
-            "test.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7"
+            "test.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
+            "serenityparkcom": "It4V1NeoAXQhXLJyQsf9",
+            "www.serenityparkcom": "It4V1NeoAXQhXLJyQsf9",
+            "test.serenityparkcom": "It4V1NeoAXQhXLJyQsf9",
           };
           businessId = businessIdToken || hostnameToBusinessIdMap[hostname] || url.searchParams.get('id') || 'MGou3rzTVIbP77OLmZa7';
           console.log('🌎 Browser context:', { hostname, businessId });

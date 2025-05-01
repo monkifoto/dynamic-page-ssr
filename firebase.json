@@ -1,109 +1,186 @@
 {
   "hosting": [
+
     {
-      "site": "helpinghandafh-com",
+      "site": "helpinghandafh-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "vfCMoPjAu2ROVBbKvk0D"
-            }
+            { "key": "x-business-id", "value": "vfCMoPjAu2ROVBbKvk0D" }
           ]
         }
       ]
     },
     {
-      "site": "aefamilyhome-com",
+      "site": "aefamilyhome-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "UiSDf9elSjwcbQs2HZb1"
-            }
+            { "key": "x-business-id", "value": "UiSDf9elSjwcbQs2HZb1" }
           ]
         }
       ]
     },
     {
-      "site": "countrycrestafh-com",
+      "site": "countrycrestafh-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "yrNc50SvfPqwTSkvvygA"
-            }
+            { "key": "x-business-id", "value": "yrNc50SvfPqwTSkvvygA" }
           ]
         }
       ]
     },
     {
-      "site": "prestigecareafh-com",
+      "site": "prestigecareafh-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "pDJgpl34XUnRblyIlBA7"
-            }
+            { "key": "x-business-id", "value": "pDJgpl34XUnRblyIlBA7" }
           ]
         }
       ]
     },
     {
-      "site": "sbmediahub-com",
+      "site": "sbmediahub-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "MGou3rzTVIbP77OLmZa7"
-            }
+            { "key": "x-business-id", "value": "MGou3rzTVIbP77OLmZa7" }
           ]
         }
       ]
     },
     {
-      "site": "elderlyhomecareafh-com",
+      "site": "elderlyhomecareafh-com-test",
       "source": ".",
-      "frameworksBackend": {
-        "region": "us-central1"
-      },
+      "frameworksBackend": { "region": "us-central1" },
       "headers": [
         {
           "source": "**",
           "headers": [
-            {
-              "key": "x-business-id",
-              "value": "SJgFxBYkopnPR4WibCAf"
-            }
+            { "key": "x-business-id", "value": "SJgFxBYkopnPR4WibCAf" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "serenitypark-com-test",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "SJgFxBYkopnPR4WibCAf" }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "site": "helpinghandafh-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "vfCMoPjAu2ROVBbKvk0D" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "aefamilyhome-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "UiSDf9elSjwcbQs2HZb1" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "countrycrestafh-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "yrNc50SvfPqwTSkvvygA" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "prestigecareafh-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "pDJgpl34XUnRblyIlBA7" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "sbmediahub-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "MGou3rzTVIbP77OLmZa7" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "elderlyhomecareafh-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "SJgFxBYkopnPR4WibCAf" }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "serenitypark-com-prod",
+      "source": ".",
+      "frameworksBackend": { "region": "us-central1" },
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "x-business-id", "value": "SJgFxBYkopnPR4WibCAf" }
           ]
         }
       ]
