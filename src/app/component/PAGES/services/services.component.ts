@@ -77,10 +77,10 @@ export class ServicesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id && this.isBrowser) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
-    }
+    // const id = this.route.snapshot.queryParamMap.get('id');
+    // if (id && this.isBrowser) {
+    //   window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    // }
 
     this.businessDataService.businessData$.subscribe((business) => {
       if (!business) return;

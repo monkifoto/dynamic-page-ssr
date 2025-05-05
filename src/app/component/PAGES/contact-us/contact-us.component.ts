@@ -72,10 +72,10 @@ export class ContactUsComponent {
       this.formData.website = this.extractBaseDomain(window.location.hostname);
     }
 
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id && isPlatformBrowser(this.platformId)) {
-      window.history.replaceState({}, '', this.router.url.split('?')[0]);
-    }
+    // const id = this.route.snapshot.queryParamMap.get('id');
+    // if (id && isPlatformBrowser(this.platformId)) {
+    //   window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    // }
 
     this.businessDataService.businessData$.subscribe((business) => {
       if (!business) return;

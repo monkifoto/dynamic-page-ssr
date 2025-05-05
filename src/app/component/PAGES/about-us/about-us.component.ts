@@ -71,12 +71,12 @@ export class AboutUsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (isPlatformBrowser(this.platformId)) {
-      const id = this.route.snapshot.queryParamMap.get('id');
-      if (id) {
-        window.history.replaceState({}, '', this.router.url.split('?')[0]);
-      }
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   const id = this.route.snapshot.queryParamMap.get('id');
+    //   if (id) {
+    //     window.history.replaceState({}, '', this.router.url.split('?')[0]);
+    //   }
+    // }
 
     this.businessDataService
       .getBusinessData()

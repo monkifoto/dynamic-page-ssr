@@ -32,6 +32,7 @@ export class ExpandableNavigationComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('🚀 Expandable Navigation Component Initialized');
     if (isPlatformBrowser(this.platformId)) {
     this.businessDataService.getBusinessId().subscribe((businessId) => {
       if (businessId) {
@@ -101,6 +102,10 @@ export class ExpandableNavigationComponent  implements OnInit {
         this.closeMenu();  // 🔥 Close menu after selecting a location
       }
     });
+  }
+
+  hasMultipleLocations(): boolean {
+    return this.locations && this.locations.length > 1;
   }
 
   toggleLocations(): void {

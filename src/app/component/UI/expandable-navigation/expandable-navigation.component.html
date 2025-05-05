@@ -19,7 +19,7 @@
       <ul class="clemo-navbar-nav">
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link"  (click)="navigateTo('home')">Home</span></li>
 
-        <li class="clemo-nav-linkitem dropdown" *ngIf="locations!.length > 1">
+        <li class="clemo-nav-linkitem dropdown" *ngIf="hasMultipleLocations()">
 
           <span class="clemo-nav-link dropdown-toggle" (click)="toggleDropdown(0)" >
             Locations <!-- Locations ({{ locations.length }}) -->

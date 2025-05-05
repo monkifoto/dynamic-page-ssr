@@ -42,13 +42,13 @@ export class LocationPageComponent implements OnInit {
       this.locationIndex = Number(params['locationIndex']);
 
       // 🔄 Clean up URL if locationIndex was in query params
-      if (params['locationIndex']) {
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: {},
-          replaceUrl: true
-        });
-      }
+      // if (params['locationIndex']) {
+      //   this.router.navigate([], {
+      //     relativeTo: this.route,
+      //     queryParams: {},
+      //     replaceUrl: true
+      //   });
+      // }
 
       // ✅ Business data already loaded in AppInitializer
       this.businessDataService.getBusinessData().subscribe(business => {

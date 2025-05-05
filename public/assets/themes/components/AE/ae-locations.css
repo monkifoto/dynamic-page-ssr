@@ -1,0 +1,47 @@
+.location-page-container {
+  text-align: center;
+  padding: 20px;
+}
+
+
+.location-details > * {
+  margin: 20px 0;
+}
+
+.location-contact-details p{
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 20px;
+}
+.location-contact-details i{
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+/* Make the .row a flex container */
+.location-page-container .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Optional spacing between image and text */
+}
+
+/* Each column takes half the width on larger screens */
+.location-page-container .col {
+  flex: 1 1 50%;
+  box-sizing: border-box;
+}
+
+/* Stack columns on smaller screens */
+@media (max-width: 768px) {
+  .location-page-container .col {
+    flex: 1 1 100%;
+  }
+}

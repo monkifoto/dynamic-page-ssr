@@ -36,8 +36,8 @@ export class NavigationComponent implements OnInit {
         this.businessDataService.getBusinessData().subscribe((data) => {
           this.business = data;
           this.layoutType = this.business?.theme.themeType;
-          //console.log("Navigation Logo", this.business?.logoImage);
-          //console.log("Navigation ID", this.business?.id);
+          console.log("Navigation Logo", this.business?.logoImage);
+          console.log("Navigation ID", this.business?.id);
         });
       }
     });

@@ -69,9 +69,9 @@ export class PhotoGalleryComponent implements OnInit {
       const id = this.route.snapshot.queryParamMap.get('id');
 
       // Clean up the URL if an ID param was used
-      if (id && isPlatformBrowser(this.platformId)) {
-        window.history.replaceState({}, '', this.router.url.split('?')[0]);
-      }
+      // if (id && isPlatformBrowser(this.platformId)) {
+      //   window.history.replaceState({}, '', this.router.url.split('?')[0]);
+      // }
 
       // Subscribe to the loaded business data
       this.businessDataService.businessData$.subscribe((business) => {

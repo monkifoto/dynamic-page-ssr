@@ -189,5 +189,8 @@
   "functions": {
     "source": "functions",
     "runtime": "nodejs22"
+  },
+  "frameworks": {
+    "publicHeaders": ["x-business-id"]
   }
 }
