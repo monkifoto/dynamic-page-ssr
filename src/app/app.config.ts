@@ -117,7 +117,7 @@ export const appConfig: ApplicationConfig = {
         }
 
         return async () => {
-       
+
           try {
             const business = await firstValueFrom(businessData.loadBusinessData(businessId));
             console.log('✅ Loaded business data:', business?.businessName);

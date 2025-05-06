@@ -516,20 +516,67 @@ export class EditBusinessComponent implements OnInit, AfterViewInit {
     console.warn('⚠️ No locations found to populate the form.');
   }
 
-    if (this.employeeComponent) {
-      this.employeeComponent.populateEmployees(business.employees ?? []);
+  if (business.employees && business.employees.length) {
+    const employeesFormArray = this.fb.array(
+      business.employees.map((employee) =>
+        this.fb.group({
+          name: [employee.name],
+          role: [employee.role],
+          bio: [employee.bio],
+          photoURL: [employee.photoURL],
+        })
+      )
+    );
+    this.businessForm.setControl('employees', employeesFormArray);
+
+      // Optional: sync EmployeeComponent after form control is set
+      if (this.employeeComponent) {
+        this.employeeComponent.populateEmployees(business.employees);
+      }
+    } else {
+      this.businessForm.setControl('employees', this.fb.array([]));
     }
 
-    if (this.reviewComponent) {
-      this.reviewComponent.populateTestimonials(business.testimonials ?? []);
-    }
+   // ⭐ TESTIMONIALS
+   const testimonialsArray = this.fb.array(
+    (business.testimonials ?? []).map((testimonial) =>
+      this.fb.group({
+        name: [testimonial.name],
+        relationship: [testimonial.relationship],
+        quote: [testimonial.quote],
+        photoUrl: [testimonial.photoURL],
+      })
+    )
+  );
+  this.businessForm.setControl('testimonials', testimonialsArray);
+  if (this.reviewComponent) {
+    this.reviewComponent.populateTestimonials(business.testimonials ?? []);
+  }
+
+  // 🧩 UNIQUE SERVICE
+  const uniqueServiceArray = this.fb.array(
+    (business.uniqueService ?? []).map((service) =>
+      this.fb.group({
+        name: [service.name],
+        description: [service.description],
+      })
+    )
+  );
+  this.businessForm.setControl('uniqueService', uniqueServiceArray);
+
+  // 💡 WHY CHOOSE
+  const whyChooseArray = this.fb.array(
+    (business.whyChoose ?? []).map((choice) =>
+      this.fb.group({
+        name: [choice.name],
+        description: [choice.description],
+      })
+    )
+  );
+  this.businessForm.setControl('whyChoose', whyChooseArray);
 
     if (this.locationsManager) {
       this.locationsManager.loadLocations();
-    }
-
-    if (this.reviewComponent) {
-      this.reviewComponent.populateTestimonials(business.testimonials ?? []);
     }
 
     // Ensure logoImage is handled
