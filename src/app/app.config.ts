@@ -74,7 +74,7 @@ export const appConfig: ApplicationConfig = {
             "ssrserenityparkcomprod": "It4V1NeoAXQhXLJyQsf9",
           };
 
-          const matchedKey = Object.keys(functionToBusinessIdMap)e
+          const matchedKey = Object.keys(functionToBusinessIdMap)
             .find(key => key.startsWith(functionTarget));
           businessId = matchedKey ? functionToBusinessIdMap[matchedKey] : 'MGou3rzTVIbP77OLmZa7';
           if (!matchedKey) {
