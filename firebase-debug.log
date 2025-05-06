@@ -1,0 +1,30 @@
+[debug] [2025-05-06T06:16:47.611Z] ----------------------------------------------------------------------
+[debug] [2025-05-06T06:16:47.614Z] Command:       /nix/store/ixbb20farqh1f4fqbmsn6b1ixn8mc8ij-nodejs-20.18.1/bin/node /home/user/.global_modules/bin/firebase projects:list
+[debug] [2025-05-06T06:16:47.615Z] CLI Version:   14.2.2
+[debug] [2025-05-06T06:16:47.615Z] Platform:      linux
+[debug] [2025-05-06T06:16:47.615Z] Node Version:  v20.18.1
+[debug] [2025-05-06T06:16:47.615Z] Time:          Tue May 06 2025 06:16:47 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-06T06:16:47.616Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-06T06:16:48.074Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"frameworks"}
+[debug] [2025-05-06T06:16:48.080Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-06T06:16:48.081Z] > authorizing via signed-in user (sorin.bucse@gmail.com)
+[debug] [2025-05-06T06:16:48.086Z] No OAuth tokens found
+[debug] [2025-05-06T06:16:48.087Z] No OAuth tokens found
+[debug] [2025-05-06T06:16:48.087Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-06T06:16:48.088Z] > authorizing via signed-in user (sorin.bucse@gmail.com)
+[debug] [2025-05-06T06:16:48.090Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-05-06T06:16:48.499Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2025-05-06T06:16:48.500Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-05-06T06:16:48.500Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2025-05-06T06:16:48.501Z] No OAuth tokens found
+[debug] [2025-05-06T06:16:48.501Z] No OAuth tokens found
+[debug] [2025-05-06T06:16:48.501Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-06T06:16:48.501Z] > authorizing via signed-in user (sorin.bucse@gmail.com)
+[debug] [2025-05-06T06:16:48.502Z] Request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2025-05-06T06:16:48.504Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/responseToError.js:52:12)
+    at RetryOperation._fn (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
