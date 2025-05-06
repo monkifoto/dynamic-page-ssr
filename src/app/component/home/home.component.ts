@@ -1,4 +1,3 @@
-import { Title } from '@angular/platform-browser';
 import {
   Component,
   OnInit,
@@ -9,33 +8,27 @@ import {
   Type,
   PLATFORM_ID,
   Inject
-} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MetaService } from '../../services/meta-service.service';
-import { BusinessDataService } from '../../services/business-data.service';
-import { BusinessSectionsService } from '../../services/business-sections.service';
-import { CenterTextComponent } from '../UI/center-text/center-text.component';
-import { RightTextComponent } from '../UI/right-text/right-text.component';
-import { LeftTextComponent } from '../UI/left-text/left-text.component';
-import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
-import { ItemListComponent } from '../UI/item-list/item-list.component';
+} from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { CenterTextComponent } from '../UI/center-text/center-text.component'
+import { RightTextComponent } from '../UI/right-text/right-text.component'
+import { LeftTextComponent } from '../UI/left-text/left-text.component'
+import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component'
+import { ItemListComponent } from '../UI/item-list/item-list.component'
+import { TestimonialsComponent } from '../testimonials/testimonials.component'
+import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimonial-carousel.component'
+import { ConsultationComponent } from '../UI/consultation/consultation.component'
+import { WhyUsComponent } from '../UI/why-us/why-us.component'
+import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component'
+import { Business } from '../../model/business-questions.model'
+import { LatestProductsComponent } from '../UI/latest-products/latest-products.component'
+import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component'
+import { FaqComponent } from '../UI/faq/faq.component'
+import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.component'
+import { StatsComponent } from '../UI/stats/stats.component'
+import { VideoComponent } from '../UI/video/video.component'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { FeaturesComponent } from '../UI/features/features.component';
-import { TestimonialsComponent } from '../testimonials/testimonials.component';
-import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimonial-carousel.component';
-import { ConsultationComponent } from '../UI/consultation/consultation.component';
-import { WhyUsComponent } from '../UI/why-us/why-us.component';
-import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
-import { Business } from '../../model/business-questions.model';
-import { Observable } from 'rxjs';
-import { IconListComponent } from '../UI/Deprecated/icon-list/icon-list.component';
-import { LatestProductsComponent } from '../UI/latest-products/latest-products.component';
-import { CallToActionComponent } from '../UI/call-to-action/call-to-action.component';
-import { FaqComponent } from '../UI/faq/faq.component';
-import { ItemListImageComponent } from '../UI/item-list-image/item-list-image.component';
-import { StatsComponent } from '../UI/stats/stats.component';
-import { VideoComponent } from '../UI/video/video.component';
-import { Router } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -46,17 +39,15 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   sections: any[] = [];
-  businessId: string = '';
+  businessId: string = ''
   business: Business | null = null;
-  business$: Observable<Business | null> | undefined;
-
+ 
   componentsMap: Record<string, Type<any>> = {
     'center-text': CenterTextComponent,
     'hero-slider': HeroSliderComponent,
     'right-text': RightTextComponent,
     'left-text': LeftTextComponent,
     'item-list': ItemListComponent,
-    'icon-list': IconListComponent,
     'unique-features': FeaturesComponent,
     'testimonials': TestimonialsComponent,
     'testimonials-carousel': TestimonialCarouselComponent,
@@ -72,35 +63,26 @@ export class HomeComponent implements OnInit {
   container!: ViewContainerRef;
 
   constructor(
-    private sectionService: BusinessSectionsService,
     private resolver: ComponentFactoryResolver,
     private injector: Injector,
     private route: ActivatedRoute,
-    private metaService: MetaService,
-    private businessDataService: BusinessDataService,
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {}
 
   ngOnInit(): void {
-    // Initialize business$ here
-    this.business$ = this.businessDataService.businessData$;
+    this.route.data.subscribe(data => {
+        const homeData = data['homeData']
 
-    this.businessDataService.getBusinessData().subscribe((business) => {
-      if (business) {
-        this.business = business;
-        this.businessId = business.id!;
-        this.loadSections();
-      } else {
-        console.warn('⚠️ No business data available in HomeComponent');
-      }
-    });
+        if(homeData){
+            this.business = homeData.business
+            this.sections = homeData.sections
+            this.businessId = homeData.business?.id!
+            this.loadComponents()
+        }
+    })
   }
 
-  loadSections() {
-    this.sectionService
-      .getBusinessSections(this.businessId, 'home')
-      .subscribe((sections) => {
+  loadSections(sections:any[]) {
         if (!sections || sections.length === 0) {
           console.warn('❗ No sections retrieved from the database');
           return;
@@ -109,13 +91,12 @@ export class HomeComponent implements OnInit {
         this.sections = sections
           .filter((section) => section.isActive !== false)
           .sort((a, b) => (a.order || 0) - (b.order || 0));
-        this.loadComponents();
-      });
+        
   }
 
   loadComponents() {
     this.container.clear();
-    this.container.createComponent(HeroSliderComponent);
+    if (this.sections.length) this.container.createComponent(HeroSliderComponent);
 
     if (!this.sections.length) {
       console.warn('❗ No sections available to load.');

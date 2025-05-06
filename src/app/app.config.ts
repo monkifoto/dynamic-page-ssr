@@ -14,7 +14,7 @@ import { BusinessDataService } from './services/business-data.service';
 import { SERVER_REQUEST, SSR_BUSINESS_ID } from './tokens/server-request.token';
 import { firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../environments/environment';
+import { environment } from 'environments/environment';
 import { ThemeService } from './services/theme-service.service';
 
 let initialized = false;

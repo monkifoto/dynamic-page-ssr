@@ -11,10 +11,12 @@ import { TestimonialsListComponent } from './component/PAGES/testimonials/testim
 import { FaqComponent } from './component/UI/faq/faq.component';
 import { LocationPageComponent } from './component/PAGES/location-page/location-page.component';
 import { NotFoundComponent } from './component/PAGES/not-found/not-found.component';
+import { HomeResolver } from './home-resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent,
+  resolve:{homeData: HomeResolver}},
   { path: 'about-us', component: AboutUsComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'contact-us', component: ContactUsComponent },

@@ -17,7 +17,7 @@ import { finalize, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { UploadService } from '../../services/upload.service';
 import { WebContentService } from '../../services/web-content.service';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environments/environment';
 import { initializeApp } from 'firebase/app';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
