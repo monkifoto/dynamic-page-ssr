@@ -77,7 +77,11 @@ export const appConfig: ApplicationConfig = {
             "ssrserenityparkcomprod": "It4V1NeoAXQhXLJyQsf9",
           };
 
-          businessId = functionToBusinessIdMap[functionTarget] || 'MGou3rzTVIbP77OLmZa7';
+          // businessId = functionToBusinessIdMap[functionTarget] || 'MGou3rzTVIbP77OLmZa7';
+          const matchedKey = Object.keys(functionToBusinessIdMap)
+          .find(key => key.startsWith(functionTarget));
+        businessId = matchedKey ? functionToBusinessIdMap[matchedKey] : 'MGou3rzTVIbP77OLmZa7';
+        console.log('✅ SSR: Matched businessId from FUNCTION_TARGET:', { functionTarget, matchedKey, businessId });
         } else {
           const url = new URL(window.location.href);
           hostname = url.hostname || '';

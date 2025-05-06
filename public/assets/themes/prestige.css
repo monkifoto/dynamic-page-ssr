@@ -222,7 +222,6 @@ p {
 }
 
 .sb-service-description {
-  font-size: 14px;
   color: #6c757d;
   line-height: 1.6;
 }
@@ -235,6 +234,11 @@ p {
   max-width: var(--site-max-width);
   margin: 0 auto;
 }
+
+.center-text-container h3{
+  padding-left: 0px;
+}
+
 .center-text-section-clemo {
   display: flex;
   flex-direction: row;
@@ -462,7 +466,6 @@ ul li strong {
 
 /* Service Description */
 .service-item p {
-  font-size: 14px;
   color: #7f8c8d;
   margin-top: 5px;
   line-height: 1.5;

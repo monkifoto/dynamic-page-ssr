@@ -202,30 +202,45 @@ export class ServicesComponent implements OnInit, AfterViewInit {
     Object.assign(instance, {
       isActive: [isActive],
       order: section.order || 0,
+
       _businessName: this.business?.businessName || '',
+
       themeType: this.business?.theme?.themeType,
       items: section.items || [],
       isMinimal: section.isMinimal || false,
       isParallax: section.isParallax ?? true,
       backgroundColor: section.backgroundColor || '#ffffff',
+
       content: this.applyReplaceKeyword(section.sectionContent || ''),
       textColor: section.textColor || '#000000',
+      textFontSize: section.textFontSize || '16',
+      textFontStyle: section.textFontStyle || 'normal',
       alignText: section.alignText || 'left',
+
       title: this.applyReplaceKeyword(section.sectionTitle || ''),
       titleColor: section.titleColor || '#000000',
+      titleFontSize: section.titleFontSize || '36',
+      titleFontStyle: section.titleFontStyle || 'normal',
+
       subTitle: this.applyReplaceKeyword(section.sectionSubTitle || ''),
       subtitleColor: section.subtitleColor || '#000000',
+      subtitleFontSize: section.subtitleFontSize || '14',
+      subtitleFontStyle: section.subtitleFontStyle || 'normal',
+
+      fullWidth: section.fullWidth || false,
       showBtn: section.showLearnMore || false,
       showButton: section.showButton || false,
       buttonText: section.buttonText || 'Learn More',
       buttonLink: section.buttonLink || '',
+
       showImage: !!section.sectionImageUrl,
       sectionImageUrl: section.sectionImageUrl || '',
+
       boxShadow: section.boxShadow || false,
       borderRadius: section.borderRadius ?? 10,
-      fullWidth: section.fullWidth || false,
       page: section.page,
       location: section.location,
+
     });
   }
 
