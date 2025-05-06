@@ -14,10 +14,8 @@ import { BusinessDataService } from './services/business-data.service';
 import { SERVER_REQUEST, SSR_BUSINESS_ID } from './tokens/server-request.token';
 import { firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { environment } from 'environments/environment';
+import { environment } from '../environments/environment';
 import { ThemeService } from './services/theme-service.service';
-
-let initialized = false;
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -50,7 +48,6 @@ export const appConfig: ApplicationConfig = {
         let businessId = '';
 
         if (!isPlatformBrowser(platformId)) {
-
           const functionTarget = (process.env['FUNCTION_TARGET'] || '').toLowerCase();
           console.log('🏢 Server-side FUNCTION_TARGET:', functionTarget);
 
@@ -77,35 +74,40 @@ export const appConfig: ApplicationConfig = {
             "ssrserenityparkcomprod": "It4V1NeoAXQhXLJyQsf9",
           };
 
-          businessId = functionToBusinessIdMap[functionTarget] || 'MGou3rzTVIbP77OLmZa7';
+          const matchedKey = Object.keys(functionToBusinessIdMap)e
+            .find(key => key.startsWith(functionTarget));
+          businessId = matchedKey ? functionToBusinessIdMap[matchedKey] : 'MGou3rzTVIbP77OLmZa7';
+          if (!matchedKey) {
+            console.warn('⚠️ SSR: No matching businessId found for truncated FUNCTION_TARGET:', functionTarget);
+          }
+          console.log('✅ SSR: Matched businessId from FUNCTION_TARGET:', { functionTarget, matchedKey, businessId });
+
         } else {
           const url = new URL(window.location.href);
           hostname = url.hostname || '';
           const hostnameToBusinessIdMap: { [key: string]: string } = {
             "helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
             "www.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
-            "test.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
-
             "aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
             "www.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
-            "test.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
-
             "elderlyhomecareafh.com": "SJgFxBYkopnPR4WibCAf",
             "www.elderlyhomecareafh.com": "SJgFxBYkopnPR4WibCAf",
-            "test.elderlyhomecareafh.com": "SJgFxBYkopnPR4WibCAf",
-
             "prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
             "www.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
-            "test.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
-
             "countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
             "www.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
-            "test.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
-
             "sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
+            "sp.sbmediahub.com": "KyQfU7hjez0uXRfAjqcu",
+            "elderlyhc.sbmediahub.com": "SJgFxBYkopnPR4WibCAf",
+            "prestige.sbmediahub.com": "pDJgpl34XUnRblyIlBA7",
+            "cc.sbmediahub.com": "yrNc50SvfPqwTSkvvygA",
+            "hh.sbmediahub.com": "vfCMoPjAu2ROVBbKvk0D",
+            "ae.sbmediahub.com": "UiSDf9elSjwcbQs2HZb1",
             "www.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
-            "test.sbmediahub.com": "MGou3rzTVIbP77OLmZa7",
-
+            "test.helpinghandafh.com": "vfCMoPjAu2ROVBbKvk0D",
+            "test.aefamilyhome.com": "UiSDf9elSjwcbQs2HZb1",
+            "test.countrycrestafh.com": "yrNc50SvfPqwTSkvvygA",
+            "test.prestigecareafh.com": "pDJgpl34XUnRblyIlBA7",
             "serenitypark.com": "It4V1NeoAXQhXLJyQsf9",
             "www.serenitypark.com": "It4V1NeoAXQhXLJyQsf9",
             "test.serenitypark.com": "It4V1NeoAXQhXLJyQsf9",
@@ -115,13 +117,7 @@ export const appConfig: ApplicationConfig = {
         }
 
         return async () => {
-          if (initialized) {
-            console.log('⚠️ Skipping duplicate APP_INITIALIZER for', businessId);
-            return;
-          }
-          initialized = true;
-          // console.trace("app-initializer.service.ts", "initializeApp", businessId);
-
+       
           try {
             const business = await firstValueFrom(businessData.loadBusinessData(businessId));
             console.log('✅ Loaded business data:', business?.businessName);
@@ -138,6 +134,7 @@ export const appConfig: ApplicationConfig = {
             }
 
             if (business) {
+              console.log("SSR setting metatags for businessId:", businessId);
               meta.updateMetaTags({
                 title: business.metaTitle?.trim() || business.businessName || 'Default Title',
                 description: business.metaDescription?.trim() || 'Adult Family Home providing quality care.',
