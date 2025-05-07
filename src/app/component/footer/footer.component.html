@@ -1,25 +1,25 @@
-<div [ngSwitch]="layoutType">
+<div *ngIf="business && layoutType" [ngSwitch]="layoutType">
   <ng-container *ngSwitchCase="'hh'">
     <footer class="footer">
       <div class="footer-content">
-        <h2 class="footer-title">{{business?.businessName}}</h2>
+        <h2 class="footer-title">{{business.businessName}}</h2>
         <hr class="footer-divider" />
         <div class="footer-info">
           <div class="footer-column">
             <h3 class="footer-column-title">Location:</h3>
             <address>
-              {{ business?.address }}
+              {{ business.address }}
             </address>
           </div>
           <div class="footer-column">
-            <h3 class="footer-column-title">Provider:{{business?.providerName}}</h3>
-            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
-            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+            <h3 class="footer-column-title">Provider:{{business.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
           </div>
           <div class="footer-column">
-            <h3 class="footer-column-title">Resident Manager:{{business?.providerName}}</h3>
-            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
-            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+            <h3 class="footer-column-title">Resident Manager:{{business.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
         <!-- Business Name and Divider -->
         <div class="ae-footer-business">
           <hr class="ae-footer-line" />
-          <h2 class="ae-footer-business-text">{{ business?.businessName }}</h2>
+          <h2 class="ae-footer-business-text">{{ business.businessName }}</h2>
           <hr class="ae-footer-line" />
         </div>
 
@@ -52,21 +52,21 @@
           <!-- Owner -->
           <div class="ae-footer-column">
             <h3 class="ae-footer-column-title">Owner:</h3>
-            <p>{{ business?.providerName }}</p>
+            <p>{{ business.providerName }}</p>
           </div>
 
           <!-- Location -->
           <div class="ae-footer-column">
             <h3 class="ae-footer-column-title">Location:</h3>
-            <p>{{ business?.address }}</p>
+            <p>{{ business.address }}</p>
           </div>
 
           <!-- Provider -->
           <div class="ae-footer-column">
             <h3 class="ae-footer-column-title">Provider:</h3>
-            <p>{{ business?.providerName }}</p>
-            <p>Email: <a href="mailto:{{ business?.email }}">{{ business?.email }}</a></p>
-            <p>Phone: <a href="tel:+{{ business?.phone }}">{{ business?.phone }}</a></p>
+            <p>{{ business.providerName }}</p>
+            <p>Email: <a href="mailto:{{ business.email }}">{{ business.email }}</a></p>
+            <p>Phone: <a href="tel:+{{ business.phone }}">{{ business.phone }}</a></p>
           </div>
         </div>
 
@@ -79,7 +79,7 @@
               <p>DESIGNED BY <a href="sbmediahub.com">SB MEDIA HUB</a>
             </div>
             <div class="rights">
-              <p>© {{ 2024 }} {{ business?.businessName }}. All rights reserved.</p>
+              <p>© {{ 2024 }} {{ business.businessName }}. All rights reserved.</p>
             </div>
           </div>
 
@@ -107,25 +107,25 @@
       </div>
       <div class="clemo-footer-logo">
         <div class="logo-circle">
-        <img src="{{ business?.logoImage }}" alt="">
+        <img src="{{ business.logoImage }}" alt="">
         </div>
-        <h4 class="clemo-footer-section-heading">{{ business?.businessName }}</h4>
+        <h4 class="clemo-footer-section-heading">{{ business.businessName }}</h4>
       </div>
       <!-- Row 2: Address, Contact, and Logo -->
       <div class="clemo-footer-content">
 
         <div class="clemo-footer-address">
           <h4 class="clemo-footer-section-heading">Address</h4>
-          <p>{{ business?.address }}</p>
+          <p>{{ business.address }}</p>
         </div>
 
         <div class="clemo-footer-phone">
           <h4 class="clemo-footer-section-heading">Contact Us</h4>
-          <p>Phone:{{ business?.phone }}<br>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
+          <p>Phone:{{ business.phone }}<br>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
         </div>
         <div class="clemo-footer-contact">
           <h4 class="clemo-footer-section-heading">Provider</h4>
-          <p>{{business?.providerName}}</p>
+          <p>{{business.providerName}}</p>
         </div>
       </div>
       <div class="clemo-footer-bottom">
@@ -146,11 +146,11 @@
       <div class="clemo-footer-content">
         <!-- Logo and Contact Info -->
         <div class="clemo-footer-logo">
-          <img src="{{ business?.logoImage}}" alt="">
-          <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
-          <h4>{{ business?.businessName }}</h4>
-          <p class="clemo-footer-phone">{{ business?.phone }}</p>
-          <p class="clemo-footer-address">{{ business?.address }}</p>
+          <img src="{{ business.logoImage}}" alt="">
+          <!-- <h2 class="clemo-footer-logo-text">{{ business.logoImage}}</h2> -->
+          <h4>{{ business.businessName }}</h4>
+          <p class="clemo-footer-phone">{{ business.phone }}</p>
+          <p class="clemo-footer-address">{{ business.address }}</p>
         </div>
 
         <!-- Social Media Links -->
@@ -192,11 +192,11 @@
       <div class="clemo-footer-content">
         <!-- Logo and Contact Info -->
         <div class="clemo-footer-logo">
-          <img src="{{ business?.logoImage}}" alt="">
-          <!-- <h2 class="clemo-footer-logo-text">{{ business?.logoImage}}</h2> -->
-          <!-- <h4>{{ business?.businessName }}</h4> -->
-          <p class="clemo-footer-phone">{{ business?.phone }}</p>
-          <p class="clemo-footer-address">{{ business?.address }}</p>
+          <img src="{{ business.logoImage}}" alt="">
+          <!-- <h2 class="clemo-footer-logo-text">{{ business.logoImage}}</h2> -->
+          <!-- <h4>{{ business.businessName }}</h4> -->
+          <p class="clemo-footer-phone">{{ business.phone }}</p>
+          <p class="clemo-footer-address">{{ business.address }}</p>
         </div>
 
         <!-- Social Media Links -->
@@ -237,24 +237,24 @@
   <ng-container *ngSwitchDefault>
     <footer class="footer">
       <div class="footer-content">
-        <h2 class="footer-title">{{business?.businessName}}</h2>
+        <h2 class="footer-title">{{business.businessName}}</h2>
         <hr class="footer-divider" />
         <div class="footer-info">
           <div class="footer-column">
             <h3 class="footer-column-title">Location:</h3>
             <address>
-              {{ business?.address }}
+              {{ business.address }}
             </address>
           </div>
           <div class="footer-column">
-            <h3 class="footer-column-title">Provider:{{business?.providerName}}</h3>
-            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
-            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+            <h3 class="footer-column-title">Provider:{{business.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
           </div>
           <div class="footer-column">
-            <h3 class="footer-column-title">Resident Manager:{{business?.providerName}}</h3>
-            <p>Email: <a href="mailto:{{business?.email}}"> {{ business?.email }}</a></p>
-            <p>Phone: <a href="tel:+{{business?.phone}}">{{business?.phone}}</a></p>
+            <h3 class="footer-column-title">Resident Manager:{{business.providerName}}</h3>
+            <p>Email: <a href="mailto:{{business.email}}"> {{ business.email }}</a></p>
+            <p>Phone: <a href="tel:+{{business.phone}}">{{business.phone}}</a></p>
           </div>
         </div>
       </div>

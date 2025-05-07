@@ -1,28 +1,30 @@
-
-import { getFirestore, doc, getDoc, setDoc, DocumentReference } from 'firebase/firestore';
-import { initializeApp } from 'firebase/app';
+import { Injectable, Inject, PLATFORM_ID, EnvironmentInjector, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { TransferState, makeStateKey } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { Theme } from '../model/business-questions.model';
 import { environment } from '../../environments/environment';
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { TransferState, makeStateKey } from '@angular/core';
-import { RendererFactory2, Renderer2, inject } from '@angular/core';
-
-
+import { RendererFactory2, Renderer2 } from '@angular/core';
+import { getFirestore, doc, getDoc, setDoc, DocumentReference } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { runInInjectionContext } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private firestore = getFirestore(initializeApp(environment.firebase));
-  // private themeLink: HTMLLinkElement;
   private isBrowser: boolean;
   private renderer: Renderer2;
   private themeAppliedOnce = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private transferState: TransferState, rendererFactory: RendererFactory2) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private transferState: TransferState,
+    private environmentInjector: EnvironmentInjector,
+    rendererFactory: RendererFactory2
+  ) {
     this.renderer = rendererFactory.createRenderer(null, null);
     this.isBrowser = isPlatformBrowser(platformId);
 
@@ -36,7 +38,6 @@ export class ThemeService {
       }
     }
   }
-
 
   public defaultTheme: Theme = {
     themeFileName: 'styles.css',
@@ -60,16 +61,15 @@ export class ThemeService {
   }
 
   getBusinessTheme(businessId: string): Observable<Theme> {
-    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`) as DocumentReference<Theme>;
-    return from(getDoc(themeRef)).pipe(
-      map((snapshot) => {
-        const data = snapshot.exists() ? snapshot.data() : this.defaultTheme;
-        return {
-          ...data,
-          themeType: data.themeType || 'demo',
-        } as Theme;
-      })
-    );
+    return from(runInInjectionContext(this.environmentInjector, async () => {
+      const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`) as DocumentReference<Theme>;
+      const snapshot = await getDoc(themeRef);
+      const data = snapshot.exists() ? snapshot.data() : this.defaultTheme;
+      return {
+        ...data,
+        themeType: data.themeType || 'demo',
+      } as Theme;
+    }));
   }
 
   getThemeColors(businessId: string): Observable<any> {
@@ -82,40 +82,33 @@ export class ThemeService {
       return of(cached);
     }
 
-    const businessRef = doc(this.firestore, `businesses/${businessId}`);
-    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
+    return from(runInInjectionContext(this.environmentInjector, async () => {
+      const businessRef = doc(this.firestore, `businesses/${businessId}`);
+      const businessSnap = await getDoc(businessRef);
 
-    return from(getDoc(businessRef)).pipe(
-      take(1),
-      switchMap((businessSnap) => {
-        if (!businessSnap.exists()) {
-          console.error('Theme Service - Business document does not exist for ID:', businessId);
-          return throwError(() => new Error('Business document does not exist'));
-        }
+      if (!businessSnap.exists()) {
+        console.error('Theme Service - Business document does not exist for ID:', businessId);
+        throw new Error('Business document does not exist');
+      }
 
-        return from(getDoc(themeRef)).pipe(
-          switchMap((themeSnap) => {
-            const themeData = themeSnap.exists() ? themeSnap.data() : this.defaultTheme;
+      const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
+      const themeSnap = await getDoc(themeRef);
 
-            // ✅ Cache into TransferState during SSR
-            if (!this.isBrowser) {
-              this.transferState.set(STATE_KEY, themeData);
-              console.log('📝 Writing theme to TransferState (SSR)');
-            }
+      const themeData = themeSnap.exists() ? themeSnap.data() : this.defaultTheme;
 
-            if (!themeSnap.exists()) {
-              return from(setDoc(themeRef, this.defaultTheme)).pipe(
-                switchMap(() => {
-                  this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
-                  return of(this.defaultTheme);
-                })
-              );
-            }
+      if (!this.isBrowser) {
+        this.transferState.set(STATE_KEY, themeData);
+        console.log('📝 Writing theme to TransferState (SSR)');
+      }
 
-            return of(themeData);
-          })
-        );
-      }),
+      if (!themeSnap.exists()) {
+        await setDoc(themeRef, this.defaultTheme);
+        this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
+        return this.defaultTheme;
+      }
+
+      return themeData;
+    })).pipe(
       catchError((error) => {
         console.error('Error fetching theme:', error);
         this.applyThemeFile(this.defaultTheme.themeFileName ?? 'styles.css');
@@ -124,40 +117,29 @@ export class ThemeService {
     );
   }
 
-
   updateColors(businessId: string, colors: any): Promise<void> {
-    const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
-    return setDoc(themeRef, colors, { merge: true })
-      .then(() => {
-        if (colors.themeFileName) {
-          this.applyThemeFile(colors.themeFileName);
-        }
-      })
-      .catch(error => {
-        console.error('Theme Service - Error updating colors:', error);
-        throw new Error(error);
-      });
+    return runInInjectionContext(this.environmentInjector, async () => {
+      const themeRef = doc(this.firestore, `businesses/${businessId}/theme/themeDoc`);
+      await setDoc(themeRef, colors, { merge: true });
+
+      if (colors.themeFileName) {
+        this.applyThemeFile(colors.themeFileName);
+      }
+    });
   }
 
   resetToDefaultColors(): Observable<any> {
-    const defaultRef = doc(this.firestore, 'defaultSettings/colors');
-    return from(getDoc(defaultRef)).pipe(
-      switchMap(snapshot => {
-        if (snapshot.exists()) {
-          return of(snapshot.data());
-        } else {
-          console.warn('No default colors found in Firestore.');
-          return of(this.defaultTheme);
-        }
-      })
-    );
+    return from(runInInjectionContext(this.environmentInjector, async () => {
+      const defaultRef = doc(this.firestore, 'defaultSettings/colors');
+      const snapshot = await getDoc(defaultRef);
+      return snapshot.exists() ? snapshot.data() : this.defaultTheme;
+    }));
   }
 
   applyThemeFile(themeFileName: string): Promise<void> {
     if (!this.isBrowser) return Promise.resolve();
 
     const existing = document.querySelector(`link[href="/assets/themes/${themeFileName}"]`);
-
     if (existing) {
       console.log(`🎯 Theme already present: ${themeFileName}`);
       return Promise.resolve();
@@ -189,25 +171,17 @@ export class ThemeService {
 
   hasValidColors(themeColors: any): boolean {
     const keys = [
-      'primaryColor',
-      'secondaryColor',
-      'accentColor',
-      'backgroundColor',
-      'darkBackgroundColor',
-      'textColor',
-      'navBackgroundColor',
-      'navTextColor',
-      'navActiveBackground',
-      'navActiveText',
-      'buttonColor',
-      'buttonHoverColor',
+      'primaryColor', 'secondaryColor', 'accentColor', 'backgroundColor',
+      'darkBackgroundColor', 'textColor', 'navBackgroundColor',
+      'navTextColor', 'navActiveBackground', 'navActiveText',
+      'buttonColor', 'buttonHoverColor',
     ];
     return keys.every((key) => !!themeColors?.[key]);
   }
 
-
   private loadCss(url: string): Promise<void> {
     if (!this.isBrowser) return Promise.resolve();
+
     return new Promise((resolve, reject) => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -236,11 +210,9 @@ export class ThemeService {
           if (this.isBrowser && theme?.themeFileName) {
             this.applyThemeFile(theme.themeFileName);
           }
-
           if (this.hasValidColors(theme)) {
             this.applyTheme(theme);
           }
-
           resolve();
         },
         error: (err) => {
@@ -253,6 +225,4 @@ export class ThemeService {
       });
     });
   }
-
-
 }

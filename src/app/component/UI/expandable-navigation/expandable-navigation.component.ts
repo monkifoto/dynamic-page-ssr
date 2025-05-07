@@ -33,25 +33,25 @@ export class ExpandableNavigationComponent  implements OnInit {
 
   ngOnInit(): void {
     console.log('🚀 Expandable Navigation Component Initialized');
+
     if (isPlatformBrowser(this.platformId)) {
-    this.businessDataService.getBusinessId().subscribe((businessId) => {
-      if (businessId) {
-        this.businessId = businessId;
+      this.businessDataService.getBusinessData().subscribe((business) => {
+        if (business) {
+          this.business = business;
+          this.businessId = business.id;
+          this.layoutType = business.theme?.themeType;
+          console.log('themeType', this.business?.theme.themeType);
 
-        this.businessDataService.getBusinessData().subscribe((data) => {
-          this.business = data;
-          this.layoutType = this.business?.theme.themeType;
-        });
+          this.businessDataService.getLocations().subscribe((locations) => {
+            this.locations = locations;
+          });
+        }
+      });
 
-        this.businessDataService.getLocations().subscribe((locations) => {
-          this.locations = locations;
-        });
-      }
-    });
-
-    this.checkScroll();
+      this.checkScroll();
+    }
   }
-  }
+
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {

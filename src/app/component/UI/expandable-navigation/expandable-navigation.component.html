@@ -33,9 +33,19 @@
         </li>
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link" (click)="navigateTo('about-us')">About Us</span></li>
         <li class="clemo-nav-linkitem" ><span class="clemo-nav-link" (click)="navigateTo('services')">Services</span></li>
-        <li class="clemo-nav-linkitem" *ngIf="layoutType!='sb'"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Home</span></li>
-        <li class="clemo-nav-linkitem" *ngIf="layoutType=='sb'"><span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Work</span></li>
-        <li class="clemo-nav-linkitem" *ngIf="layoutType!='sb'"><span class="clemo-nav-link" (click)="navigateTo('resident-form')">Resident Form</span></li>
+        <ng-container *ngIf="business">
+          <li class="clemo-nav-linkitem" *ngIf="layoutType !== 'sb'">
+            <span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Home</span>
+          </li>
+
+          <li class="clemo-nav-linkitem" *ngIf="layoutType === 'sb'">
+            <span class="clemo-nav-link" (click)="navigateTo('gallery')">Our Work</span>
+          </li>
+
+          <li class="clemo-nav-linkitem" *ngIf="layoutType !== 'sb'">
+            <span class="clemo-nav-link" (click)="navigateTo('resident-form')">Resident Form</span>
+          </li>
+        </ng-container>
         <li class="clemo-nav-linkitem"><span class="clemo-nav-link" (click)="navigateTo('contact-us')">Contact</span></li>
       </ul>
     </div>

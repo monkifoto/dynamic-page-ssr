@@ -87,6 +87,7 @@ export class BusinessService {
   }
 
   getBusinessData(businessId: string | null | undefined): Observable<Business | undefined> {
+    console.log('getBusinessData called with businessId:', businessId);
     const resolvedBusinessId = businessId?.trim() || this.defaultBusinessId;
     const businessRef = this.run(() => doc(this.firestore, `${this.basePath}/${resolvedBusinessId}`));
 
@@ -128,6 +129,7 @@ export class BusinessService {
   }
 
   getBusiness(id: string): Observable<Business | undefined> {
+    console.log('getBusiness called with id:', id);
     return this.getBusinessData(id);
   }
 
@@ -159,6 +161,7 @@ export class BusinessService {
   }
 
   async getThemeFileName(businessId: string = this.defaultBusinessId): Promise<string> {
+    console.log
     const themeRef = doc(this.firestore, `${this.basePath}/${businessId}/theme/themeDoc`);
     const themeSnap = await this.run(() => getDoc(themeRef));
     return themeSnap.exists() ? (themeSnap.data()?.['themeFileName'] || 'styles.css') : 'default.css';
@@ -212,9 +215,10 @@ export class BusinessService {
   }
 
   private getDefaultTheme(): Theme {
+    console.log('🟢 [business.service.ts] Using default theme');
     return {
-      themeFileName: 'styles.css',
-      primaryColor: '#fffaf2',
+      themeFileName: 'sb.css',
+      primaryColor: '#ffffff',
       secondaryColor: '#f8f3f0',
       accentColor: '#F0C987',
       backgroundColor: '#F5F3E7',
@@ -226,7 +230,7 @@ export class BusinessService {
       navActiveText: '#ffffff',
       buttonColor: '#D9A064',
       buttonHoverColor: '#c9605b',
-      themeType: 'demo',
+      themeType: 'sb',
     };
   }
 }

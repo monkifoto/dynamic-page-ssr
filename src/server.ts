@@ -4,7 +4,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import bootstrap from './main.server';
-import { SSR_BUSINESS_ID } from './app/tokens/server-request.token';
+import { SERVER_REQUEST, SSR_BUSINESS_ID } from './app/tokens/server-request.token';
 import { appConfig } from './app/app.config';
 import { ApplicationConfig } from '@angular/core';
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
@@ -64,6 +64,7 @@ app.get('**', (req: Request, res: Response, next: NextFunction) => {
 
     "ssrsbmediahubcomtest": "MGou3rzTVIbP77OLmZa7",
     "ssrsbmediahubcomprod": "MGou3rzTVIbP77OLmZa7",
+
     "ssrserenityparkcomtest": "It4V1NeoAXQhXLJyQsf9",
     "ssrserenityparkcomprod": "It4V1NeoAXQhXLJyQsf9",
   };
@@ -72,7 +73,14 @@ app.get('**', (req: Request, res: Response, next: NextFunction) => {
 
   commonEngine
     .render({
-      bootstrap, documentFilePath: indexHtml, url: `${protocol}://${headers.host}${originalUrl}`, publicPath: browserDistFolder, providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }, { provide: SSR_BUSINESS_ID, useValue: businessId }]
+      bootstrap,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: browserDistFolder,
+      providers: [
+        { provide: APP_BASE_HREF, useValue: baseUrl },
+        { provide: SSR_BUSINESS_ID, useValue: businessId },
+        { provide: SERVER_REQUEST, useValue: req } ]
     })
     .then((html) => res.send(html))
     .catch((err) => next(err));

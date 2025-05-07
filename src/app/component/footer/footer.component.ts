@@ -24,7 +24,7 @@ export class FooterComponent implements OnInit {
   isAdmin = false;
   isAuthenticated$: Observable<boolean> | undefined;
   themeFileName?: string;
-  layoutType?: string = 'demo';
+  layoutType?: string;
   envName = environment.production ? 'Production' : 'Development';
   useMockMap = environment.useMockGoogleMap;
 useMockReviews = environment.useMockGoogleReviews;
