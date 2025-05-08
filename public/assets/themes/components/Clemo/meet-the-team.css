@@ -65,12 +65,30 @@
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
+  .team-member h3 {
+    font-size: 1.1em;
+    color: var(--dark-background-color);
+    margin: 0;
+  }
+  .team-member h4 {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 @media (max-width: 480px) {
   .team-member {
     flex: 1 1 100%;
     max-width: 100%;
+  }
+  .team-member h3 {
+    font-size: .8em;
+    color: var(--dark-background-color);
+    margin: 0;
+  }
+  .team-member h4 {
+    padding: 0;
+    margin: 0;
   }
 }
 /********************************************************* MEET THE TEAM ********************************************************/

@@ -1,3 +1,4 @@
+
 import {
   Component,
   OnInit,
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
   sections: any[] = [];
   businessId: string = ''
   business: Business | null = null;
- 
+
   componentsMap: Record<string, Type<any>> = {
     'center-text': CenterTextComponent,
     'hero-slider': HeroSliderComponent,
@@ -71,114 +72,83 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-        const homeData = data['homeData']
+      const homeData = data['homeData'];
+      if (homeData) {
+        this.business = homeData.business;
+        this.businessId = homeData.business?.id ?? '';
+        this.sections = (homeData.sections || [])
+          .filter((section: any) => section.isActive !== false)
+          .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
 
-        if(homeData){
-            this.business = homeData.business
-            this.sections = homeData.sections
-            this.businessId = homeData.business?.id!
-            this.loadComponents()
+        if (isPlatformBrowser(this.platformId)) {
+          this.loadComponents();
         }
-    })
-  }
-
-  loadSections(sections:any[]) {
-        if (!sections || sections.length === 0) {
-          console.warn('❗ No sections retrieved from the database');
-          return;
-        }
-
-        this.sections = sections
-          .filter((section) => section.isActive !== false)
-          .sort((a, b) => (a.order || 0) - (b.order || 0));
-        
+      }
+    });
   }
 
   loadComponents() {
-    this.container.clear();
-    if (this.sections.length) this.container.createComponent(HeroSliderComponent);
+    if (!isPlatformBrowser(this.platformId)) return;
 
-    if (!this.sections.length) {
-      console.warn('❗ No sections available to load.');
-      return;
+    this.container.clear();
+
+    if (this.sections.length) {
+      this.container.createComponent(HeroSliderComponent);
     }
 
     let consultationSection: any = null;
 
     this.sections.forEach((section) => {
-      const componentType = this.componentsMap[
-        section.component as keyof typeof this.componentsMap
-      ] as Type<any>;
-
-      if (!componentType) {
-        console.error(`Component Not Found:`, section.component);
-        return;
-      }
+      const componentType = this.componentsMap[section.component];
+      if (!componentType) return;
 
       if (section.component === 'consultation') {
         consultationSection = section;
         return;
       }
 
-      const componentRef = this.container.createComponent(componentType);
-      this.assignComponentProperties(componentRef.instance, section);
+      const ref = this.container.createComponent(componentType);
+      this.assignComponentProperties(ref.instance, section);
     });
 
     this.loadManualComponents();
 
     if (consultationSection) {
-      const consultationComponentType = this.componentsMap[
-        'consultation'
-      ] as Type<any>;
-
-      if (consultationComponentType) {
-        const consultationRef = this.container.createComponent(
-          consultationComponentType
-        );
-        this.assignComponentProperties(
-          consultationRef.instance,
-          consultationSection
-        );
-      } else {
-        console.error(`Consultation Component Not Found!`);
-      }
+      const ref = this.container.createComponent(this.componentsMap['consultation']);
+      this.assignComponentProperties(ref.instance, consultationSection);
     }
   }
 
   loadManualComponents() {
-    if (this.business?.theme?.themeType === 'clemo') {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const layout = this.business?.theme?.themeType;
+
+    if (layout === 'clemo') {
       this.container.createComponent(VideoComponent);
-    }
-
-    // Manually Load LatestProductsComponent if Business is SB
-    if (this.business?.theme?.themeType == 'sb') {
-      const latestProductsRef = this.container.createComponent(LatestProductsComponent);
-      latestProductsRef.instance.layoutType = this.business?.theme?.themeType;
-      latestProductsRef.changeDetectorRef.detectChanges();
-    }
-
-    // Manually Load StatusComponent if Business is Clemo
-    if (this.business?.theme?.themeType == 'clemo') {
       const statsRef = this.container.createComponent(StatsComponent);
-      statsRef.instance.businessId = this.business?.id;
+      statsRef.instance.businessId = this.business?.id ?? '';
       statsRef.changeDetectorRef.detectChanges();
     }
 
-    // Manually Load TestimonialCarouselComponent if Business Has a Google Place ID
-    if (isPlatformBrowser(this.platformId) && this.business?.placeId) {
+    if (layout === 'sb') {
+      const latestProductsRef = this.container.createComponent(LatestProductsComponent);
+      latestProductsRef.instance.layoutType = layout;
+      latestProductsRef.changeDetectorRef.detectChanges();
+    }
+
+    if (this.business?.placeId) {
       const testimonialCarouselRef = this.container.createComponent(TestimonialCarouselComponent);
       testimonialCarouselRef.instance.placeId = this.business.placeId;
+
+      if (layout === 'clemo') {
+        const gmapRef = this.container.createComponent(GoogleMapsComponent);
+        gmapRef.instance.layoutType = layout;
+        gmapRef.instance.address = this.business?.address || '';
+      }
     }
 
-    // GOOGLE MAP COMPONENT
-    if (this.business?.placeId && this.business?.theme?.themeType === 'clemo') {
-      const gmapRef = this.container.createComponent(GoogleMapsComponent);
-      gmapRef.instance.layoutType = this.business?.theme?.themeType || 'demo';
-      gmapRef.instance.address = this.business?.address || '';
-    }
-
-    // FAQ COMPONENT
-    if (this.business?.theme?.themeType === 'sp') {
+    if (layout === 'sp') {
       this.container.createComponent(FaqComponent);
     }
   }
@@ -221,7 +191,7 @@ export class HomeComponent implements OnInit {
         businessId: this.business?.id,
       });
 
-      if (componentInstance.changeDetectorRef) {
+      if (componentInstance.changeDetectorRef && isPlatformBrowser(this.platformId)) {
         componentInstance.changeDetectorRef.detectChanges();
       }
     }

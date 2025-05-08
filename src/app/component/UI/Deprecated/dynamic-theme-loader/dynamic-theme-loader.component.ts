@@ -1,14 +1,14 @@
 import { Component, Input, ViewChild, ViewContainerRef, OnChanges, ComponentFactoryResolver, Type } from '@angular/core';
-import { ThemeService } from '../../services/theme-service.service';
-import { HeroSliderComponent } from '../UI/hero-slider/hero-slider.component';
-import { CenterTextComponent } from '../UI/center-text/center-text.component';
-import { ItemListComponent } from '../UI/item-list/item-list.component';
-import { WhyUsComponent } from '../UI/why-us/why-us.component';
-import { FeaturesComponent } from '../UI/features/features.component';
-import { TestimonialsComponent } from '../testimonials/testimonials.component';
-import { TestimonialCarouselComponent } from '../UI/testimonial-carousel/testimonial-carousel.component';
-import { ConsultationComponent } from '../UI/consultation/consultation.component';
-import { GoogleMapsComponent } from '../UI/google-maps/google-maps.component';
+import { ThemeService } from '../../../../services/theme-service.service';
+import { HeroSliderComponent } from '../../hero-slider/hero-slider.component';
+import { CenterTextComponent } from '../../center-text/center-text.component';
+import { ItemListComponent } from '../../item-list/item-list.component';
+import { WhyUsComponent } from '../../why-us/why-us.component';
+import { FeaturesComponent } from '../../features/features.component';
+import { TestimonialsComponent } from '../../../testimonials/testimonials.component';
+import { TestimonialCarouselComponent } from '../../testimonial-carousel/testimonial-carousel.component';
+import { ConsultationComponent } from '../../consultation/consultation.component';
+import { GoogleMapsComponent } from '../../google-maps/google-maps.component';
 import { ComponentRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -38,31 +38,31 @@ export class DynamicThemeLoaderComponent implements OnChanges {
   };
 
   ngOnChanges(): void {
-    // if (this.businessId) {
-    //   console.trace(DynamicThemeLoaderComponent.name, 'ngOnChanges', this.businessId);
-    //   this.loadTheme();
-    // }
+    if (this.businessId) {
+      console.trace(DynamicThemeLoaderComponent.name, 'ngOnChanges', this.businessId);
+      this.loadTheme();
+    }
   }
 
-  // private loadTheme(): void {
-  //   this.container.clear();
+  private loadTheme(): void {
+    this.container.clear();
 
-  //   this.themeService.getBusinessTheme(this.businessId).subscribe(themeData => {
-  //     const themeType = themeData?.themeType || 'demo';
-  //     const themeFile = themeData?.themeFileName || 'styles.css';
+    this.themeService.getBusinessTheme(this.businessId).subscribe(themeData => {
+      const themeType = themeData?.themeType || 'demo';
+      const themeFile = themeData?.themeFileName || 'styles.css';
 
-  //     // Apply the theme CSS
-  //     this.themeService.applyThemeFile(themeFile).then(() => {
-  //       console.log(`Theme applied: ${themeFile}`);
-  //     });
+      // Apply the theme CSS
+      this.themeService.applyThemeFile(themeFile).then(() => {
+        console.log(`Theme applied: ${themeFile}`);
+      });
 
-  //     // Get the components for the given theme type
-  //     const componentsToLoad = this.themeComponentsMap[themeType] || this.themeComponentsMap['demo'];
+      // Get the components for the given theme type
+      const componentsToLoad = this.themeComponentsMap[themeType] || this.themeComponentsMap['demo'];
 
-  //     // Dynamically create each component in the array
-  //     componentsToLoad.forEach(component => {
-  //       this.container.createComponent(component);
-  //     });
-  //   });
- // }
+      // Dynamically create each component in the array
+      componentsToLoad.forEach(component => {
+        this.container.createComponent(component);
+      });
+    });
+ }
 }

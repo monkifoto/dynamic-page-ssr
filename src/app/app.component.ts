@@ -1,6 +1,6 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from "./component/footer/footer.component";
+import { FooterComponent } from './component/UI/footer/footer.component';
 import { NavigationComponent } from "./component/navigation/navigation.component";
 // import { ThemeInitializerService } from './services/theme-initializer.service';
 import { isPlatformBrowser } from '@angular/common';

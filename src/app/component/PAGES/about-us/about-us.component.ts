@@ -90,7 +90,7 @@ export class AboutUsComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     if (this.business) {
-      this.loadComponents();
+      // this.loadComponents();
     }
   }
 

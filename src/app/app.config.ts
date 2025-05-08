@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection, inject, PLATFORM_ID } from '@angular/core';
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER , TransferState, makeStateKey} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -13,9 +13,10 @@ import { MetaService } from './services/meta-service.service';
 import { BusinessDataService } from './services/business-data.service';
 import { SERVER_REQUEST, SSR_BUSINESS_ID } from './tokens/server-request.token';
 import { firstValueFrom } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../environments/environment';
 import { ThemeService } from './services/theme-service.service';
+import { Business } from './model/business-questions.model';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -43,6 +44,7 @@ export const appConfig: ApplicationConfig = {
         const businessData = inject(BusinessDataService);
         const themeService = inject(ThemeService);
         const businessIdToken = inject(SSR_BUSINESS_ID, { optional: true });
+        const transferState = inject(TransferState);
 
         let hostname = '';
         let businessId = '';
@@ -140,6 +142,13 @@ export const appConfig: ApplicationConfig = {
             const business = await firstValueFrom(businessData.loadBusinessData(businessId));
             console.log('✅ Loaded business data:', business?.businessName);
 
+            const STATE_KEY = makeStateKey<Business>(`business-${businessId}`);
+            if (isPlatformServer(platformId)) {
+              transferState.set(STATE_KEY, business);
+              console.log('📝 Cached business in TransferState');
+            }
+
+
             const firestore = getFirestore();
             const themeRef = doc(firestore, `businesses/${businessId}/theme/themeDoc`);
             const themeSnap = await getDoc(themeRef);
@@ -186,3 +195,5 @@ export const appConfig: ApplicationConfig = {
     },
   ],
 };
+// Removed the local declaration of isPlatformServer as it conflicts with the imported one.
+

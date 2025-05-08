@@ -1,5 +1,5 @@
-<div *ngIf="business">
-  <div [ngSwitch]="business.theme.themeType">
+<div *ngIf="business as biz">
+  <div [ngSwitch]="biz.theme?.themeType">
     <ng-container *ngSwitchCase="'hh'">
       <div class="hero-about">
         <div class="page-hero-overlay">
@@ -26,28 +26,26 @@
     <ng-container *ngSwitchCase="'prestige'">
       <app-hero [layoutType]="'prestige'"></app-hero>
     </ng-container>
-
   </div>
 
-  <div *ngIf="business.theme.themeType!='prestige'" class="aboutus-page-main-container">
+  <!-- 🔁 Unified dynamic container handling -->
+  <div class="aboutus-page-main-container">
     <div class="container text-section" #dynamicContainer></div>
   </div>
-  <div *ngIf="business.theme.themeType=='prestige'" class="aboutus-page-main-container">
-    <div class="" #dynamicContainer></div>
-  </div>
 
-  <!-- <section class="business-team">
-    <app-meet-the-team [businessId]="business.id"></app-meet-the-team>
-  </section> -->
+  <!-- 🔁 Optional: Meet the team if needed by layoutType -->
+  <!--
+  <section class="business-team" *ngIf="biz.theme?.themeType === 'clemo'">
+    <app-meet-the-team [businessId]="biz.id"></app-meet-the-team>
+  </section>
+  -->
 
-  <div [ngSwitch]="business.theme.themeType">
-    <ng-container *ngSwitchCase="'ae'">
-      <app-testimonial-image
-        [imageURL]="
-          '../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'
-        "
-        [author]="business.testimonials[0].name"
-        [text]="business.testimonials[0].quote"
-      ></app-testimonial-image>
-    </ng-container>
-  </div>
+  <!-- ✅ Conditionally show testimonial image -->
+  <ng-container *ngIf="biz?.theme?.themeType === 'ae' && (biz?.testimonials?.length ?? 0) > 0">
+    <app-testimonial-image
+      [imageURL]="'../../../../assets/sharedAssets/istockphoto-480743801-2048x2048.jpg'"
+      [author]="biz.testimonials[0].name || ''"
+      [text]="biz.testimonials[0].quote || ''"
+    ></app-testimonial-image>
+  </ng-container>
+</div>

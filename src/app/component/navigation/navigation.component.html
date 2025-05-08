@@ -1,35 +1,4 @@
 <div *ngIf="business && layoutType" [ngSwitch]="layoutType">
-
-  <!-- HH Layout (inline nav) -->
-  <ng-container *ngSwitchCase="'hh'">
-    <nav class="navbar_">
-      <div class="navbar-container">
-        <div class="logo">
-          <a [routerLink]="['/home']" [queryParams]="{ id: businessId }">
-            <img
-              class="logoImage"
-              *ngIf="business.logoImage"
-              [src]="business.logoImage"
-              alt="Business Logo"
-            />
-          </a>
-        </div>
-        <div class="menu-icon" (click)="toggleMenu()">
-          <div class="bar1" [ngClass]="{ 'open-bar1': menuOpen }"></div>
-          <div class="bar2" [ngClass]="{ 'open-bar2': menuOpen }"></div>
-          <div class="bar3" [ngClass]="{ 'open-bar3': menuOpen }"></div>
-        </div>
-        <ul class="nav-menu" [ngClass]="{ active: menuOpen }">
-          <li class="nav-item" (click)="navigateTo('home')">Home</li>
-          <li class="nav-item" (click)="navigateTo('services')">Services</li>
-          <li class="nav-item" (click)="navigateTo('about-us')">About Us</li>
-          <li class="nav-item" (click)="navigateTo('gallery')">Our Home</li>
-          <li class="nav-item" (click)="navigateTo('contact-us')">Contact</li>
-        </ul>
-      </div>
-    </nav>
-  </ng-container>
-
   <!-- SP Layout (inline nav) -->
   <ng-container *ngSwitchCase="'sp'">
     <nav class="navbar_sp">

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { WebContentService } from '../../services/web-content.service';
-import { Business } from '../../model/business-questions.model';
-import { AuthService } from '../../services/auth.service';
-import { ThemeService } from '../../services/theme-service.service';
-import { BusinessDataService } from '../../services/business-data.service';
+import { WebContentService } from 'app/services/web-content.service';
+import { Business } from 'app/model/business-questions.model';
+import { AuthService } from 'app/services/auth.service';
+import { ThemeService } from 'app/services/theme-service.service';
+import { BusinessDataService } from 'app/services/business-data.service';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environments/environment';
 import { CommonModule } from '@angular/common';
 
 

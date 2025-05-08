@@ -95,6 +95,31 @@ border-left: solid 1px var(--text-color);
   .left-column{
     min-height: 10px;
   }
+  @media (max-width: 480px) {
+    .right-column{
+      border-left: solid 0px var(--text-color);
+      padding: 0 !important;
+      margin: 0 !important;
+      }
+    .center-text-container {
+      flex-direction: row;
+    }
+    .left-column{
+      min-height: 10px;
+    }
+    .center-text-container::before {
+      display: none;
+    }
+
+    .center-text-title:last-of-type {
+      font-size: 36px;
+    }
+    .center-text-description{
+      padding: 0;
+      margin: 0;
+    }
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -112,3 +137,5 @@ border-left: solid 1px var(--text-color);
     font-size: 36px;
   }
 }
+
+

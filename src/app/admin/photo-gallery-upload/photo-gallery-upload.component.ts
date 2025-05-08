@@ -21,7 +21,7 @@ import { environment } from 'environments/environment';
 import { initializeApp } from 'firebase/app';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ImageViewerModalComponent } from '../../component/image-viewer-modal/image-viewer-modal.component';
+import { ImageViewerModalComponent } from '../../component/UI/image-viewer-modal/image-viewer-modal.component';
 
 @Component({
   selector: 'app-photo-gallery-upload',
