@@ -1,11 +1,24 @@
-<div *ngIf="employees$" class="meet-the-team">
-  <app-section-title [title]="'Meet the Team'" [titleColor]="'var(--primary-color)'"></app-section-title>
-  <div class="team-list">
-    <div class="team-member" *ngFor="let employee of employees$ | async">
-      <img [src]="employee.photoURL" alt="{{ employee.name }}" class="team-photo">
+<div *ngIf="isBrowser && (employees$ | async) as employees" class="meet-the-team">
+  <app-section-title
+    [title]="'Meet the Team'"
+    [titleColor]="'var(--primary-color)'"
+  ></app-section-title>
+
+  <div class="team-list" *ngIf="employees.length > 0; else noTeam">
+    <div class="team-member" *ngFor="let employee of employees">
+      <img
+        *ngIf="employee.photoURL"
+        [src]="employee.photoURL"
+        alt="{{ employee.name }}"
+        class="team-photo"
+      />
       <h3>{{ employee.name }}</h3>
       <h4>{{ employee.role }}</h4>
       <p>{{ employee.bio }}</p>
     </div>
   </div>
+
+  <ng-template #noTeam>
+    <p class="no-team-message">No team members listed at this time.</p>
+  </ng-template>
 </div>

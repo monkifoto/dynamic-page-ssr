@@ -1,28 +1,47 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit, OnDestroy, Optional } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './component/UI/footer/footer.component';
 import { NavigationComponent } from "./component/navigation/navigation.component";
-// import { ThemeInitializerService } from './services/theme-initializer.service';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TransferState } from '@angular/core';
 import { SSR_BUSINESS_ID } from './tokens/server-request.token';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, NavigationComponent],
+  standalone: true,
+  imports: [RouterOutlet, FooterComponent, NavigationComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  standalone: true,
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'dynamic-page-ssr';
+  platformIdType: 'server' | 'browser';
+
   constructor(
-    // private themeService: ThemeInitializerService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(SSR_BUSINESS_ID) private businessId: string | null
-  ) {}
-  ngOnInit() {
+    @Optional() @Inject(SSR_BUSINESS_ID) private businessId: string | null,
+    private transferState: TransferState
+  ) {
+    this.platformIdType = isPlatformBrowser(platformId) ? 'browser' : 'server';
+  }
+
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('🔍 TRANSFER_STATE in browser:', (window as any)['TRANSFER_STATE']);
+      const ts = (window as any)['TRANSFER_STATE'];
+      console.log('🔍 TRANSFER_STATE in browser:', ts ?? '(none)');
+
+      if (!ts) {
+        console.warn('⚠️ No TRANSFER_STATE found — hydration mismatch may occur.');
+      }
+
+      if (this.businessId) {
+        console.log('🌐 SSR_BUSINESS_ID in browser:', this.businessId);
+      }
     }
+  }
+
+  ngOnDestroy(): void {
+    // SSR cleanup hook, if needed in future
   }
 }

@@ -5,10 +5,11 @@ import { provideServerRendering } from '@angular/platform-server';
 import { SERVER_REQUEST } from './app/tokens/server-request.token';
 
 console.log('🟢 [main.server.ts] Server bootstrap starting...');
-console.time('🔥 Angular bootstrap time');
+
 
 // ✅ Patch: Add default providers to handle optional server context (e.g. during prerender)
 const bootstrap = () => {
+  console.time('🔥 Angular bootstrap time');
   return bootstrapApplication(AppComponent, {
     ...appConfig,
     providers: [

@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import time
 
 test_project = "afhdynamicwebsite-test"
 prod_project = "afhdynamicwebsite"
@@ -50,6 +51,9 @@ def deploy_sites(sites, project):
         if selection == len(site_keys):
             for site in site_keys:
                 run_deploy(site, project)
+                if i < len(site_keys):
+                  print("⏳ Waiting 60 seconds before next deploy...")
+                  time.sleep(60)
         elif selection == len(site_keys) + 1:
             print("Exiting.")
         elif 0 <= selection < len(site_keys):

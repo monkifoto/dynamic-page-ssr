@@ -1,3 +1,5 @@
 <app-navigation></app-navigation>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<ng-container *ngIf="platformIdType === 'browser'">
+  <app-footer />
+</ng-container>
